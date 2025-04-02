@@ -1,1 +1,159 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Estilos para la navbar transparente con efectos mejorados
+.navbar-transparent {
+    background-color: rgba(0, 10, 30, 0.15);
+    backdrop-filter: blur(8px);
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+} */
+
+
+
+/* Estilos para el hero con la imagen de fondo */
+.hero-section {
+    height: 100vh;
+    width: 100%;
+    background-color: #000;
+    position: relative;
+    overflow: hidden;
+    padding-top: 5rem; /* Espacio adicional para separar del navbar */
+}
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../public/img/Fondo\ blanco.avif');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    animation: slowZoom 30s infinite alternate;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(14, 77, 202, 0.85), rgba(117, 171, 247, 0.6));
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Animaciones y efectos */
+@keyframes slowZoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(2deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes pulseBorder {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.float-animation { animation: float 6s ease-in-out infinite; }
+.float-slow { animation: float 8s ease-in-out infinite; }
+.float-reverse { animation: float 7s ease-in-out infinite reverse; }
+
+/* Efecto para estadísticas */
+.stat-item {
+    position: relative;
+    backdrop-filter: blur(4px);
+    background-color: rgba(37, 99, 235, 0.08);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(37, 99, 235, 0.15);
+    background-color: rgba(37, 99, 235, 0.12);
+}
+
+/* Efectos de texto */
+.text-gradient {
+    background: linear-gradient(135deg, #ffffff, #e0e0e0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+}
+
+.staggered-animation-container > * {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Botones estilizados */
+.btn-primary {
+    background: linear-gradient(to right, #2563eb, #3b82f6);
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(to right, #1d4ed8, #2563eb);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
+}
+
+/* Decoraciones de fondo */
+.bg-decoration {
+    position: absolute;
+    opacity: 0.1;
+    z-index: 1;
+}
+
+/* Animated dots */
+.animated-dots {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.8); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(0.8); opacity: 0.5; }
+}
