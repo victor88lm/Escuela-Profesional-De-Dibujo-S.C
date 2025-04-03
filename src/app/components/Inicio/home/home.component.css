@@ -1,0 +1,232 @@
+/* Estilos para la sección de cursos con temática artística */
+
+/* Estilos para el contenedor principal */
+section.py-20 {
+  background-color: #fcfcfc;
+  position: relative;
+}
+
+/* Animaciones para las tarjetas */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes brushStroke {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  100% {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+/* Animación de entrada */
+.animate-fade-up {
+  animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-fade-in {
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Efecto de pincelada para títulos */
+.brush-stroke {
+  position: relative;
+}
+
+.brush-stroke::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 6px;
+  background: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='none' stroke='%23F59E0B' stroke-width='4' stroke-dasharray='6, 14' stroke-dashoffset='0' stroke-linecap='round'/%3E%3C/svg%3E");
+  animation: brushStroke 0.8s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+/* Efectos de hover para las tarjetas de cursos */
+.group.relative.bg-white {
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+}
+
+.group.relative.bg-white:hover {
+  transform: translateY(-12px) scale(1.01);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Efecto de hover para imágenes */
+.relative.h-56 img {
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group:hover .relative.h-56 img {
+  transform: scale(1.08);
+}
+
+/* Esquinas artísticas decorativas */
+.absolute.-top-10.-right-10 {
+  transition: transform 0.5s ease;
+  z-index: 0;
+}
+
+.group:hover .absolute.-top-10.-right-10 {
+  transform: rotate(60deg) scale(1.1);
+}
+
+/* Línea decorativa debajo del título */
+.w-20.h-1 {
+  transition: width 0.4s ease, transform 0.4s ease;
+}
+
+.group:hover .w-20.h-1 {
+  width: 40px;
+  transform: translateX(0);
+}
+
+/* Efecto para botones */
+.group.flex.justify-center {
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group.flex.justify-center svg {
+  transition: transform 0.3s ease;
+}
+
+.group.flex.justify-center:hover svg {
+  transform: translateX(5px);
+}
+
+/* Indicadores de puntos para las características */
+.w-2.h-2.bg-blue-500,
+.w-2.h-2.bg-purple-500,
+.w-2.h-2.bg-green-500,
+.w-2.h-2.bg-orange-500 {
+  transition: transform 0.3s ease;
+}
+
+.flex.items-center:hover .w-2.h-2 {
+  transform: scale(1.5);
+}
+
+/* Detalle artístico en las imágenes */
+.absolute.-bottom-6.right-2 {
+  transition: transform 0.5s ease;
+  z-index: 1;
+}
+
+.group:hover .absolute.-bottom-6.right-2 {
+  transform: rotate(45deg) scale(1.2);
+}
+
+/* Efectos especiales para el fondo de la sección */
+.absolute.inset-0.opacity-5 {
+  mix-blend-mode: multiply;
+}
+
+/* Efecto hover para el botón de llamada a la acción */
+.inline-flex.items-center.px-8 {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.inline-flex.items-center.px-8::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.6s;
+  z-index: -1;
+}
+
+.inline-flex.items-center.px-8:hover::before {
+  left: 100%;
+}
+
+/* Mano de lápiz decorativa */
+.pencil-hand {
+  transform: rotate(-5deg);
+  transition: transform 0.5s ease;
+}
+
+.pencil-hand:hover {
+  transform: rotate(0deg) translateY(-5px);
+}
+
+/* Paleta de colores flotante */
+.floating-palette {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Media query para mejorar la experiencia en móviles */
+@media (max-width: 768px) {
+  .group.relative.bg-white:hover {
+    transform: translateY(-5px);
+  }
+  
+  .container.mx-auto.px-6 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+ /* Animaciones nativas sin librerías externas */
+ @keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 1s forwards;
+}
