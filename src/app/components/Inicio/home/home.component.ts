@@ -1,4 +1,11 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+interface OpcionConocio {
+  value: string;
+  label: string;
+}
+
 
 @Component({
   selector: 'app-home',
@@ -67,13 +74,7 @@ export class HomeComponent {
 
   // Variables para animaciones
   private animatedItems: Set<HTMLElement> = new Set();
-
-  constructor(private elementRef: ElementRef) { }
-
-  ngOnInit(): void {
-    // Inicializar evento de scroll para detectar elementos en viewport
-    this.checkItemsInViewport();
-  }
+  elementRef: any;
 
   /**
    * Listener para el scroll que detecta elementos para animar
@@ -135,5 +136,96 @@ export class HomeComponent {
     console.log(`Navegando a la página del curso: ${cursoId}`);
     // Implementa la lógica de navegación, por ejemplo:
     // this.router.navigate(['/curso', cursoId]);
+  }
+
+
+  contactForm: FormGroup;
+  submitted = false;
+  formSuccess = false;
+  messageLength = 0;
+  
+  // Opciones para el campo "¿Cómo nos conociste?"
+  opcionesConocio: OpcionConocio[] = [
+    { value: 'Redes sociales', label: 'Redes sociales' },
+    { value: 'Recomendación', label: 'Recomendación' },
+    { value: 'Búsqueda en internet', label: 'Internet' },
+    { value: 'Publicidad', label: 'Publicidad' },
+    { value: 'Evento o feria', label: 'Evento o feria' },
+    { value: 'Otro', label: 'Otro' }
+  ];
+
+  constructor(private formBuilder: FormBuilder) {
+    this.contactForm = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      telefono: ['', [Validators.required, Validators.pattern('[0-9]{10}')]],
+      email: ['', [Validators.required, Validators.email]],
+      curso: ['', Validators.required],
+      conocio: ['', Validators.required],
+      mensaje: [''],
+      privacidad: [false, Validators.requiredTrue]
+    });
+  }
+
+  ngOnInit(): void {
+    this.checkItemsInViewport();
+
+    // Escuchar cambios en el campo de mensaje para actualizar el contador
+    this.contactForm.get('mensaje')?.valueChanges.subscribe(value => {
+      this.messageLength = value ? value.length : 0;
+    });
+  }
+
+  // Getter para acceder fácilmente a los controles del formulario
+  get f() {
+    return this.contactForm.controls;
+  }
+
+  onSubmit(): void {
+    this.submitted = true;
+
+    // Detener si el formulario es inválido
+    if (this.contactForm.invalid) {
+      return;
+    }
+
+    // Aquí iría la lógica para enviar el formulario a tu backend
+    // Por ejemplo, utilizando HttpClient:
+    // this.http.post('tu-endpoint-api', this.contactForm.value).subscribe(...)
+
+    // Simulación de envío exitoso después de 1.5 segundos
+    setTimeout(() => {
+      this.formSuccess = true;
+      this.submitted = false;
+      this.contactForm.reset();
+      
+      // Restablecer formulario después de mostrar mensaje de éxito
+      setTimeout(() => {
+        this.formSuccess = false;
+      }, 5000);
+    }, 1500);
+  }
+
+  // Método para verificar si un campo específico tiene errores
+  hasError(controlName: string, errorName: string): boolean {
+    const control = this.contactForm.get(controlName);
+    return !!(control && control.touched && control.hasError(errorName));
+  }
+
+  // Método para obtener clases CSS según estado del campo
+  getFieldClass(controlName: string): string {
+    const control = this.contactForm.get(controlName);
+    if (control && control.touched) {
+      return control.valid ? 'is-valid' : 'is-invalid';
+    }
+    return '';
+  }
+
+  // Método para actualizar la animación de los radio buttons
+  updateRadioSelection(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    if (target && target.name === 'conocio') {
+      // La lógica del estado visual se maneja mediante CSS en lugar de manipulación DOM directa
+      this.contactForm.get('conocio')?.setValue(target.value);
+    }
   }
 }

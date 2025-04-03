@@ -65,4 +65,6 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     window.removeEventListener('scroll', this.handleScroll);
   }
+
+  
 }
