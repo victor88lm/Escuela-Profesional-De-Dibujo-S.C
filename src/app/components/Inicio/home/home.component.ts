@@ -1,5 +1,8 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { PrivacyModalService } from '../../shared/privacy-modal/privacy-modal.service';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PrivacyModalComponent } from '../../shared/privacy-modal/privacy-modal.component';
 
 interface OpcionConocio {
   value: string;
@@ -75,6 +78,7 @@ export class HomeComponent {
   // Variables para animaciones
   private animatedItems: Set<HTMLElement> = new Set();
   elementRef: any;
+  privacyModalService: any;
 
   /**
    * Listener para el scroll que detecta elementos para animar
@@ -154,7 +158,7 @@ export class HomeComponent {
     { value: 'Otro', label: 'Otro' }
   ];
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, privacyModalService: PrivacyModalService) {
     this.contactForm = this.formBuilder.group({
       nombre: ['', Validators.required],
       telefono: ['', [Validators.required, Validators.pattern('[0-9]{10}')]],
@@ -172,6 +176,10 @@ export class HomeComponent {
     // Escuchar cambios en el campo de mensaje para actualizar el contador
     this.contactForm.get('mensaje')?.valueChanges.subscribe(value => {
       this.messageLength = value ? value.length : 0;
+    });
+
+    this.privacyModalService.openModal$.subscribe(() => {
+      this.openPrivacyModal();
     });
   }
 
@@ -227,5 +235,17 @@ export class HomeComponent {
       // La lógica del estado visual se maneja mediante CSS en lugar de manipulación DOM directa
       this.contactForm.get('conocio')?.setValue(target.value);
     }
+  }
+
+  @ViewChild(PrivacyModalComponent) privacyModal!: PrivacyModalComponent;
+
+
+
+
+  openPrivacyModal(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+    this.privacyModal.open();
   }
 }

@@ -21,6 +21,7 @@ import { DibujoInfantilComponent } from './components/cursos/dibujo-infantil/dib
 import { GaleriaComponent } from './components/Inicio/galeria/galeria.component';
 import { PlantelesComponent } from './components/Inicio/planteles/planteles.component';
 import { ContactoComponent } from './components/Inicio/contacto/contacto.component';
+import { PrivacyModalComponent } from './components/shared/privacy-modal/privacy-modal.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ContactoComponent } from './components/Inicio/contacto/contacto.compone
     DibujoInfantilComponent,
     GaleriaComponent,
     PlantelesComponent,
-    ContactoComponent
+    ContactoComponent,
+    PrivacyModalComponent
   ],
   imports: [
     BrowserModule,

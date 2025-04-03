@@ -880,7 +880,7 @@
               </div>
               <div class="ml-3 text-sm">
                 <label for="privacidad" class="text-gray-700">
-                  Acepto la <a href="#" class="text-blue-600 hover:text-blue-800 font-medium underline">Política de Privacidad</a> y el tratamiento de mis datos. <span class="text-red-500">*</span>
+                  Acepto la <a (click)="openPrivacyModal($event)" class="text-blue-600 hover:text-blue-800 font-medium underline cursor-pointer">Política de Privacidad</a> y el tratamiento de mis datos. <span class="text-red-500">*</span>
                 </label>
                 <p class="text-gray-500 text-xs mt-1">
                   Tus datos serán tratados de acuerdo a nuestra política de privacidad para poder atender tu solicitud.
@@ -927,7 +927,8 @@
       </div>
     </div>
   </section>
-  
+  <app-privacy-modal></app-privacy-modal>
+
   <!-- Añadir script para interactividad -->
   <script>
     // Script para mejorar la interactividad del formulario
