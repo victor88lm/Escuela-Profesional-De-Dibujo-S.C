@@ -67,55 +67,45 @@
 }
 
 /* Mejoras para el sidebar móvil y el overlay */
-.sidenav-overlay {
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(3px);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  z-index: 55;
-}
-
-.sidenav-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
+/* Base del sidebar con color azul */
 #mobile-sidenav {
-  /* FIX: Asegurar el posicionamiento correcto */
   position: fixed;
   top: 0;
   right: 0;
-  height: 100vh; /* Usar vh en lugar de % */
-  width: 18rem; /* 72px en rem */
-  max-width: 80vw; /* Límite para pantallas pequeñas */
-  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.25);
+  height: 100vh;
+  width: 78vw;
+  max-width: 320px;
+  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.35);
   overflow-y: auto;
-  overflow-x: hidden; /* Prevenir scroll horizontal */
-  z-index: 60; /* Asegurar que esté sobre el overlay */
-  transform: translateX(100%); /* Inicialmente fuera de pantalla */
-  transition: transform 0.3s ease-in-out;
-  will-change: transform; /* Optimización para animaciones */
+  overflow-x: hidden;
+  z-index: 60;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  flex-direction: column;
   
-  /* Estilos para scrollbar */
+  /* Mejorar scrollbar */
   scrollbar-width: thin;
-  scrollbar-color: rgba(59, 130, 246, 0.6) rgba(17, 24, 39, 0.3);
+  scrollbar-color: rgba(255, 255, 255, 0.6) rgba(37, 99, 235, 0.3);
 }
 
 #mobile-sidenav::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
 }
 
 #mobile-sidenav::-webkit-scrollbar-track {
-  background: rgba(17, 24, 39, 0.3);
+  background: rgba(37, 99, 235, 0.2);
 }
 
 #mobile-sidenav::-webkit-scrollbar-thumb {
-  background-color: rgba(59, 130, 246, 0.6);
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 20px;
 }
 
-/* FIX: Controlar específicamente la posición del sidebar abierto y cerrado */
+/* Control de estados del sidebar */
 #mobile-sidenav.translate-x-0 {
   transform: translateX(0);
 }
@@ -124,11 +114,38 @@
   transform: translateX(100%);
 }
 
-/* Animación para elementos del sidebar */
+/* Mejora del header del sidebar */
+#mobile-sidenav .sidebar-header {
+  padding: 1.25rem;
+  background: rgba(59, 130, 246, 0.7);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Tamaños de logo adaptables */
+.logo-img.desktop {
+  height: 4rem;
+}
+
+.logo-img.mobile {
+  height: 3rem;
+}
+
+@media (max-width: 640px) {
+  .logo-img.desktop {
+    height: 3.5rem;
+  }
+  
+  .logo-img.mobile {
+    height: 2.75rem;
+  }
+}
+
+/* Mejora de los ítems del menú */
 .sidenav-item {
   transform: translateX(20px);
   opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .sidenav-open .sidenav-item {
@@ -136,38 +153,194 @@
   opacity: 1;
 }
 
+/* Secuencia escalonada de animación */
 .sidenav-open .sidenav-item:nth-child(1) { transition-delay: 0.1s; }
 .sidenav-open .sidenav-item:nth-child(2) { transition-delay: 0.15s; }
 .sidenav-open .sidenav-item:nth-child(3) { transition-delay: 0.2s; }
 .sidenav-open .sidenav-item:nth-child(4) { transition-delay: 0.25s; }
 .sidenav-open .sidenav-item:nth-child(5) { transition-delay: 0.3s; }
-.sidenav-open .sidenav-item:nth-child(6) { transition-delay: 0.35s; }
 
-/* Botón de cierre */
+/* Botón de cierre rediseñado */
 .close-btn {
   position: relative;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  background-color: rgba(59, 130, 246, 0.1);
+  background-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
 }
 
 .close-btn:hover {
-  background-color: rgba(59, 130, 246, 0.2);
+  background-color: rgba(255, 255, 255, 0.4);
   transform: rotate(90deg);
 }
 
-/* Media queries para ajustes responsivos */
-@media (max-width: 640px) {
-  #mobile-sidenav {
-    width: 85vw;
-  }
-  
-  .logo-img {
-    height: 3.5rem;
-  }
+.close-btn svg {
+  stroke-width: 2.5;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Rediseño del contenedor de enlaces */
+#mobile-sidenav .menu-container {
+  padding: 1.25rem;
+  flex: 0 0 auto;
+}
+
+/* Rediseño de los enlaces del menú */
+#mobile-sidenav .nav-link-item {
+  padding: 0.875rem 1.25rem;
+  border-radius: 14px;
+  background-color: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+}
+
+#mobile-sidenav .nav-link-item:hover,
+#mobile-sidenav .nav-link-item:focus {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px) translateX(3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+#mobile-sidenav .nav-link-item svg {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+#mobile-sidenav .nav-link-item:hover svg {
+  transform: scale(1.15);
+}
+
+/* Sección de redes sociales */
+.social-section {
+  flex: 1 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  min-height: 120px; /* Altura mínima para asegurar visibilidad */
+}
+
+/* Estilo para los iconos sociales - MEJORADO */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.social-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.social-icon svg {
+  width: 26px;
+  height: 26px;
+  stroke: white;
+  fill: none;
+  transition: all 0.3s ease;
+}
+
+.social-icon.facebook:hover {
+  background-color: #1877f2; /* Color de Facebook */
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(24, 119, 242, 0.4);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.social-icon.instagram:hover {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(220, 39, 67, 0.4);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.social-icon:hover svg {
+  stroke: white;
+  transform: scale(1.15);
+}
+
+/* Footer con copyright y créditos - MEJORADO PARA NO TAPARSE */
+.copyright-footer {
+  flex: 0 0 auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(59, 130, 246, 0.3);
+  backdrop-filter: blur(8px);
+  margin-top: auto;
+  /* Espaciado aumentado para evitar que se tape con la barra del navegador */
+  padding: 1.5rem 1.25rem 7rem;
+}
+
+/* Pie de página con copyright y créditos */
+.copyright-section {
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+}
+
+.created-by {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.8rem;
+  padding: 0.625rem 0.875rem;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+  width: fit-content;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.created-by img {
+  height: 22px;
+  margin-left: 0.5rem;
+  opacity: 0.95;
+  transition: all 0.2s ease;
+}
+
+.created-by:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.created-by:hover img {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Mejora del overlay */
+.sidenav-overlay {
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.35s ease;
+  z-index: 55;
+}
+
+.sidenav-overlay.active {
+  opacity: 1;
+  visibility: visible;
 }

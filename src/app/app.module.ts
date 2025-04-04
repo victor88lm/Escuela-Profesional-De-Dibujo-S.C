@@ -22,6 +22,10 @@ import { GaleriaComponent } from './components/Inicio/galeria/galeria.component'
 import { PlantelesComponent } from './components/Inicio/planteles/planteles.component';
 import { ContactoComponent } from './components/Inicio/contacto/contacto.component';
 import { PrivacyModalComponent } from './components/shared/privacy-modal/privacy-modal.component';
+import { PrivacyPolicyModalComponent } from './components/shared/privacy-policy-modal/privacy-policy-modal.component';
+import { TermsConditionsModalComponent } from './components/shared/terms-conditions-modal/terms-conditions-modal.component';
+import { LegalNoticeModalComponent } from './components/shared/legal-notice-modal/legal-notice-modal.component';
+import { SliderComponent } from './components/inicio/slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,11 @@ import { PrivacyModalComponent } from './components/shared/privacy-modal/privacy
     GaleriaComponent,
     PlantelesComponent,
     ContactoComponent,
-    PrivacyModalComponent
+    PrivacyModalComponent,
+    PrivacyPolicyModalComponent,
+    TermsConditionsModalComponent,
+    LegalNoticeModalComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule,

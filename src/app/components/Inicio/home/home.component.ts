@@ -1,7 +1,6 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { PrivacyModalService } from '../../shared/privacy-modal/privacy-modal.service';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PrivacyModalService } from '../../shared/privacy-modal/privacy-modal.service';
 import { PrivacyModalComponent } from '../../shared/privacy-modal/privacy-modal.component';
 
 interface OpcionConocio {
@@ -9,13 +8,12 @@ interface OpcionConocio {
   label: string;
 }
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   public cursos = [
     {
       id: 'dibujo-publicitario',
@@ -75,74 +73,6 @@ export class HomeComponent {
     }
   ];
 
-  // Variables para animaciones
-  private animatedItems: Set<HTMLElement> = new Set();
-  elementRef: any;
-  privacyModalService: any;
-
-  /**
-   * Listener para el scroll que detecta elementos para animar
-   */
-  @HostListener('window:scroll', ['$event'])
-  checkItemsInViewport(): void {
-    const cards = this.elementRef.nativeElement.querySelectorAll('.bg-white.rounded-lg');
-    
-    cards.forEach((card: HTMLElement) => {
-      if (this.isElementInViewport(card) && !this.animatedItems.has(card)) {
-        this.animateCard(card);
-        this.animatedItems.add(card);
-      }
-    });
-  }
-
-  /**
-   * Verifica si un elemento está en el viewport
-   * @param el El elemento a verificar
-   * @returns boolean
-   */
-  private isElementInViewport(el: HTMLElement): boolean {
-    const rect = el.getBoundingClientRect();
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    
-    return (
-      rect.top <= windowHeight * 0.85 && // El elemento está 85% dentro del viewport
-      rect.bottom >= 0
-    );
-  }
-
-  /**
-   * Aplica animación a una tarjeta de curso
-   * @param card La tarjeta a animar
-   */
-  private animateCard(card: HTMLElement): void {
-    // Añadir clase para animar entrada
-    card.classList.add('animate-fade-up');
-    
-    // Animar elementos dentro de la tarjeta secuencialmente
-    const image = card.querySelector('.relative.h-56');
-    const title = card.querySelector('h3');
-    const description = card.querySelector('p');
-    const list = card.querySelector('ul');
-    const button = card.querySelector('a.block');
-    
-    if (image) setTimeout(() => image.classList.add('animate-fade-in'), 100);
-    if (title) setTimeout(() => title.classList.add('animate-fade-in'), 200);
-    if (description) setTimeout(() => description.classList.add('animate-fade-in'), 300);
-    if (list) setTimeout(() => list.classList.add('animate-fade-in'), 400);
-    if (button) setTimeout(() => button.classList.add('animate-fade-in'), 500);
-  }
-
-  /**
-   * Maneja la redirección a la página de un curso específico
-   * @param cursoId ID del curso
-   */
-  public navegarACurso(cursoId: string): void {
-    console.log(`Navegando a la página del curso: ${cursoId}`);
-    // Implementa la lógica de navegación, por ejemplo:
-    // this.router.navigate(['/curso', cursoId]);
-  }
-
-
   contactForm: FormGroup;
   submitted = false;
   formSuccess = false;
@@ -158,7 +88,12 @@ export class HomeComponent {
     { value: 'Otro', label: 'Otro' }
   ];
 
-  constructor(private formBuilder: FormBuilder, privacyModalService: PrivacyModalService) {
+  @ViewChild(PrivacyModalComponent) privacyModal!: PrivacyModalComponent;
+
+  constructor(
+    private formBuilder: FormBuilder, 
+    private privacyModalService: PrivacyModalService
+  ) {
     this.contactForm = this.formBuilder.group({
       nombre: ['', Validators.required],
       telefono: ['', [Validators.required, Validators.pattern('[0-9]{10}')]],
@@ -171,16 +106,25 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    this.checkItemsInViewport();
-
     // Escuchar cambios en el campo de mensaje para actualizar el contador
     this.contactForm.get('mensaje')?.valueChanges.subscribe(value => {
       this.messageLength = value ? value.length : 0;
     });
 
+    // Suscribirse al servicio modal
     this.privacyModalService.openModal$.subscribe(() => {
       this.openPrivacyModal();
     });
+  }
+
+  /**
+   * Maneja la redirección a la página de un curso específico
+   * @param cursoId ID del curso
+   */
+  public navegarACurso(cursoId: string): void {
+    console.log(`Navegando a la página del curso: ${cursoId}`);
+    // Implementa la lógica de navegación, por ejemplo:
+    // this.router.navigate(['/curso', cursoId]);
   }
 
   // Getter para acceder fácilmente a los controles del formulario
@@ -228,24 +172,23 @@ export class HomeComponent {
     return '';
   }
 
-  // Método para actualizar la animación de los radio buttons
+  // Método para actualizar la selección de radio buttons
   updateRadioSelection(event: Event): void {
     const target = event.target as HTMLInputElement;
     if (target && target.name === 'conocio') {
-      // La lógica del estado visual se maneja mediante CSS en lugar de manipulación DOM directa
       this.contactForm.get('conocio')?.setValue(target.value);
     }
   }
-
-  @ViewChild(PrivacyModalComponent) privacyModal!: PrivacyModalComponent;
-
-
-
 
   openPrivacyModal(event?: Event): void {
     if (event) {
       event.preventDefault();
     }
-    this.privacyModal.open();
+    
+    if (this.privacyModal) {
+      this.privacyModal.open();
+    } else {
+      console.warn('privacyModal no está disponible');
+    }
   }
 }

@@ -1,0 +1,178 @@
+<!-- legal-notice-modal.component.html - Diseño Blanco Optimizado -->
+<div #legalModal 
+     class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center transition-opacity duration-300 will-change-transform" 
+     [class.opacity-0]="!isVisible"
+     [ngClass]="{'hidden': !isVisible}"
+     (click)="onBackdropClick($event)">
+  <div class="bg-white rounded-lg shadow-xl w-[95%] max-w-3xl max-h-[90vh] overflow-hidden flex flex-col relative animate-scale-up" 
+       (click)="$event.stopPropagation()">
+    
+    <!-- Header con acento de color -->
+    <div class="p-4 sm:p-6 border-b border-gray-100 flex justify-between items-center relative">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
+      <h3 class="text-xl sm:text-2xl font-medium text-gray-900 flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        Aviso Legal
+      </h3>
+      
+      <button (click)="close($event)" type="button" class="p-1.5 rounded-full hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Contenido con scroll optimizado -->
+    <div class="overflow-y-auto overscroll-contain will-change-scroll flex-grow p-4 sm:p-6 text-gray-700 smooth-scroll">
+      <div class="space-y-6 sm:space-y-8 max-w-2xl mx-auto">
+        
+        <!-- Introducción -->
+        <div>
+          <p class="text-xs text-gray-500 mb-4">Última actualización: Abril 2025</p>
+          <p class="mb-4">
+            Este Aviso Legal regula el uso y utilización del sitio web <span class="text-blue-600 font-medium">epd.edu.mx</span>, que es propiedad de la <span class="text-blue-600 font-medium">ESCUELA PROFESIONAL DE DIBUJO S.C.</span>
+          </p>
+        </div>
+
+        <!-- Secciones con diseño limpio y blanco -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-blue-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded-full">
+            TITULAR DEL SITIO WEB
+          </h4>
+          
+          <ul class="space-y-2">
+            <li class="grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-2">
+              <span class="font-medium text-gray-900">Nombre:</span>
+              <span>Escuela Profesional de Dibujo S.C.</span>
+            </li>
+            <li class="grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-2">
+              <span class="font-medium text-gray-900">Domicilio:</span>
+              <span>Eje Central Lázaro Cárdenas 150, Col. Guerrero, Cuauhtémoc, 06300 CDMX</span>
+            </li>
+            <li class="grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-2">
+              <span class="font-medium text-gray-900">Contacto:</span>
+              <span>info&#64;epd.edu.mx / +52 (55) 7321 2343</span>
+            </li>
+            <li class="grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-2">
+              <span class="font-medium text-gray-900">RFC:</span>
+              <span>EPD860518ABC</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Condiciones de uso -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-blue-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded-full">
+            CONDICIONES DE USO
+          </h4>
+          
+          <p class="mb-3">
+            El presente aviso legal regula el uso y utilización del sitio web <span class="font-medium">epd.edu.mx</span>, al que se accede mediante la dirección URL <span class="font-medium">www.epd.edu.mx</span>
+          </p>
+          
+          <p class="mb-3">
+            La navegación por el sitio web otorga la condición de usuario del mismo e implica la aceptación plena y sin reservas de todas las disposiciones incluidas en este Aviso Legal.
+          </p>
+          
+          <p class="text-sm bg-blue-50 p-3 rounded-md border-l-2 border-blue-500">
+            La Escuela se reserva el derecho a modificar cualquier tipo de información que pudiera aparecer en el sitio web, sin que exista obligación de preavisar o poner en conocimiento de los usuarios dichas modificaciones.
+          </p>
+        </section>
+
+        <!-- Propiedad intelectual -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-blue-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded-full">
+            PROPIEDAD INTELECTUAL E INDUSTRIAL
+          </h4>
+          
+          <ul class="space-y-3">
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-blue-500 mt-2"></span>
+              <div>
+                <strong class="font-medium text-gray-900">Derechos reservados:</strong> El sitio web, incluyendo su programación, edición, compilación y demás elementos necesarios para su funcionamiento, los diseños, logotipos, texto y/o gráficos, son propiedad de la Escuela Profesional de Dibujo S.C.
+              </div>
+            </li>
+            
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-blue-500 mt-2"></span>
+              <div>
+                <strong class="font-medium text-gray-900">Reproducción prohibida:</strong> Todos los contenidos del sitio están protegidos por las leyes de propiedad intelectual e industrial. Queda prohibida cualquier reproducción sin autorización previa.
+              </div>
+            </li>
+            
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-blue-500 mt-2"></span>
+              <div>
+                <strong class="font-medium text-gray-900">Uso personal:</strong> El usuario podrá visualizar, imprimir o almacenar los elementos del portal siempre y cuando sea, única y exclusivamente, para su uso personal y privado.
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Exclusion -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-blue-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded-full">
+            EXCLUSIÓN DE GARANTÍAS Y RESPONSABILIDAD
+          </h4>
+          
+          <p class="mb-3">
+            La Escuela no se hace responsable de daños y perjuicios que pudieran ocasionar: errores u omisiones en los contenidos, falta de disponibilidad del portal o la transmisión de virus o programas maliciosos.
+          </p>
+          
+          <p class="text-sm bg-gray-50 p-3 rounded-md border-l-2 border-gray-300">
+            El contenido, información y/o consejos expresados en este sitio web deben entenderse como simplemente orientativos. La Escuela no responde de ninguna forma de la efectividad o exactitud de los mismos.
+          </p>
+        </section>
+
+        <!-- Cookies -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-blue-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded-full">
+            POLÍTICA DE COOKIES
+          </h4>
+          
+          <p class="mb-3">
+            El sitio web puede utilizar cookies para llevar a cabo determinadas funciones imprescindibles para el correcto funcionamiento y visualización del sitio. Las cookies utilizadas tienen carácter temporal.
+          </p>
+          
+          <p>
+            En ningún caso, las cookies proporcionan datos personales del usuario. Para conocer más detalles, consulte nuestra Política de Cookies específica.
+          </p>
+        </section>
+
+        <!-- Legislación -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-blue-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded-full">
+            LEY APLICABLE Y JURISDICCIÓN
+          </h4>
+          
+          <p class="mb-3">
+            Para la resolución de controversias relacionadas con el presente sitio web, será de aplicación la legislación mexicana, siendo competentes los Juzgados y Tribunales de la Ciudad de México.
+          </p>
+          
+          <p class="text-sm bg-blue-50 p-3 rounded-md border-l-2 border-blue-500">
+            Al utilizar este sitio web, el usuario acepta expresamente la sumisión a la jurisdicción de los tribunales de la Ciudad de México para resolver cualquier controversia.
+          </p>
+        </section>
+
+        <!-- Fecha de actualización -->
+        <div class="text-xs text-gray-500 pt-3 border-t border-gray-100 flex items-center justify-end">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Última actualización: Abril 2025
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer minimalista -->
+    <div class="p-4 sm:p-6 bg-white border-t border-gray-100 flex justify-end">
+      <button type="button" 
+              (click)="close($event)" 
+              class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-sm">
+        Cerrar
+      </button>
+    </div>
+  </div>
+</div>

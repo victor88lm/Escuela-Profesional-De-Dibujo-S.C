@@ -1,0 +1,243 @@
+<!-- terms-conditions-modal.component.html - Diseño Minimalista -->
+<div #termsModal 
+     class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center transition-opacity duration-300 will-change-transform" 
+     [ngClass]="{'hidden': !isVisible, 'opacity-0': !isVisible}"
+     (click)="onBackdropClick($event)">
+  <div class="bg-white rounded-lg shadow-xl w-[95%] max-w-3xl max-h-[90vh] overflow-hidden flex flex-col relative animate-scale-up" 
+       (click)="$event.stopPropagation()">
+    
+    <!-- Header con acento de color -->
+    <div class="p-4 sm:p-6 border-b border-gray-100 flex justify-between items-center relative">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-teal-500"></div>
+      <h3 class="text-xl sm:text-2xl font-medium text-gray-900 flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 mr-2 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        Términos y Condiciones
+      </h3>
+      
+      <button (click)="close($event)" type="button" class="p-1.5 rounded-full hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-green-500">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Contenido con scroll optimizado -->
+    <div class="overflow-y-auto overscroll-contain will-change-scroll flex-grow p-4 sm:p-6 text-gray-700 smooth-scroll">
+      <div class="space-y-6 sm:space-y-8 max-w-2xl mx-auto">
+        
+        <!-- Introducción -->
+        <div>
+          <p class="text-xs text-gray-500 mb-4">Última actualización: Abril 2025</p>
+          <p class="mb-4">
+            Por favor, lea cuidadosamente estos términos y condiciones antes de utilizar los servicios ofrecidos por la <strong class="text-green-700 font-medium">ESCUELA PROFESIONAL DE DIBUJO S.C.</strong> Estos términos establecen los derechos y obligaciones que usted acepta al contratar nuestros servicios educativos.
+          </p>
+        </div>
+
+        <!-- Sección 1 - Definiciones -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-green-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-green-500 after:rounded-full">
+            DEFINICIONES
+          </h4>
+          
+          <div class="space-y-3">
+            <div class="border border-green-100 rounded-md p-3">
+              <p class="font-medium text-green-700 text-sm">La Escuela</p>
+              <p class="text-sm text-gray-700">Se refiere a la Escuela Profesional de Dibujo S.C. (EPD), institución educativa legalmente constituida y con reconocimiento oficial.</p>
+            </div>
+            
+            <div class="border border-green-100 rounded-md p-3">
+              <p class="font-medium text-green-700 text-sm">El Estudiante</p>
+              <p class="text-sm text-gray-700">Persona que se inscribe y participa en alguno de los programas educativos ofrecidos por la Escuela.</p>
+            </div>
+            
+            <div class="border border-green-100 rounded-md p-3">
+              <p class="font-medium text-green-700 text-sm">Servicios Educativos</p>
+              <p class="text-sm text-gray-700">Son todas las actividades académicas, cursos, talleres, diplomados y demás programas de enseñanza ofrecidos por la Escuela.</p>
+            </div>
+            
+            <div class="border border-green-100 rounded-md p-3">
+              <p class="font-medium text-green-700 text-sm">Cuotas y Colegiaturas</p>
+              <p class="text-sm text-gray-700">Contraprestaciones económicas que el Estudiante debe pagar a cambio de los Servicios Educativos.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sección 2 - Admisión e Inscripción -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-green-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-green-500 after:rounded-full">
+            ADMISIÓN E INSCRIPCIÓN
+          </h4>
+          
+          <ul class="space-y-2">
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-green-500 mt-2"></span>
+              <div>
+                <strong class="font-medium text-gray-900">Requisitos de admisión:</strong> La Escuela se reserva el derecho de establecer los requisitos de admisión para cada programa educativo, los cuales deberán ser cumplidos por el aspirante para ser considerado como Estudiante.
+              </div>
+            </li>
+            
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-green-500 mt-2"></span>
+              <div>
+                <strong class="font-medium text-gray-900">Documentación:</strong> El Estudiante debe proporcionar documentación verídica y completa durante el proceso de inscripción. La falsificación o alteración de documentos será causa de baja inmediata.
+              </div>
+            </li>
+            
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-green-500 mt-2"></span>
+              <div>
+                <strong class="font-medium text-gray-900">Cuota de inscripción:</strong> Para formalizar la inscripción, el Estudiante deberá cubrir la cuota correspondiente, la cual no es reembolsable una vez iniciado el curso o transcurridos 5 días hábiles desde su pago.
+              </div>
+            </li>
+            
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-green-500 mt-2"></span>
+              <div>
+                <strong class="font-medium text-gray-900">Reincorporación:</strong> Los estudiantes que hayan interrumpido sus estudios y deseen reincorporarse deberán sujetarse a las disposiciones vigentes al momento de su reingreso.
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Sección 3 - Pagos y Colegiaturas -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-green-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-green-500 after:rounded-full">
+            PAGOS Y COLEGIATURAS
+          </h4>
+          
+          <ul class="space-y-2">
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-green-500 mt-2"></span>
+              <div>
+                <strong class="font-medium text-gray-900">Obligaciones de pago:</strong> El Estudiante se compromete a cubrir puntualmente las cuotas y colegiaturas establecidas por la Escuela según el calendario de pagos.
+              </div>
+            </li>
+            
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-green-500 mt-2"></span>
+              <div>
+                <strong class="font-medium text-gray-900">Métodos de pago:</strong> Los pagos podrán realizarse mediante transferencia electrónica, depósito bancario, tarjeta de crédito/débito o efectivo en las instalaciones de la Escuela.
+              </div>
+            </li>
+            
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-green-500 mt-2"></span>
+              <div>
+                <strong class="font-medium text-gray-900">Pagos extemporáneos:</strong> Los pagos realizados después de la fecha límite establecida causarán un recargo según lo determine la Escuela.
+              </div>
+            </li>
+            
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-green-500 mt-2"></span>
+              <div>
+                <strong class="font-medium text-gray-900">Suspensión de servicios:</strong> La falta de pago de dos o más colegiaturas faculta a la Escuela para suspender los servicios educativos hasta que se regularice la situación.
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Sección 4 - Cancelaciones y Reembolsos -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-green-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-green-500 after:rounded-full">
+            CANCELACIONES Y REEMBOLSOS
+          </h4>
+          
+          <ul class="space-y-2">
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-green-500 mt-2"></span>
+              <div>
+                <strong class="font-medium text-gray-900">Baja voluntaria:</strong> El Estudiante podrá solicitar su baja voluntaria en cualquier momento, debiendo notificar por escrito a la Escuela.
+              </div>
+            </li>
+            
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-green-500 mt-2"></span>
+              <div>
+                <strong class="font-medium text-gray-900">Cancelación por la Escuela:</strong> La Escuela se reserva el derecho de cancelar o reprogramar cursos por causas justificadas, ofreciendo alternativas al Estudiante.
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Sección 5 - Derechos y Obligaciones -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-green-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-green-500 after:rounded-full">
+            DERECHOS Y OBLIGACIONES
+          </h4>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="border border-green-100 rounded-md p-3">
+              <p class="font-medium text-green-700 mb-2 text-sm">Derechos del Estudiante</p>
+              <ul class="space-y-1 text-sm">
+                <li class="flex gap-2">
+                  <span class="flex-shrink-0 w-1 h-1 rounded-full bg-green-400 mt-1.5"></span>
+                  <div>Recibir educación de calidad conforme al plan de estudios.</div>
+                </li>
+                <li class="flex gap-2">
+                  <span class="flex-shrink-0 w-1 h-1 rounded-full bg-green-400 mt-1.5"></span>
+                  <div>Ser evaluado de manera objetiva y justa.</div>
+                </li>
+                <li class="flex gap-2">
+                  <span class="flex-shrink-0 w-1 h-1 rounded-full bg-green-400 mt-1.5"></span>
+                  <div>Recibir atención y orientación académica.</div>
+                </li>
+                <li class="flex gap-2">
+                  <span class="flex-shrink-0 w-1 h-1 rounded-full bg-green-400 mt-1.5"></span>
+                  <div>Acceder a las instalaciones y recursos educativos.</div>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="border border-teal-100 rounded-md p-3">
+              <p class="font-medium text-teal-700 mb-2 text-sm">Obligaciones del Estudiante</p>
+              <ul class="space-y-1 text-sm">
+                <li class="flex gap-2">
+                  <span class="flex-shrink-0 w-1 h-1 rounded-full bg-teal-400 mt-1.5"></span>
+                  <div>Cumplir con el reglamento interno de la Escuela.</div>
+                </li>
+                <li class="flex gap-2">
+                  <span class="flex-shrink-0 w-1 h-1 rounded-full bg-teal-400 mt-1.5"></span>
+                  <div>Mantener un comportamiento respetuoso.</div>
+                </li>
+                <li class="flex gap-2">
+                  <span class="flex-shrink-0 w-1 h-1 rounded-full bg-teal-400 mt-1.5"></span>
+                  <div>Cuidar las instalaciones y material didáctico.</div>
+                </li>
+                <li class="flex gap-2">
+                  <span class="flex-shrink-0 w-1 h-1 rounded-full bg-teal-400 mt-1.5"></span>
+                  <div>Asistir puntualmente a clases y actividades.</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sección 6 - Jurisdicción -->
+        <section>
+          <p class="text-sm bg-green-50 p-3 rounded-md border-l-2 border-green-500">
+            Al inscribirse o contratar los servicios de la Escuela Profesional De Dibujo S.C., el Estudiante manifiesta haber leído, entendido y aceptado estos Términos y Condiciones en su totalidad.
+          </p>
+        </section>
+
+        <!-- Fecha de actualización -->
+        <div class="text-xs text-gray-500 pt-3 border-t border-gray-100 flex items-center justify-end">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Última actualización: Abril 2025
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer minimalista -->
+    <div class="p-4 sm:p-6 bg-white border-t border-gray-100 flex justify-end">
+      <button type="button" 
+              (click)="close($event)" 
+              class="px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 shadow-sm">
+        Cerrar
+      </button>
+    </div>
+  </div>
+</div>

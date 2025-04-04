@@ -1,0 +1,250 @@
+<!-- privacy-policy-modal.component.html - Diseño Minimalista -->
+<div #policyModal 
+     class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center transition-opacity duration-300 will-change-transform" 
+     [ngClass]="{'hidden': !isVisible, 'opacity-0': !isVisible}"
+     (click)="onBackdropClick($event)">
+  <div class="bg-white rounded-lg shadow-xl w-[95%] max-w-3xl max-h-[90vh] overflow-hidden flex flex-col relative animate-scale-up" 
+       (click)="$event.stopPropagation()">
+    
+    <!-- Header con acento de color -->
+    <div class="p-4 sm:p-6 border-b border-gray-100 flex justify-between items-center relative">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
+      <h3 class="text-xl sm:text-2xl font-medium text-gray-900 flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+        Políticas de Privacidad
+      </h3>
+      
+      <button (click)="close($event)" type="button" class="p-1.5 rounded-full hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Contenido con scroll optimizado -->
+    <div class="overflow-y-auto overscroll-contain will-change-scroll flex-grow p-4 sm:p-6 text-gray-700 smooth-scroll">
+      <div class="space-y-6 sm:space-y-8 max-w-2xl mx-auto">
+        
+        <!-- Introducción -->
+        <div>
+          <p class="text-xs text-gray-500 mb-4">Última actualización: Abril 2025</p>
+          <p class="mb-4">
+            <strong class="text-blue-600 font-medium">ESCUELA PROFESIONAL DE DIBUJO S.C.</strong>, con domicilios en sus dos planteles, es el responsable del uso y protección de sus datos personales:
+          </p>
+          
+          <!-- Planteles en diseño minimalista -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <div class="border border-blue-100 rounded-md p-4">
+              <h5 class="font-medium text-blue-700 mb-2 flex items-center text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+                Plantel Centro
+              </h5>
+              <p class="text-sm text-gray-700">Eje Central Lázaro Cárdenas 150, Col. Guerrero, Cuauhtémoc, 06300 CDMX</p>
+            </div>
+            
+            <div class="border border-indigo-100 rounded-md p-4">
+              <h5 class="font-medium text-indigo-700 mb-2 flex items-center text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+                Plantel Ecatepec
+              </h5>
+              <p class="text-sm text-gray-700">Av. Insurgentes 2 Bis, Centro, 55000 Ecatepec de Morelos, Estado de México</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección 1 - Finalidad -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-blue-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded-full">
+            FINALIDAD DEL TRATAMIENTO
+          </h4>
+          
+          <p class="mb-3">
+            Los datos personales que recabamos de usted, los utilizaremos para las siguientes finalidades que son necesarias para el servicio que solicita:
+          </p>
+          
+          <ul class="space-y-2 mb-4">
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-blue-500 mt-2"></span>
+              <div>Proveer los servicios educativos y de formación que ha solicitado</div>
+            </li>
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-blue-500 mt-2"></span>
+              <div>Informarle sobre cambios en los mismos</div>
+            </li>
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-blue-500 mt-2"></span>
+              <div>Evaluar la calidad del servicio que le brindamos</div>
+            </li>
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-blue-500 mt-2"></span>
+              <div>Integrar su expediente académico</div>
+            </li>
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-blue-500 mt-2"></span>
+              <div>Procesos de gestión administrativa</div>
+            </li>
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-blue-500 mt-2"></span>
+              <div>Programas, procesos, grupos y actividades académicas</div>
+            </li>
+          </ul>
+          
+          <p class="mb-3">
+            De manera adicional, utilizaremos su información personal para las siguientes finalidades secundarias:
+          </p>
+          
+          <div class="text-sm bg-gray-50 p-3 rounded mb-2 border-l-2 border-gray-300">
+            <ul class="space-y-2">
+              <li class="flex gap-2">
+                <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5"></span>
+                <div>Ofrecerle nuevos productos y servicios educativos</div>
+              </li>
+              <li class="flex gap-2">
+                <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5"></span>
+                <div>Enviarle promociones e información sobre eventos y actividades</div>
+              </li>
+              <li class="flex gap-2">
+                <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5"></span>
+                <div>Aplicar encuestas y evaluar la calidad de nuestros servicios</div>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Sección 2 - Datos personales -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-blue-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded-full">
+            DATOS PERSONALES QUE UTILIZAREMOS
+          </h4>
+          
+          <p class="mb-3">
+            Para llevar a cabo las finalidades descritas, utilizaremos los siguientes datos personales:
+          </p>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="border border-blue-100 p-3 rounded-md">
+              <p class="font-medium text-blue-700 text-sm">Datos de identificación</p>
+              <p class="text-sm">Nombre, edad, fecha de nacimiento, género, estado civil, firma</p>
+            </div>
+            
+            <div class="border border-indigo-100 p-3 rounded-md">
+              <p class="font-medium text-indigo-700 text-sm">Datos de contacto</p>
+              <p class="text-sm">Domicilio, teléfono, correo electrónico</p>
+            </div>
+            
+            <div class="border border-blue-100 p-3 rounded-md">
+              <p class="font-medium text-blue-700 text-sm">Datos académicos</p>
+              <p class="text-sm">Escolaridad, historial académico, calificaciones, títulos</p>
+            </div>
+            
+            <div class="border border-indigo-100 p-3 rounded-md">
+              <p class="font-medium text-indigo-700 text-sm">Datos financieros</p>
+              <p class="text-sm">Información de pagos, facturación, datos bancarios</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sección 3 - Transferencia de datos -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-blue-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded-full">
+            TRANSFERENCIA DE DATOS PERSONALES
+          </h4>
+          
+          <p class="mb-3">
+            Le informamos que sus datos personales podrán ser compartidos con las siguientes entidades:
+          </p>
+          
+          <div class="overflow-x-auto overflow-y-hidden rounded-md border border-gray-200 mb-3">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="bg-gray-50 border-b border-gray-200">
+                  <th class="text-left py-2 px-3 font-medium text-gray-700">Destinatario</th>
+                  <th class="text-left py-2 px-3 font-medium text-gray-700">Finalidad</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-gray-100">
+                  <td class="py-2 px-3 text-gray-700">Autoridades educativas</td>
+                  <td class="py-2 px-3 text-gray-700">Acreditación de estudios, validación de documentos</td>
+                </tr>
+                <tr class="border-b border-gray-100">
+                  <td class="py-2 px-3 text-gray-700">Instituciones bancarias</td>
+                  <td class="py-2 px-3 text-gray-700">Procesos de pagos y becas</td>
+                </tr>
+                <tr class="border-b border-gray-100">
+                  <td class="py-2 px-3 text-gray-700">Aseguradoras</td>
+                  <td class="py-2 px-3 text-gray-700">Seguros estudiantiles (en caso de ser aplicable)</td>
+                </tr>
+                <tr>
+                  <td class="py-2 px-3 text-gray-700">Empresas para prácticas</td>
+                  <td class="py-2 px-3 text-gray-700">Colocación y seguimiento académico-profesional</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <p class="text-sm bg-blue-50 p-3 rounded-md border-l-2 border-blue-500">
+            Nos comprometemos a que los mismos serán tratados bajo estrictas medidas de seguridad, siempre garantizando su confidencialidad.
+          </p>
+        </section>
+
+        <!-- Sección 4 - Derechos ARCO -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-blue-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded-full">
+            DERECHOS ARCO
+          </h4>
+          
+          <p class="mb-3">
+            Usted tiene derecho a conocer qué datos personales tenemos de usted, para qué los utilizamos y las condiciones del uso que les damos (Acceso). Asimismo, es su derecho solicitar la corrección de su información personal (Rectificación); que la eliminemos de nuestros registros (Cancelación); así como oponerse al uso de sus datos personales para fines específicos (Oposición).
+          </p>
+          
+          <div class="flex flex-col sm:flex-row items-center sm:items-start gap-3 p-3 bg-gray-50 rounded-md mb-3 border border-gray-200">
+            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <p class="text-sm text-center sm:text-left">
+              Para el ejercicio de cualquiera de los derechos ARCO, usted deberá presentar la solicitud respectiva a través de un correo electrónico a: 
+              <span class="text-blue-700 font-medium">info&#64;epd.edu.mx</span>
+            </p>
+          </div>
+        </section>
+
+        <!-- Sección 5 - Modificaciones -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-blue-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded-full">
+            MODIFICACIONES AL AVISO DE PRIVACIDAD
+          </h4>
+          
+          <p>
+            El presente aviso de privacidad puede sufrir modificaciones, cambios o actualizaciones. Nos comprometemos a mantenerlo informado sobre los cambios que pueda sufrir el presente aviso de privacidad, a través de nuestra página web.
+          </p>
+        </section>
+
+        <!-- Fecha de actualización -->
+        <div class="text-xs text-gray-500 pt-3 border-t border-gray-100 flex items-center justify-end">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Última actualización: Abril 2025
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer minimalista -->
+    <div class="p-4 sm:p-6 bg-white border-t border-gray-100 flex justify-end">
+      <button type="button" 
+              (click)="close($event)" 
+              class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-sm">
+        Cerrar
+      </button>
+    </div>
+  </div>
+</div>

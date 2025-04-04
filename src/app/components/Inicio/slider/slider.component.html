@@ -1,0 +1,233 @@
+<!-- Slider component with three slides and swipe functionality -->
+<section class="slider-container relative overflow-hidden" aria-label="Escuela Profesional de Dibujo">
+    <!-- Slider controls - Improved with better positioning and appearance -->
+    <div class="slider-controls absolute z-20 bottom-6 left-0 right-0 flex justify-center gap-3">
+        <button class="slider-dot active" aria-label="Slide 1" data-slide="0"></button>
+        <button class="slider-dot" aria-label="Slide 2" data-slide="1"></button>
+        <button class="slider-dot" aria-label="Slide 3" data-slide="2"></button>
+    </div>
+
+    <!-- Added navigation arrows for desktop -->
+    <button class="nav-arrow nav-prev hidden sm:block" aria-label="Anterior slide">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+    </button>
+    <button class="nav-arrow nav-next hidden sm:block" aria-label="Siguiente slide">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+    </button>
+
+    <!-- Slider wrapper - This will be handled by the swipe functionality -->
+    <div class="slider-wrapper flex transition-transform duration-500 ease-in-out h-[600px]" id="sliderWrapper">
+        <!-- Slide 1: Original Hero (unchanged) -->
+        <div class="slider-slide flex-shrink-0 w-full relative">
+            <section class="hero-section flex items-center justify-center h-full" aria-label="Escuela Profesional de Dibujo">
+                <!-- Reduced overlay with simpler gradient -->
+                <div class="hero-overlay" role="presentation"></div>
+                <!-- Optimized Hero Content -->
+                <div class="hero-content flex items-center justify-center h-full w-full pt-4">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            <!-- Optimized Text Content -->
+                            <div class="text-white">
+                                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
+                                    <span class="block text-gradient">Arte y técnica</span>
+                                    <span class="block text-white">en el dibujo profesional</span>
+                                </h1>
+                                <p class="mt-6 text-lg sm:text-xl text-gray-100 max-w-lg">
+                                    Descubre tu potencial artístico en la Escuela Profesional de Dibujo. 
+                                    Nuestros programas especializados te brindarán las herramientas 
+                                    necesarias para destacar en el mundo del arte.
+                                </p>
+                                <div class="mt-10">
+                                    <a routerLink="/Cursos" class="group inline-block px-8 py-3 btn-primary font-medium rounded-full" aria-label="Descubre nuestros cursos">
+                                        <span class="flex items-center">
+                                            Descubre nuestros cursos
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Optimized Image -->
+                            <div class="hidden md:block relative">
+                                <div class="float-animation">
+                                    <img 
+                                        src="img/Icon.avif" 
+                                        alt="Estudiantes dibujando en la Escuela Profesional de Dibujo" 
+                                        class="w-full h-auto object-contain" 
+                                        loading="lazy" 
+                                        width="600" 
+                                        height="400"
+                                        fetchpriority="low"
+                                    >
+                                </div>
+                                
+                                <!-- Reduced decorative elements -->
+                                <div class="absolute -top-10 right-0" aria-hidden="true">
+                                    <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="50" cy="50" r="40" stroke="rgba(255, 255, 255, 0.15)" stroke-width="2" stroke-dasharray="10 10" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Slide 2: Fechas de Inscripción (Enhanced) -->
+        <div class="slider-slide flex-shrink-0 w-full relative">
+            <section class="hero-section flex items-center justify-center h-full" aria-label="Fechas de Inscripción">
+                <!-- Enhanced purple overlay with more vibrant gradient -->
+                <div class="hero-overlay-purple" role="presentation"></div>
+                <!-- Inscripción Content -->
+                <div class="hero-content flex items-center justify-center h-full w-full pt-0 lg:pt-4">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            <!-- Enhanced Text Content with improved UI -->
+                            <div class="text-white">
+                                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
+                                    <span class="block text-purple-200 text-glow-purple">Inscripciones</span>
+                                    <span class="block text-white">Abiertas</span>
+                                </h1>
+                                <p class="mt-6 text-lg sm:text-xl text-gray-100 max-w-lg">
+                                    No pierdas la oportunidad de formarte con los mejores. 
+                                    Las inscripciones para el próximo ciclo ya están abiertas.
+                                </p>
+                                <!-- Enhanced date card with better styling -->
+                                <div class="mt-6 glass-card p-6 rounded-xl border border-purple-300 border-opacity-30">
+                                    <h3 class="text-xl font-semibold text-purple-200 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        Próximas fechas:
+                                    </h3>
+                                    <ul class="mt-4 space-y-3">
+                                        <li class="flex items-center date-item">
+                                            <div class="date-icon-container">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="date-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                </svg>
+                                            </div>
+                                            <span>Inicio de clases: <strong>15 de mayo</strong></span>
+                                        </li>
+                                        <li class="flex items-center date-item">
+                                            <div class="date-icon-container">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="date-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                </svg>
+                                            </div>
+                                            <span>Cierre de inscripciones: <strong>30 de abril</strong></span>
+                                        </li>
+                                        <li class="flex items-center date-item">
+                                            <div class="date-icon-container">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="date-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </div>
+                                            <span>Descuento por inscripción anticipada: <strong class="text-purple-200">hasta el 20 de abril</strong></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="mt-10">
+                                    <a routerLink="/Inscripcion" class="group inline-block px-8 py-3 btn-secondary font-medium rounded-full pulse-animation" aria-label="Inscríbete ahora">
+                                        <span class="flex items-center">
+                                            Inscríbete ahora
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Enhanced Calendar Image with decorative elements -->
+                            <div class="hidden md:block relative">
+                                <div class="float-animation">
+                                    <div class="calendar-container">
+                                        <img 
+                                            src="img/placeholder.png" 
+                                            alt="Calendario de inscripciones para la Escuela Profesional de Dibujo" 
+                                            class="w-full h-auto object-contain rounded-lg shadow-purple" 
+                                            loading="lazy" 
+                                            width="600" 
+                                            height="400"
+                                        >
+                                    </div>
+                                </div>
+                                
+                                <!-- Enhanced decorative elements -->
+                                <div class="absolute -bottom-10 left-0" aria-hidden="true">
+                                    <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="50" cy="50" r="40" stroke="rgba(139, 92, 246, 0.3)" stroke-width="2" stroke-dasharray="10 10" />
+                                    </svg>
+                                </div>
+                                <!-- Added extra decorative element -->
+                                <div class="absolute top-10 right-10" aria-hidden="true">
+                                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="purple-star-animation">
+                                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="rgba(167, 139, 250, 0.5)" stroke-width="1" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- <div class="slider-slide flex-shrink-0 w-full relative">
+            <section class="hero-section flex items-center justify-center h-full" aria-label="Presentación en Video">
+                <div class="hero-overlay-green" role="presentation"></div>
+                <div class="hero-content flex items-center justify-center h-full w-full pt-4">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            <div class="text-white">
+                                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
+                                    <span class="block text-green-200 text-glow-green">Conoce nuestra</span>
+                                    <span class="block text-white">escuela en acción</span>
+                                </h1>
+                                <p class="mt-6 text-lg sm:text-xl text-gray-100 max-w-lg">
+                                    Mira cómo nuestros estudiantes aplican las técnicas aprendidas y 
+                                    desarrollan su talento artístico en un ambiente creativo y profesional.
+                                </p>
+                            </div>
+                            
+                            <div class="relative">
+                                <div class="video-container w-full rounded-xl overflow-hidden shadow-xl border-2 border-green-500 border-opacity-30">
+                                    <div class="relative">
+                                        <video 
+                                            class="w-full h-auto video-element" 
+                                            autoplay
+                                            muted
+                                            loop
+                                            preload="auto"
+                                        >
+                                        <source src="video/video-informativo.mp4" type="video/mp4">
+                                        Tu navegador no soporta la reproducción de videos.
+                                        </video>
+                                    </div>
+                                </div>
+                                
+                                <div class="absolute -top-10 -right-10" aria-hidden="true">
+                                    <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="spin-slow">
+                                        <circle cx="50" cy="50" r="40" stroke="rgba(16, 185, 129, 0.3)" stroke-width="2" stroke-dasharray="10 10" />
+                                    </svg>
+                                </div>
+                                <div class="absolute -bottom-6 -left-6 z-10" aria-hidden="true">
+                                    <svg width="100" height="40" viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2,20 C20,5 50,35 98,15" stroke="rgba(16, 185, 129, 0.6)" stroke-width="4" fill="none" stroke-linecap="round" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div> -->
+    </div>
+</section>
