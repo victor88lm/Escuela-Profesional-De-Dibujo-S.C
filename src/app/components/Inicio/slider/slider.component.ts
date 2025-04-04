@@ -5,7 +5,7 @@ import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.css']
 })
-export class SliderComponent implements OnInit, OnDestroy, AfterViewInit {
+export class sliderComponent implements OnInit, OnDestroy, AfterViewInit {
   currentSlide: number = 0;
   totalSlides: number = 2;
   autoSlideInterval: any;

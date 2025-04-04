@@ -25,7 +25,7 @@ import { PrivacyModalComponent } from './components/shared/privacy-modal/privacy
 import { PrivacyPolicyModalComponent } from './components/shared/privacy-policy-modal/privacy-policy-modal.component';
 import { TermsConditionsModalComponent } from './components/shared/terms-conditions-modal/terms-conditions-modal.component';
 import { LegalNoticeModalComponent } from './components/shared/legal-notice-modal/legal-notice-modal.component';
-import { SliderComponent } from './components/inicio/slider/slider.component';
+import { sliderComponent } from './components/Inicio/slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,7 @@ import { SliderComponent } from './components/inicio/slider/slider.component';
     PrivacyPolicyModalComponent,
     TermsConditionsModalComponent,
     LegalNoticeModalComponent,
-    SliderComponent
+    sliderComponent
   ],
   imports: [
     BrowserModule,
