@@ -191,11 +191,17 @@ export class TermsConditionsModalComponent implements OnInit, AfterViewInit, OnD
    */
   @HostListener('touchstart', ['$event'])
   handleTouchStart(event: TouchEvent): void {
-    // Prevenir comportamientos inesperados en iOS
     if (this.isVisible) {
-      // Permitir scroll solo dentro del contenido
       const scrollContent = this.modalElement?.nativeElement?.querySelector('.overflow-y-auto');
-      if (scrollContent && !scrollContent.contains(event.target as Node)) {
+      const closeIcon = this.modalElement?.nativeElement?.querySelector('button[type="button"] svg');
+      const closeButton = this.modalElement?.nativeElement?.querySelector('button[type="button"]');
+  
+      if (
+        scrollContent &&
+        !scrollContent.contains(event.target as Node) &&
+        !(closeButton && closeButton.contains(event.target as Node)) &&
+        !(closeIcon && closeIcon.contains(event.target as Node))
+      ) {
         event.preventDefault();
       }
     }

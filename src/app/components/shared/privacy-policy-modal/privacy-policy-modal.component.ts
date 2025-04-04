@@ -133,7 +133,7 @@ export class PrivacyPolicyModalComponent implements OnInit, AfterViewInit, OnDes
       });
     }
   }
-
+  
   close(event?: MouseEvent): void {
     // Evitar cerrar el modal si ya está en proceso de animación
     if (this.isAnimating) return;
@@ -191,15 +191,23 @@ export class PrivacyPolicyModalComponent implements OnInit, AfterViewInit, OnDes
    */
   @HostListener('touchstart', ['$event'])
   handleTouchStart(event: TouchEvent): void {
-    // Prevenir comportamientos inesperados en iOS
     if (this.isVisible) {
-      // Permitir scroll solo dentro del contenido
       const scrollContent = this.modalElement?.nativeElement?.querySelector('.overflow-y-auto');
-      if (scrollContent && !scrollContent.contains(event.target as Node)) {
+      const closeIcon = this.modalElement?.nativeElement?.querySelector('button[type="button"] svg');
+      const closeButton = this.modalElement?.nativeElement?.querySelector('button[type="button"]');
+  
+      if (
+        scrollContent &&
+        !scrollContent.contains(event.target as Node) &&
+        !(closeButton && closeButton.contains(event.target as Node)) &&
+        !(closeIcon && closeIcon.contains(event.target as Node))
+      ) {
         event.preventDefault();
       }
     }
   }
+  
+  
 
   ngOnDestroy(): void {
     // Limpieza de listeners y observers
