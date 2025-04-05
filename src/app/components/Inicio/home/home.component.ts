@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PrivacyModalService } from '../../shared/privacy-modal/privacy-modal.service';
 import { PrivacyModalComponent } from '../../shared/privacy-modal/privacy-modal.component';
+import { ContactService } from '../../../services/contact.service';
 
 interface OpcionConocio {
   value: string;
@@ -14,6 +15,9 @@ interface OpcionConocio {
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
+  formError = false;
+  errorMessage = '';
+
   public cursos = [
     {
       id: 'dibujo-publicitario',
@@ -92,8 +96,9 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder, 
-    private privacyModalService: PrivacyModalService
-  ) {
+    private privacyModalService: PrivacyModalService,
+    private contactService: ContactService
+  )  {
     this.contactForm = this.formBuilder.group({
       nombre: ['', Validators.required],
       telefono: ['', [Validators.required, Validators.pattern('[0-9]{10}')]],
@@ -106,6 +111,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     // Escuchar cambios en el campo de mensaje para actualizar el contador
     this.contactForm.get('mensaje')?.valueChanges.subscribe(value => {
       this.messageLength = value ? value.length : 0;
@@ -134,27 +140,38 @@ export class HomeComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
+    this.formSuccess = false;
+    this.formError = false;
 
     // Detener si el formulario es inválido
     if (this.contactForm.invalid) {
       return;
     }
 
-    // Aquí iría la lógica para enviar el formulario a tu backend
-    // Por ejemplo, utilizando HttpClient:
-    // this.http.post('tu-endpoint-api', this.contactForm.value).subscribe(...)
-
-    // Simulación de envío exitoso después de 1.5 segundos
-    setTimeout(() => {
-      this.formSuccess = true;
-      this.submitted = false;
-      this.contactForm.reset();
-      
-      // Restablecer formulario después de mostrar mensaje de éxito
-      setTimeout(() => {
-        this.formSuccess = false;
-      }, 5000);
-    }, 1500);
+    // Enviar el formulario usando el servicio
+    this.contactService.enviarFormulario(this.contactForm.value).subscribe(
+      response => {
+        if (response.status === 'success') {
+          this.formSuccess = true;
+          this.contactForm.reset();
+          
+          // Restablecer formulario después de mostrar mensaje de éxito
+          setTimeout(() => {
+            this.formSuccess = false;
+          }, 5000);
+        } else {
+          this.formError = true;
+          this.errorMessage = response.message || 'Hubo un error al enviar el formulario.';
+        }
+        this.submitted = false;
+      },
+      error => {
+        this.formError = true;
+        this.errorMessage = 'Error de conexión. Por favor, intenta nuevamente.';
+        this.submitted = false;
+        console.error('Error al enviar formulario:', error);
+      }
+    );
   }
 
   // Método para verificar si un campo específico tiene errores

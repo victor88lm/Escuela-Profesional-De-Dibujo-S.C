@@ -26,6 +26,8 @@ import { PrivacyPolicyModalComponent } from './components/shared/privacy-policy-
 import { TermsConditionsModalComponent } from './components/shared/terms-conditions-modal/terms-conditions-modal.component';
 import { LegalNoticeModalComponent } from './components/shared/legal-notice-modal/legal-notice-modal.component';
 import { sliderComponent } from './components/Inicio/slider/slider.component';
+import { NgOptimizedImage } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { TalleresEspecializadosComponent } from './components/cursos/talleres-especializados/talleres-especializados.component';
 
 @NgModule({
@@ -47,7 +49,7 @@ import { TalleresEspecializadosComponent } from './components/cursos/talleres-es
     TermsConditionsModalComponent,
     LegalNoticeModalComponent,
     sliderComponent,
-    TalleresEspecializadosComponent
+    TalleresEspecializadosComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,9 +60,11 @@ import { TalleresEspecializadosComponent } from './components/cursos/talleres-es
     MatIconModule,
     MatButtonModule,
     MatListModule,
-    ReactiveFormsModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    NgOptimizedImage,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

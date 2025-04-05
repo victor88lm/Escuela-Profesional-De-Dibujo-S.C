@@ -7,7 +7,7 @@ import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 })
 export class sliderComponent implements OnInit, OnDestroy, AfterViewInit {
   currentSlide: number = 0;
-  totalSlides: number = 2;
+  totalSlides: number = 3;
   autoSlideInterval: any;
   isVisible: boolean = true;
   observer: IntersectionObserver | null = null;
@@ -196,7 +196,7 @@ export class sliderComponent implements OnInit, OnDestroy, AfterViewInit {
       // Auto-slide every 10 seconds (as in your updated code)
       this.autoSlideInterval = setInterval(() => {
         this.nextSlide();
-      }, 10000);
+      }, 15000);
     }
   }
   

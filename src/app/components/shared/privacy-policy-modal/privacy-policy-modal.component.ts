@@ -9,8 +9,9 @@ export class PrivacyPolicyModalComponent implements OnInit, AfterViewInit, OnDes
   @ViewChild('policyModal') modalElement!: ElementRef;
   isVisible = false;
   isAnimating = false;
-  private scrollHandler: any = null;
+  private scrollHandler: (() => void) | null = null;
   private resizeObserver: ResizeObserver | null = null;
+  private touchStartHandler: (() => void) | null = null;
 
   constructor(
     private renderer: Renderer2,
@@ -23,6 +24,7 @@ export class PrivacyPolicyModalComponent implements OnInit, AfterViewInit, OnDes
   ngAfterViewInit(): void {
     // Inicializar el observer de redimensionamiento una sola vez
     this.initializeResizeObserver();
+    this.setupPassiveTouchListener();
   }
 
   /**
@@ -36,6 +38,52 @@ export class PrivacyPolicyModalComponent implements OnInit, AfterViewInit, OnDes
             this.adjustModalHeight();
           }
         });
+      }
+    });
+  }
+
+  /**
+   * Setup a passive touch start listener to prevent performance warnings
+   */
+  setupPassiveTouchListener(): void {
+    this.ngZone.runOutsideAngular(() => {
+      if (this.modalElement?.nativeElement) {
+        const element = this.modalElement.nativeElement;
+        
+        // Remove any existing listener first
+        if (this.touchStartHandler) {
+          this.touchStartHandler();
+        }
+
+        // Create a touch start handler
+        const handleTouchStart = (event: TouchEvent) => {
+          if (this.isVisible) {
+            const scrollContent = element.querySelector('.overflow-y-auto');
+            const closeIcon = element.querySelector('button[type="button"] svg');
+            const closeButton = element.querySelector('button[type="button"]');
+          
+            // Check if the touch is outside of scroll content and close elements
+            if (
+              scrollContent &&
+              !scrollContent.contains(event.target as Node) &&
+              !(closeButton && closeButton.contains(event.target as Node)) &&
+              !(closeIcon && closeIcon.contains(event.target as Node))
+            ) {
+              // If not in allowed elements, prevent default
+              this.ngZone.run(() => {
+                event.preventDefault();
+              });
+            }
+          }
+        };
+
+        // Add event listener directly with passive option
+        element.addEventListener('touchstart', handleTouchStart, { passive: false });
+
+        // Store a cleanup function
+        this.touchStartHandler = () => {
+          element.removeEventListener('touchstart', handleTouchStart, { passive: false });
+        };
       }
     });
   }
@@ -186,34 +234,16 @@ export class PrivacyPolicyModalComponent implements OnInit, AfterViewInit, OnDes
     }
   }
 
-  /**
-   * Mejora del comportamiento en iOS/Safari
-   */
-  @HostListener('touchstart', ['$event'])
-  handleTouchStart(event: TouchEvent): void {
-    if (this.isVisible) {
-      const scrollContent = this.modalElement?.nativeElement?.querySelector('.overflow-y-auto');
-      const closeIcon = this.modalElement?.nativeElement?.querySelector('button[type="button"] svg');
-      const closeButton = this.modalElement?.nativeElement?.querySelector('button[type="button"]');
-  
-      if (
-        scrollContent &&
-        !scrollContent.contains(event.target as Node) &&
-        !(closeButton && closeButton.contains(event.target as Node)) &&
-        !(closeIcon && closeIcon.contains(event.target as Node))
-      ) {
-        event.preventDefault();
-      }
-    }
-  }
-  
-  
-
   ngOnDestroy(): void {
     // Limpieza de listeners y observers
     if (this.scrollHandler) {
       this.scrollHandler();
       this.scrollHandler = null;
+    }
+    
+    if (this.touchStartHandler) {
+      this.touchStartHandler();
+      this.touchStartHandler = null;
     }
     
     if (this.resizeObserver) {
