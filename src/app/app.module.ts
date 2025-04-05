@@ -29,6 +29,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TalleresEspecializadosComponent } from './components/cursos/talleres-especializados/talleres-especializados.component';
+import { WhatsappButtonComponent } from './components/shared/whatsapp-button/whatsapp-button.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { TalleresEspecializadosComponent } from './components/cursos/talleres-es
     LegalNoticeModalComponent,
     sliderComponent,
     TalleresEspecializadosComponent,
+    WhatsappButtonComponent,
   ],
 
   imports: [
