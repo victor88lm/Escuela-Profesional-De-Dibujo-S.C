@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './oferta-educativa.component.css'
 })
 export class OfertaEducativaComponent {
-
+ ngOnInit() {
+  window.scrollTo(0, 0);
+  }
 }

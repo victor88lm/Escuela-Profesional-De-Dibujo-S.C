@@ -111,6 +111,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     // Escuchar cambios en el campo de mensaje para actualizar el contador
     this.contactForm.get('mensaje')?.valueChanges.subscribe(value => {
       this.messageLength = value ? value.length : 0;
