@@ -380,6 +380,7 @@ export class AlertService {
         .swal2-confirm {
           position: relative;
           overflow: hidden;
+          margin-bottom: 2rem;
         }
         
         .swal2-confirm:after {
