@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PrivacyModalService } from '../../shared/privacy-modal/privacy-modal.service';
 import { PrivacyModalComponent } from '../../shared/privacy-modal/privacy-modal.component';
 import { ContactService } from '../../../services/contact.service';
+import { AlertService } from '../../../services/Alert.service';
+import Swal from 'sweetalert2';
 
 interface OpcionConocio {
   value: string;
@@ -97,7 +99,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder, 
     private privacyModalService: PrivacyModalService,
-    private contactService: ContactService
+    private contactService: ContactService,
+    private alertService: AlertService // Inject the AlertService
   )  {
     this.contactForm = this.formBuilder.group({
       nombre: ['', Validators.required],
@@ -142,33 +145,60 @@ export class HomeComponent implements OnInit {
     this.submitted = true;
     this.formSuccess = false;
     this.formError = false;
-
+  
     // Detener si el formulario es inválido
     if (this.contactForm.invalid) {
+      // Mostrar alerta de error de validación
+      this.alertService.error(
+        'Por favor, completa todos los campos obligatorios correctamente.'
+      );
+      this.submitted = false; // Añadido para resetear el botón
       return;
     }
-
+  
     // Enviar el formulario usando el servicio
     this.contactService.enviarFormulario(this.contactForm.value).subscribe(
       response => {
         if (response.status === 'success') {
-          this.formSuccess = true;
-          this.contactForm.reset();
-          
-          // Restablecer formulario después de mostrar mensaje de éxito
-          setTimeout(() => {
-            this.formSuccess = false;
-          }, 5000);
+          // Mostrar alerta de éxito personalizada
+          Swal.fire({
+            ...this.alertService.getSuccessConfig(
+              'Tu solicitud ha sido enviada correctamente. Nos pondremos en contacto contigo pronto.'
+            ),
+            didClose: () => {
+              // Resetear estado del formulario cuando se cierra la alerta
+              this.submitted = false;
+              this.formSuccess = false;
+              this.contactForm.reset();
+            }
+          } as any);
         } else {
-          this.formError = true;
-          this.errorMessage = response.message || 'Hubo un error al enviar el formulario.';
+          // Mostrar alerta de error
+          Swal.fire({
+            ...this.alertService.getErrorConfig(
+              response.message || 'Hubo un problema al enviar tu solicitud. Por favor, intenta nuevamente.'
+            ),
+            didClose: () => {
+              // Resetear estado del formulario cuando se cierra la alerta
+              this.submitted = false;
+              this.formError = false;
+            }
+          } as any);
         }
-        this.submitted = false;
       },
       error => {
-        this.formError = true;
-        this.errorMessage = 'Error de conexión. Por favor, intenta nuevamente.';
-        this.submitted = false;
+        // Mostrar alerta de error de conexión
+        Swal.fire({
+          ...this.alertService.getErrorConfig(
+            'No se pudo establecer conexión. Por favor, verifica tu conexión a internet e intenta de nuevo.'
+          ),
+          didClose: () => {
+            // Resetear estado del formulario cuando se cierra la alerta
+            this.submitted = false;
+            this.formError = false;
+          }
+        } as any);
+  
         console.error('Error al enviar formulario:', error);
       }
     );

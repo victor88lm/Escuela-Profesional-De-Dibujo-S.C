@@ -28,6 +28,7 @@ import { LegalNoticeModalComponent } from './components/shared/legal-notice-moda
 import { sliderComponent } from './components/Inicio/slider/slider.component';
 import { NgOptimizedImage } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { AlertService } from './services/Alert.service';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,6 @@ import { HttpClientModule } from '@angular/common/http';
     NgOptimizedImage
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, AlertService]
 })
 export class AppModule { }

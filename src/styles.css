@@ -150,3 +150,49 @@ body {
     50% { transform: scale(1.2); opacity: 1; }
     100% { transform: scale(0.8); opacity: 0.5; }
 }
+
+
+/*Estilos de alerta personalizada*/
+
+/* Estilos adicionales para alertas artísticas */
+@keyframes pulse-slow {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse-slow 5s ease-in-out infinite;
+  }
+  
+  /* Estilos personalizados para SweetAlert2 */
+  .swal2-popup {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .swal2-confirm {
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  
+  .swal2-confirm:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+  }
+  
+  /* Efectos de dibujo y creatividad */
+  .swal2-popup svg {
+    mix-blend-mode: soft-light;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    .swal2-popup {
+      width: 95% !important;
+      max-width: 95% !important;
+      margin: 0 auto !important;
+    }
+  }
