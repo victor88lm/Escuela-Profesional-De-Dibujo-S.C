@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './planteles.component.css'
 })
 export class PlantelesComponent {
-
+  ngOnInit() {
+    window.scrollTo(0, 0); // Scroll to the top of the page when the component is initialized
+  }
 }

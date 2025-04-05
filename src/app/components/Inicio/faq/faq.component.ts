@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-galeria',
-  templateUrl: './galeria.component.html',
-  styleUrl: './galeria.component.css'
+  selector: 'app-faq',
+  templateUrl: './faq.component.html',
+  styleUrl: './faq.component.css'
 })
-export class GaleriaComponent {
+export class FAQComponent {
   ngOnInit() {
     window.scrollTo(0, 0); // Scroll to the top of the page when the component is initialized
   }

@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './nosotros.component.css'
 })
 export class NosotrosComponent {
-
+ngOnInit() {
+  window.scrollTo(0, 0); // Scroll to the top of the page when the component is initialized
+}
 }

@@ -30,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TalleresEspecializadosComponent } from './components/cursos/talleres-especializados/talleres-especializados.component';
 import { WhatsappButtonComponent } from './components/shared/whatsapp-button/whatsapp-button.component';
+import { FAQComponent } from './components/Inicio/faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { WhatsappButtonComponent } from './components/shared/whatsapp-button/wha
     sliderComponent,
     TalleresEspecializadosComponent,
     WhatsappButtonComponent,
+    FAQComponent,
   ],
 
   imports: [

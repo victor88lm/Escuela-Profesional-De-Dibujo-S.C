@@ -10,6 +10,7 @@ import { DibujoPublicitarioComponent } from './components/cursos/dibujo-publicit
 import { DibujoInfantilComponent } from './components/cursos/dibujo-infantil/dibujo-infantil.component';
 import { DisenoGraficoComponent } from './components/cursos/diseno-grafico/diseno-grafico.component';
 import { TalleresEspecializadosComponent } from './components/cursos/talleres-especializados/talleres-especializados.component';
+import { FAQComponent } from './components/Inicio/faq/faq.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,6 +27,8 @@ const routes: Routes = [
     component: TalleresEspecializadosComponent,
   },
   { path: 'Cursos', component: OfertaEducativaComponent },
+  { path: 'Preguntas Frecuentes', component: FAQComponent},
+  { path: 'Contactanos', component: ContactoComponent },
 ];
 
 @NgModule({
