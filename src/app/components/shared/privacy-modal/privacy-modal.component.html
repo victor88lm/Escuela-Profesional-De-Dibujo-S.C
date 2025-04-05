@@ -1,285 +1,236 @@
-<!-- privacy-modal.component.html (diseño mejorado) -->
+<!-- privacy-modal.component.html - Diseño Minimalista -->
 <div #privacyModal 
-     class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm z-50 flex items-center justify-center transition-all duration-300" 
-     [class.hidden]="!isVisible"
-     [class.opacity-0]="!isVisible"
+     class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center transition-opacity duration-300 will-change-transform" 
+     [ngClass]="{'hidden': !isVisible, 'opacity-0': !isVisible}"
      (click)="onBackdropClick($event)">
-  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col relative" 
-       [ngClass]="{'animate-scale-up': isVisible}" (click)="$event.stopPropagation()">
+  <div class="bg-white rounded-lg shadow-xl w-[95%] max-w-3xl max-h-[90vh] overflow-hidden flex flex-col relative animate-scale-up" 
+       (click)="$event.stopPropagation()">
     
-    <!-- Decorative elements -->
-    <div class="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full opacity-30 transform translate-x-1/2 -translate-y-1/2"></div>
-    <div class="absolute bottom-0 left-0 w-64 h-64 bg-indigo-50 rounded-full opacity-30 transform -translate-x-1/2 translate-y-1/2"></div>
-    
-    <!-- Header with enhanced design -->
-    <div class="p-6 bg-gradient-to-r from-blue-600 to-indigo-700 text-white flex justify-between items-center shadow-lg relative overflow-hidden">
-      <!-- Decorative circles in header -->
-      <div class="absolute -top-8 -right-8 w-24 h-24 bg-white opacity-10 rounded-full"></div>
-      <div class="absolute -bottom-12 left-12 w-32 h-32 bg-white opacity-5 rounded-full"></div>
-      
-      <h3 class="text-2xl font-bold flex items-center relative z-10">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <!-- Header con acento de color -->
+    <div class="p-4 sm:p-6 border-b border-gray-100 flex justify-between items-center relative">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
+      <h3 class="text-xl sm:text-2xl font-medium text-gray-900 flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
         </svg>
-        <span class="relative">
-          Políticas de Privacidad
-          <span class="absolute -bottom-1 left-0 w-full h-1 bg-white opacity-40 rounded-full"></span>
-        </span>
+        Políticas de Privacidad
       </h3>
       
-      <button (click)="close($event)" type="button" class="relative z-10 bg-white bg-opacity-10 hover:bg-opacity-20 text-white p-2 rounded-full transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <button (click)="close($event)" type="button" class="p-1.5 rounded-full hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
     </div>
     
-    <!-- Content with improved readability and styling -->
-    <div class="p-8 overflow-y-auto flex-grow bg-gradient-to-b from-white to-gray-50">
-      <div class="max-w-3xl mx-auto space-y-8 text-gray-700">
-        <!-- Introduction with improved card design -->
-        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-          <h4 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-            <span class="w-10 h-1 bg-blue-500 rounded-full mr-3"></span>
-            AVISO DE PRIVACIDAD
-          </h4>
-          <p class="mb-4 text-gray-700 leading-relaxed">
-            <strong class="text-blue-800">ESCUELA PROFESIONAL DE DIBUJO S.C.</strong>, con domicilios en sus dos planteles:
+    <!-- Contenido con scroll optimizado -->
+    <div class="overflow-y-auto overscroll-contain will-change-scroll flex-grow p-4 sm:p-6 text-gray-700 smooth-scroll">
+      <div class="space-y-6 sm:space-y-8 max-w-2xl mx-auto">
+        
+        <!-- Introducción -->
+        <div>
+          <p class="text-xs text-gray-500 mb-4">Última actualización: Abril 2025</p>
+          <p class="mb-4">
+            <strong class="text-blue-600 font-medium">ESCUELA PROFESIONAL DE DIBUJO S.C.</strong>, con domicilios en sus dos planteles, es el responsable del uso y protección de sus datos personales:
           </p>
           
-          <!-- Campus locations with improved styling -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-5">
-            <div class="bg-blue-50 p-5 rounded-xl border border-blue-100 relative overflow-hidden transform transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-              <div class="absolute top-0 right-0 w-16 h-16 bg-blue-100 rounded-full opacity-60 transform translate-x-1/3 -translate-y-1/3"></div>
-              <h5 class="text-lg font-semibold text-blue-700 mb-2 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <!-- Planteles en diseño minimalista -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <div class="border border-blue-100 rounded-md p-4">
+              <h5 class="font-medium text-blue-700 mb-2 flex items-center text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
                 Plantel Centro
               </h5>
-              <p class="text-blue-900 z-10 relative">Eje Central Lázaro Cárdenas 150, Col. Guerrero, Cuauhtémoc, 06300 Ciudad de México, CDMX</p>
+              <p class="text-sm text-gray-700">Eje Central Lázaro Cárdenas 150, Col. Guerrero, Cuauhtémoc, 06300 CDMX</p>
             </div>
             
-            <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-100 relative overflow-hidden transform transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-              <div class="absolute top-0 right-0 w-16 h-16 bg-indigo-100 rounded-full opacity-60 transform translate-x-1/3 -translate-y-1/3"></div>
-              <h5 class="text-lg font-semibold text-indigo-700 mb-2 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div class="border border-indigo-100 rounded-md p-4">
+              <h5 class="font-medium text-indigo-700 mb-2 flex items-center text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
                 Plantel Ecatepec
               </h5>
-              <p class="text-indigo-900 z-10 relative">Av. Insurgentes 2 Bis, Centro, 55000 Ecatepec de Morelos, Estado de México</p>
+              <p class="text-sm text-gray-700">Av. Insurgentes 2 Bis, Centro, 55000 Ecatepec de Morelos, Estado de México</p>
             </div>
           </div>
-          
-          <p class="text-gray-700 leading-relaxed">
-            Es el responsable del uso y protección de sus datos personales, y al respecto le informamos lo siguiente:
-          </p>
         </div>
 
-        <!-- Section 1 with improved styling -->
-        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-          <h4 class="text-xl font-bold text-blue-800 mb-4 flex items-center">
-            <div class="flex items-center justify-center bg-blue-100 text-blue-700 w-8 h-8 rounded-full mr-3 font-semibold">1</div>
-            FINALIDAD DEL TRATAMIENTO DE SUS DATOS PERSONALES
+        <!-- Sección 1 - Finalidad -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-blue-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded-full">
+            FINALIDAD DEL TRATAMIENTO
           </h4>
           
-          <p class="mb-4 text-gray-700 leading-relaxed">
+          <p class="mb-3">
             Los datos personales que recabamos de usted, los utilizaremos para las siguientes finalidades que son necesarias para el servicio que solicita:
           </p>
           
-          <ul class="list-none pl-0 space-y-3 mb-4">
-            <li class="pl-8 relative text-gray-700 leading-relaxed">
-              <div class="absolute left-0 top-1.5 w-3 h-3 bg-blue-500 rounded-full"></div>
-              Proveer los servicios educativos y de formación que ha solicitado
+          <ul class="space-y-2 mb-4">
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-blue-500 mt-2"></span>
+              <div>Proveer los servicios educativos y de formación que ha solicitado</div>
             </li>
-            <li class="pl-8 relative text-gray-700 leading-relaxed">
-              <div class="absolute left-0 top-1.5 w-3 h-3 bg-blue-500 rounded-full"></div>
-              Informarle sobre cambios en los mismos
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-blue-500 mt-2"></span>
+              <div>Informarle sobre cambios en los mismos</div>
             </li>
-            <li class="pl-8 relative text-gray-700 leading-relaxed">
-              <div class="absolute left-0 top-1.5 w-3 h-3 bg-blue-500 rounded-full"></div>
-              Evaluar la calidad del servicio que le brindamos
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-blue-500 mt-2"></span>
+              <div>Evaluar la calidad del servicio que le brindamos</div>
             </li>
-            <li class="pl-8 relative text-gray-700 leading-relaxed">
-              <div class="absolute left-0 top-1.5 w-3 h-3 bg-blue-500 rounded-full"></div>
-              Integrar su expediente académico
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-blue-500 mt-2"></span>
+              <div>Integrar su expediente académico</div>
             </li>
-            <li class="pl-8 relative text-gray-700 leading-relaxed">
-              <div class="absolute left-0 top-1.5 w-3 h-3 bg-blue-500 rounded-full"></div>
-              Procesos de gestión administrativa
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-blue-500 mt-2"></span>
+              <div>Procesos de gestión administrativa</div>
             </li>
-            <li class="pl-8 relative text-gray-700 leading-relaxed">
-              <div class="absolute left-0 top-1.5 w-3 h-3 bg-blue-500 rounded-full"></div>
-              Programas, procesos, grupos y actividades académicas
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-blue-500 mt-2"></span>
+              <div>Programas, procesos, grupos y actividades académicas</div>
             </li>
           </ul>
           
-          <p class="mb-4 text-gray-700 leading-relaxed">
-            De manera adicional, utilizaremos su información personal para las siguientes finalidades secundarias que no son necesarias para el servicio solicitado, pero que nos permiten y facilitan brindarle una mejor atención:
+          <p class="mb-3">
+            De manera adicional, utilizaremos su información personal para las siguientes finalidades secundarias:
           </p>
           
-          <div class="bg-gray-50 p-4 rounded-lg">
-            <ul class="list-none pl-0 space-y-2">
-              <li class="pl-8 relative text-gray-700 leading-relaxed">
-                <div class="absolute left-0 top-1.5 w-3 h-3 bg-indigo-400 rounded-full"></div>
-                Ofrecerle nuevos productos y servicios educativos
+          <div class="text-sm bg-gray-50 p-3 rounded-md border-l-2 border-indigo-300 mb-2">
+            <ul class="space-y-2">
+              <li class="flex gap-2">
+                <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5"></span>
+                <div>Ofrecerle nuevos productos y servicios educativos</div>
               </li>
-              <li class="pl-8 relative text-gray-700 leading-relaxed">
-                <div class="absolute left-0 top-1.5 w-3 h-3 bg-indigo-400 rounded-full"></div>
-                Enviarle promociones e información sobre eventos y actividades
+              <li class="flex gap-2">
+                <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5"></span>
+                <div>Enviarle promociones e información sobre eventos y actividades</div>
               </li>
-              <li class="pl-8 relative text-gray-700 leading-relaxed">
-                <div class="absolute left-0 top-1.5 w-3 h-3 bg-indigo-400 rounded-full"></div>
-                Aplicar encuestas y evaluar la calidad de nuestros servicios
+              <li class="flex gap-2">
+                <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5"></span>
+                <div>Aplicar encuestas y evaluar la calidad de nuestros servicios</div>
               </li>
             </ul>
           </div>
-        </div>
+        </section>
 
-        <!-- Section 2 with improved styling -->
-        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-          <h4 class="text-xl font-bold text-blue-800 mb-4 flex items-center">
-            <div class="flex items-center justify-center bg-blue-100 text-blue-700 w-8 h-8 rounded-full mr-3 font-semibold">2</div>
+        <!-- Sección 2 - Datos personales -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-blue-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded-full">
             DATOS PERSONALES QUE UTILIZAREMOS
           </h4>
           
-          <p class="mb-4 text-gray-700 leading-relaxed">
-            Para llevar a cabo las finalidades descritas en el presente aviso de privacidad, utilizaremos los siguientes datos personales:
+          <p class="mb-3">
+            Para llevar a cabo las finalidades descritas, utilizaremos los siguientes datos personales:
           </p>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
-              <h5 class="text-blue-700 font-medium mb-2 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
-                </svg>
-                Datos de identificación
-              </h5>
-              <p class="text-gray-700">Nombre, edad, fecha de nacimiento, género, estado civil, firma</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="border border-blue-100 p-3 rounded-md">
+              <p class="font-medium text-blue-700 text-sm">Datos de identificación</p>
+              <p class="text-sm">Nombre, edad, fecha de nacimiento, género, estado civil, firma</p>
             </div>
             
-            <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100">
-              <h5 class="text-indigo-700 font-medium mb-2 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                Datos de contacto
-              </h5>
-              <p class="text-gray-700">Domicilio, teléfono, correo electrónico</p>
+            <div class="border border-indigo-100 p-3 rounded-md">
+              <p class="font-medium text-indigo-700 text-sm">Datos de contacto</p>
+              <p class="text-sm">Domicilio, teléfono, correo electrónico</p>
             </div>
             
-            <div class="bg-purple-50 p-4 rounded-lg border border-purple-100">
-              <h5 class="text-purple-700 font-medium mb-2 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path d="M12 14l9-5-9-5-9 5 9 5z" />
-                  <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
-                </svg>
-                Datos académicos
-              </h5>
-              <p class="text-gray-700">Escolaridad, historial académico, calificaciones, títulos</p>
+            <div class="border border-blue-100 p-3 rounded-md">
+              <p class="font-medium text-blue-700 text-sm">Datos académicos</p>
+              <p class="text-sm">Escolaridad, historial académico, calificaciones, títulos</p>
             </div>
             
-            <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
-              <h5 class="text-blue-700 font-medium mb-2 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                Datos laborales
-              </h5>
-              <p class="text-gray-700">Ocupación, puesto, domicilio laboral (en caso de ser aplicable)</p>
+            <div class="border border-indigo-100 p-3 rounded-md">
+              <p class="font-medium text-indigo-700 text-sm">Datos laborales</p>
+              <p class="text-sm">Ocupación, puesto, domicilio laboral (en caso de ser aplicable)</p>
             </div>
           </div>
-        </div>
+        </section>
 
-        <!-- Section 3 with improved styling -->
-        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-          <h4 class="text-xl font-bold text-blue-800 mb-4 flex items-center">
-            <div class="flex items-center justify-center bg-blue-100 text-blue-700 w-8 h-8 rounded-full mr-3 font-semibold">3</div>
+        <!-- Sección 3 - Transferencia de datos -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-blue-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded-full">
             TRANSFERENCIA DE DATOS PERSONALES
           </h4>
           
-          <p class="mb-4 text-gray-700 leading-relaxed">
-            Le informamos que sus datos personales podrán ser compartidos dentro y fuera del país con las siguientes personas, empresas, organizaciones o autoridades distintas a nosotros, para los siguientes fines:
+          <p class="mb-3">
+            Le informamos que sus datos personales podrán ser compartidos con las siguientes entidades:
           </p>
           
-          <div class="overflow-hidden rounded-xl border border-gray-200 mb-4">
+          <div class="overflow-x-auto overflow-y-hidden rounded-md border border-gray-200 mb-3">
             <table class="w-full text-sm">
               <thead>
-                <tr class="bg-gradient-to-r from-blue-50 to-indigo-50">
-                  <th class="text-left py-3 px-4 font-semibold text-gray-700">Destinatario de los datos personales</th>
-                  <th class="text-left py-3 px-4 font-semibold text-gray-700">Finalidad</th>
+                <tr class="bg-gray-50 border-b border-gray-200">
+                  <th class="text-left py-2 px-3 font-medium text-gray-700">Destinatario</th>
+                  <th class="text-left py-2 px-3 font-medium text-gray-700">Finalidad</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-                  <td class="py-3 px-4 text-gray-700">Autoridades educativas</td>
-                  <td class="py-3 px-4 text-gray-700">Acreditación de estudios, validación de documentos</td>
+                <tr class="border-b border-gray-100">
+                  <td class="py-2 px-3 text-gray-700">Autoridades educativas</td>
+                  <td class="py-2 px-3 text-gray-700">Acreditación de estudios, validación de documentos</td>
                 </tr>
-                <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-                  <td class="py-3 px-4 text-gray-700">Instituciones bancarias</td>
-                  <td class="py-3 px-4 text-gray-700">Procesos de pagos y becas</td>
+                <tr class="border-b border-gray-100">
+                  <td class="py-2 px-3 text-gray-700">Instituciones bancarias</td>
+                  <td class="py-2 px-3 text-gray-700">Procesos de pagos y becas</td>
                 </tr>
-                <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-                  <td class="py-3 px-4 text-gray-700">Aseguradoras</td>
-                  <td class="py-3 px-4 text-gray-700">Seguros estudiantiles (en caso de ser aplicable)</td>
+                <tr class="border-b border-gray-100">
+                  <td class="py-2 px-3 text-gray-700">Aseguradoras</td>
+                  <td class="py-2 px-3 text-gray-700">Seguros estudiantiles (en caso de ser aplicable)</td>
                 </tr>
-                <tr class="hover:bg-gray-50 transition-colors">
-                  <td class="py-3 px-4 text-gray-700">Empresas para prácticas profesionales</td>
-                  <td class="py-3 px-4 text-gray-700">Colocación y seguimiento académico-profesional</td>
+                <tr>
+                  <td class="py-2 px-3 text-gray-700">Empresas para prácticas</td>
+                  <td class="py-2 px-3 text-gray-700">Colocación y seguimiento académico-profesional</td>
                 </tr>
               </tbody>
             </table>
           </div>
           
-          <p class="text-gray-700 leading-relaxed">
+          <p class="text-sm bg-blue-50 p-3 rounded-md border-l-2 border-blue-500">
             Nos comprometemos a que los mismos serán tratados bajo estrictas medidas de seguridad, siempre garantizando su confidencialidad.
           </p>
-        </div>
+        </section>
 
-        <!-- More sections with consistent styling -->
-        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-          <h4 class="text-xl font-bold text-blue-800 mb-4 flex items-center">
-            <div class="flex items-center justify-center bg-blue-100 text-blue-700 w-8 h-8 rounded-full mr-3 font-semibold">4</div>
+        <!-- Sección 4 - Derechos ARCO -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-blue-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded-full">
             DERECHOS ARCO
           </h4>
           
-          <p class="mb-4 text-gray-700 leading-relaxed">
-            Usted tiene derecho a conocer qué datos personales tenemos de usted, para qué los utilizamos y las condiciones del uso que les damos (Acceso). Asimismo, es su derecho solicitar la corrección de su información personal en caso de que esté desactualizada, sea inexacta o incompleta (Rectificación); que la eliminemos de nuestros registros o bases de datos cuando considere que la misma no está siendo utilizada adecuadamente (Cancelación); así como oponerse al uso de sus datos personales para fines específicos (Oposición).
+          <p class="mb-3">
+            Usted tiene derecho a conocer qué datos personales tenemos de usted, para qué los utilizamos y las condiciones del uso que les damos (Acceso). Asimismo, es su derecho solicitar la corrección de su información personal (Rectificación); que la eliminemos de nuestros registros (Cancelación); así como oponerse al uso de sus datos personales para fines específicos (Oposición).
           </p>
           
-          <div class="flex items-center p-4 bg-blue-50 rounded-lg mb-4">
-            <div class="flex-shrink-0 mr-4">
-              <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </div>
+          <div class="flex flex-col sm:flex-row items-center sm:items-start gap-3 p-3 bg-gray-50 rounded-md mb-3 border border-gray-200">
+            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
             </div>
-            <div>
-              <p class="text-gray-700 leading-relaxed">
-                Para el ejercicio de cualquiera de los derechos ARCO, usted deberá presentar la solicitud respectiva a través de un correo electrónico a: 
-                <span class="text-blue-700 font-medium">informes&#64;epd.edu.mx</span>
-              </p>
-            </div>
+            <p class="text-sm text-center sm:text-left">
+              Para el ejercicio de cualquiera de los derechos ARCO, usted deberá presentar la solicitud respectiva a través de un correo electrónico a: 
+              <span class="text-blue-700 font-medium">informes&#64;epd.edu.mx</span>
+            </p>
           </div>
-        </div>
+        </section>
 
-        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-          <h4 class="text-xl font-bold text-blue-800 mb-4 flex items-center">
-            <div class="flex items-center justify-center bg-blue-100 text-blue-700 w-8 h-8 rounded-full mr-3 font-semibold">5</div>
+        <!-- Sección 5 - Modificaciones -->
+        <section>
+          <h4 class="text-lg sm:text-xl font-medium text-gray-900 mb-3 pb-1 border-b border-blue-100 inline-flex items-center after:content-[''] after:ml-2 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded-full">
             MODIFICACIONES AL AVISO DE PRIVACIDAD
           </h4>
           
-          <p class="text-gray-700 leading-relaxed">
+          <p>
             El presente aviso de privacidad puede sufrir modificaciones, cambios o actualizaciones. Nos comprometemos a mantenerlo informado sobre los cambios que pueda sufrir el presente aviso de privacidad, a través de nuestra página web.
           </p>
-        </div>
+        </section>
 
-        <!-- Last updated date with improved styling -->
-        <div class="text-right text-sm text-gray-500 pt-4 border-t border-gray-200 flex items-center justify-end">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <!-- Fecha de actualización -->
+        <div class="text-xs text-gray-500 pt-3 border-t border-gray-100 flex items-center justify-end">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           Última actualización: Abril 2025
@@ -287,16 +238,13 @@
       </div>
     </div>
     
-    <!-- Footer with enhanced button -->
-    <div class="p-6 bg-gray-50 border-t border-gray-200 flex justify-end relative overflow-hidden">
-      <!-- Decorative elements -->
-      <div class="absolute bottom-0 left-0 w-32 h-32 bg-blue-50 rounded-full opacity-70 transform translate-x-[-40%] translate-y-[40%]"></div>
-      
+    <!-- Footer minimalista con botón de aceptar -->
+    <div class="p-4 sm:p-6 bg-white border-t border-gray-100 flex justify-end">
       <button type="button" 
               (click)="acceptAndClose($event)" 
-              class="relative bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex items-center group">
-        <span class="mr-2">Aceptar</span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-sm flex items-center gap-2">
+        <span>Aceptar</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
         </svg>
       </button>

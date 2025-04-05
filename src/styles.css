@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,15 +9,6 @@ body {
     font-family: 'Be Vietnam Pro', sans-serif;
     overflow-x: hidden;
 }
-
-/* Estilos para la navbar transparente con efectos mejorados
-.navbar-transparent {
-    background-color: rgba(0, 10, 30, 0.15);
-    backdrop-filter: blur(8px);
-    transition: all 0.4s ease;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-} */
-
 
 
 /* Estilos para el hero con la imagen de fondo */

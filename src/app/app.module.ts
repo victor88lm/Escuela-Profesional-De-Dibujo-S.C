@@ -26,6 +26,8 @@ import { PrivacyPolicyModalComponent } from './components/shared/privacy-policy-
 import { TermsConditionsModalComponent } from './components/shared/terms-conditions-modal/terms-conditions-modal.component';
 import { LegalNoticeModalComponent } from './components/shared/legal-notice-modal/legal-notice-modal.component';
 import { sliderComponent } from './components/Inicio/slider/slider.component';
+import { NgOptimizedImage } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { sliderComponent } from './components/Inicio/slider/slider.component';
     MatIconModule,
     MatButtonModule,
     MatListModule,
-    ReactiveFormsModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    NgOptimizedImage
   ],
   providers: [],
   bootstrap: [AppComponent]
