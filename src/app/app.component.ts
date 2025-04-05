@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
   title = 'EPD';
@@ -15,30 +15,30 @@ export class AppComponent implements OnInit {
   showLoopMotionConsoleLog() {
     // Create an image element to load the logo
     const img = new Image();
-    
+
     // Set up the onload event to log the image to console
     img.onload = () => {
       // Create a canvas to resize the image if needed
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
-      
+
       // Set a max width for console display (adjust as needed)
       const maxWidth = 400;
       const scaleFactor = maxWidth / img.width;
-      
+
       canvas.width = Math.min(img.width * scaleFactor, maxWidth);
       canvas.height = img.height * scaleFactor;
-      
+
       // Draw the scaled image on the canvas
       if (ctx) {
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       } else {
         console.error('Failed to get 2D context for canvas.');
       }
-      
+
       // Convert to data URL and log to console
       const resizedDataUrl = canvas.toDataURL('image/png');
-      
+
       console.log(
         '%c ',
         `font-size: 0px; 
@@ -51,10 +51,10 @@ export class AppComponent implements OnInit {
 
       console.log(
         '%c◈ LoopMotion Digital Solutions ◈\n' +
-        '🌐 Desarrolladores de: epd.edu.mx\n' +
-        '📞 Contacto: contacto@loopmotion.tech\n' +
-        '🌍 Web: www.loopmotion.tech\n' +
-        '✔ Innovación y Tecnología en Cada Proyecto',
+          '🌐 Desarrolladores de: epd.edu.mx\n' +
+          '📞 Contacto: contacto@loopmotion.tech\n' +
+          '🌍 Web: www.loopmotion.tech\n' +
+          '✔ Innovación y Tecnología en Cada Proyecto',
         `background: linear-gradient(135deg, #007bff, #0056b3); 
          color: white; 
          padding: 20px; 
@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
          border: 2px solid rgba(255,255,255,0.3);`
       );
     };
-    
+
     // Set the source to your logo
     img.src = 'img/LoopMotion.png';
   }

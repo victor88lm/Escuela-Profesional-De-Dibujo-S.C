@@ -14,7 +14,6 @@ import { HomeComponent } from './components/Inicio/home/home.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { OfertaEducativaComponent } from './components/cursos/oferta-educativa/oferta-educativa.component';
 import { NosotrosComponent } from './components/Inicio/nosotros/nosotros.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { DibujoPublicitarioComponent } from './components/cursos/dibujo-publicitario/dibujo-publicitario.component';
 import { DisenoGraficoComponent } from './components/cursos/diseno-grafico/diseno-grafico.component';
 import { DibujoInfantilComponent } from './components/cursos/dibujo-infantil/dibujo-infantil.component';
@@ -28,7 +27,8 @@ import { LegalNoticeModalComponent } from './components/shared/legal-notice-moda
 import { sliderComponent } from './components/Inicio/slider/slider.component';
 import { NgOptimizedImage } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { AlertService } from './services/Alert.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TalleresEspecializadosComponent } from './components/cursos/talleres-especializados/talleres-especializados.component';
 
 @NgModule({
   declarations: [
@@ -48,8 +48,10 @@ import { AlertService } from './services/Alert.service';
     PrivacyPolicyModalComponent,
     TermsConditionsModalComponent,
     LegalNoticeModalComponent,
-    sliderComponent
+    sliderComponent,
+    TalleresEspecializadosComponent,
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -61,9 +63,9 @@ import { AlertService } from './services/Alert.service';
     MatListModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgOptimizedImage
+    NgOptimizedImage,
   ],
   providers: [],
-  bootstrap: [AppComponent, AlertService]
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
