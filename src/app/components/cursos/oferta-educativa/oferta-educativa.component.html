@@ -1,5 +1,5 @@
 <!-- Sección de video como fondo -->
-<div class="relative h-96 w-full overflow-hidden">
+<div class="relative h-[32rem] w-full overflow-hidden">
   <!-- Video de fondo -->
   <video
     class="absolute inset-0 w-full h-full object-cover"
@@ -41,142 +41,7 @@
 
   <!-- Grid de tarjetas -->
   <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-    <!-- Tarjeta 1: Dibujo Infantil -->
-    <div
-      class="group relative rounded-3xl overflow-hidden shadow-xl hover:shadonw-2xl transitio-all duration-500 hover:scale-[1.02] transform"
-    >
-      <!-- Banner superior con gradiente -->
-      <div
-        class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 to-blue-600"
-      ></div>
-
-      <!-- Imagen con overlay al hacer hover -->
-      <div class="relative overflow-hidden">
-        <img
-          src="https://www.hola.com/horizon/landscape/85f03f5de45d-dibujo-infantil.jpg"
-          alt="Dibujo Infantil"
-          class="h-96 w-full object-cover transition-transform duration-700 group-hover:scale-110"
-        />
-        <div
-          class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-500"
-        ></div>
-      </div>
-
-      <!-- Badge/etiqueta flotante -->
-      <div
-        class="absolute top-4 right-4 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
-      >
-        Para niños
-      </div>
-
-      <!-- Contenido de la tarjeta -->
-      <div class="p-8">
-        <div class="flex items-start justify-between">
-          <h2 class="text-2xl font-extrabold text-blue-600">
-            Dibujo Infantil
-            <div class="h-1 w-12 bg-blue-500 mt-2 rounded-full"></div>
-          </h2>
-          <div
-            class="bg-blue-100 text-blue-600 rounded-full p-2 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
-          </div>
-        </div>
-
-        <p class="text-md text-gray-700 opacity-90 mt-4 leading-relaxed">
-          Curso diseñado para estimular la creatividad de los más pequeños
-          mediante técnicas de dibujo.
-        </p>
-
-        <!-- Lista con iconos -->
-        <div class="mt-6 space-y-3">
-          <div class="flex items-center text-sm text-gray-600">
-            <div class="mr-2 text-blue-500">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                />
-              </svg>
-            </div>
-            <span>Edad recomendada: 5-12 años</span>
-          </div>
-          <div class="flex items-center text-sm text-gray-600">
-            <div class="mr-2 text-blue-500">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                />
-              </svg>
-            </div>
-            <span>Materiales incluidos</span>
-          </div>
-          <div class="flex items-center text-sm text-gray-600">
-            <div class="mr-2 text-blue-500">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                />
-              </svg>
-            </div>
-            <span>Clases dinámicas y divertidas</span>
-          </div>
-        </div>
-
-        <!-- Botón con efecto hover mejorado -->
-        <div class="mt-8 relative">
-          <button
-            class="w-full relative z-10 px-6 py-3 rounded-xl text-white font-bold bg-blue-500 group-hover:bg-blue-600 transition-all duration-300 overflow-hidden"
-          >
-            <span class="relative z-10">Más información</span>
-            <div
-              class="absolute inset-0 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 bg-blue-700"
-            ></div>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tarjeta 2: Dibujo Publicitario -->
+    <!-- Tarjeta 1: Dibujo Publicitario (REORDENADA) -->
     <div
       class="group rounded-3xl overflow-hidden backdrop-blur-lg bg-white/80 border border-gray-200 hover:border-red-200 hover:shadow-2xl transition-all duration-500 relative"
     >
@@ -300,6 +165,7 @@
         <!-- Botón con efecto hover mejorado -->
         <div class="mt-8 relative">
           <button
+            routerLink="./DibujoPublicitario"
             class="w-full relative z-10 px-6 py-3 rounded-xl text-white font-bold bg-red-500 group-hover:bg-red-600 transition-all duration-300 overflow-hidden"
           >
             <span class="relative z-10">Más información</span>
@@ -311,7 +177,7 @@
       </div>
     </div>
 
-    <!-- Tarjeta 3: Diseño Gráfico -->
+    <!-- Tarjeta 2: Diseño Gráfico (REORDENADA) -->
     <div
       class="group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] transform"
     >
@@ -435,6 +301,7 @@
         <!-- Botón con efecto hover mejorado -->
         <div class="mt-8 relative">
           <button
+            routerLink="./DiseñoGrafico"
             class="w-full relative z-10 px-6 py-3 rounded-xl text-white font-bold bg-green-500 group-hover:bg-green-600 transition-all duration-300 overflow-hidden"
           >
             <span class="relative z-10">Más información</span>
@@ -446,20 +313,20 @@
       </div>
     </div>
 
-    <!-- Tarjeta 4: Cursos de Verano -->
+    <!-- Tarjeta 3: Talleres Especializados (MODIFICADA, antes era Cursos de Verano) -->
     <div
-      class="group rounded-3xl overflow-hidden backdrop-blur-lg bg-white/80 border border-gray-200 hover:border-yellow-200 hover:shadow-2xl transition-all duration-500 relative"
+      class="group rounded-3xl overflow-hidden backdrop-blur-lg bg-white/80 border border-gray-200 hover:border-purple-200 hover:shadow-2xl transition-all duration-500 relative"
     >
       <!-- Banner superior con gradiente -->
       <div
-        class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-yellow-400 to-amber-600"
+        class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-purple-400 to-indigo-600"
       ></div>
 
       <!-- Imagen con overlay al hacer hover -->
       <div class="relative overflow-hidden">
         <img
           src="https://media.timeout.com/images/106010311/750/422/image.jpg"
-          alt="Cursos de Verano"
+          alt="Talleres Especializados"
           class="h-96 w-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
         <div
@@ -469,20 +336,20 @@
 
       <!-- Badge/etiqueta flotante -->
       <div
-        class="absolute top-4 right-4 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
+        class="absolute top-4 right-4 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
       >
-        Temporada
+        Especialización
       </div>
 
       <!-- Contenido de la tarjeta con estilo glassmorphism -->
       <div class="p-8">
         <div class="flex items-start justify-between">
-          <h2 class="text-2xl font-extrabold text-yellow-600">
-            Cursos de Verano
-            <div class="h-1 w-12 bg-yellow-500 mt-2 rounded-full"></div>
+          <h2 class="text-2xl font-extrabold text-purple-600">
+            Talleres Especializados
+            <div class="h-1 w-12 bg-purple-500 mt-2 rounded-full"></div>
           </h2>
           <div
-            class="bg-yellow-100 text-yellow-600 rounded-full p-2 group-hover:bg-yellow-600 group-hover:text-white transition-all duration-300"
+            class="bg-purple-100 text-purple-600 rounded-full p-2 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -502,13 +369,14 @@
         </div>
 
         <p class="text-md text-gray-700 opacity-90 mt-4 leading-relaxed">
-          Actividades creativas y dinámicas para aprovechar al máximo el verano.
+          Formación intensiva en técnicas avanzadas con expertos del sector
+          creativo.
         </p>
 
         <!-- Lista con iconos -->
         <div class="mt-6 space-y-3">
           <div class="flex items-center text-sm text-gray-600">
-            <div class="mr-2 text-yellow-600">
+            <div class="mr-2 text-purple-600">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -520,14 +388,14 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
                 />
               </svg>
             </div>
-            <span>Variedad de disciplinas artísticas</span>
+            <span>Masterclasses con profesionales</span>
           </div>
           <div class="flex items-center text-sm text-gray-600">
-            <div class="mr-2 text-yellow-600">
+            <div class="mr-2 text-purple-600">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -539,14 +407,14 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
                 />
               </svg>
             </div>
-            <span>Ambiente relajado y creativo</span>
+            <span>Grupos reducidos y personalizados</span>
           </div>
           <div class="flex items-center text-sm text-gray-600">
-            <div class="mr-2 text-yellow-600">
+            <div class="mr-2 text-purple-600">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -558,22 +426,159 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
                 />
               </svg>
             </div>
-            <span>Perfecto para todas las edades</span>
+            <span>Certificación profesional incluida</span>
           </div>
         </div>
 
         <!-- Botón con efecto hover mejorado -->
         <div class="mt-8 relative">
           <button
-            class="w-full relative z-10 px-6 py-3 rounded-xl text-white font-bold bg-yellow-500 group-hover:bg-yellow-600 transition-all duration-300 overflow-hidden"
+            routerLink="./TalleresEspecializados"
+            class="w-full relative z-10 px-6 py-3 rounded-xl text-white font-bold bg-purple-500 group-hover:bg-purple-600 transition-all duration-300 overflow-hidden"
           >
             <span class="relative z-10">Más información</span>
             <div
-              class="absolute inset-0 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 bg-yellow-700"
+              class="absolute inset-0 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 bg-purple-700"
+            ></div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarjeta 4: Dibujo Infantil (REORDENADA) -->
+    <div
+      class="group relative rounded-3xl overflow-hidden shadow-xl hover:shadonw-2xl transitio-all duration-500 hover:scale-[1.02] transform"
+    >
+      <!-- Banner superior con gradiente -->
+      <div
+        class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 to-blue-600"
+      ></div>
+
+      <!-- Imagen con overlay al hacer hover -->
+      <div class="relative overflow-hidden">
+        <img
+          src="https://www.hola.com/horizon/landscape/85f03f5de45d-dibujo-infantil.jpg"
+          alt="Dibujo Infantil"
+          class="h-96 w-full object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-500"
+        ></div>
+      </div>
+
+      <!-- Badge/etiqueta flotante -->
+      <div
+        class="absolute top-4 right-4 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
+      >
+        Para niños
+      </div>
+
+      <!-- Contenido de la tarjeta -->
+      <div class="p-8">
+        <div class="flex items-start justify-between">
+          <h2 class="text-2xl font-extrabold text-blue-600">
+            Dibujo Infantil
+            <div class="h-1 w-12 bg-blue-500 mt-2 rounded-full"></div>
+          </h2>
+          <div
+            class="bg-blue-100 text-blue-600 rounded-full p-2 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <p class="text-md text-gray-700 opacity-90 mt-4 leading-relaxed">
+          Curso diseñado para estimular la creatividad de los más pequeños
+          mediante técnicas de dibujo.
+        </p>
+
+        <!-- Lista con iconos -->
+        <div class="mt-6 space-y-3">
+          <div class="flex items-center text-sm text-gray-600">
+            <div class="mr-2 text-blue-500">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                />
+              </svg>
+            </div>
+            <span>Edad recomendada: 5-12 años</span>
+          </div>
+          <div class="flex items-center text-sm text-gray-600">
+            <div class="mr-2 text-blue-500">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                />
+              </svg>
+            </div>
+            <span>Materiales incluidos</span>
+          </div>
+          <div class="flex items-center text-sm text-gray-600">
+            <div class="mr-2 text-blue-500">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                />
+              </svg>
+            </div>
+            <span>Clases dinámicas y divertidas</span>
+          </div>
+        </div>
+
+        <!-- Botón con efecto hover mejorado -->
+        <div class="mt-8 relative">
+          <button
+            routerLink="./DibujoInfantil"
+            class="w-full relative z-10 px-6 py-3 rounded-xl text-white font-bold bg-blue-500 group-hover:bg-blue-600 transition-all duration-300 overflow-hidden"
+          >
+            <span class="relative z-10">Más información</span>
+            <div
+              class="absolute inset-0 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 bg-blue-700"
             ></div>
           </button>
         </div>
