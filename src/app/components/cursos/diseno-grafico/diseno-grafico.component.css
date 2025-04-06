@@ -1,0 +1,10 @@
+/* Estilo para el contenedor del slider */
+#gallerySlider {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+/* Estilo para las imágenes dentro del slider */
+#gallerySlider img {
+  border-radius: 10px;
+}
