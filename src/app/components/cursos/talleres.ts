@@ -45,7 +45,6 @@ export const TALLERES = [
       'Lienzos (2 por mes)',
       'Set de pinturas según técnica elegida',
     ],
-    profesor: 'Mtra. Elena Ramírez',
     cupoMaximo: 15,
   },
   {
@@ -83,7 +82,6 @@ export const TALLERES = [
       'Lienzos preparados (3 por mes)',
       'Medium y diluyentes (incluidos)',
     ],
-    profesor: 'Mtro. Roberto Méndez',
     cupoMaximo: 12,
   },
   {
@@ -121,7 +119,6 @@ export const TALLERES = [
       'Soportes mixtos: lienzo, papel, madera',
       'Mediums texturizantes (incluidos)',
     ],
-    profesor: 'Mtra. Carolina López',
     cupoMaximo: 15,
   },
   {
@@ -159,7 +156,6 @@ export const TALLERES = [
       'Pinceles específicos para acuarela',
       'Materiales de reserva y efectos',
     ],
-    profesor: 'Mtro. Daniel Torres',
     cupoMaximo: 12,
   },
   {
@@ -197,7 +193,6 @@ export const TALLERES = [
       'Difuminos y herramientas de mezcla',
       'Fijador (incluido)',
     ],
-    profesor: 'Mtra. Gabriela Sánchez',
     cupoMaximo: 10,
   },
 
@@ -237,7 +232,6 @@ export const TALLERES = [
       'Materiales básicos: goma, difumino, sacapuntas',
       'Carpeta para trabajos (incluida)',
     ],
-    profesor: 'Mtro. Alejandro Ruiz',
     cupoMaximo: 15,
   },
   {
@@ -274,7 +268,6 @@ export const TALLERES = [
       'Cuaderno de dibujo de papel adecuado',
       'Portafolio para organizar trabajos',
     ],
-    profesor: 'Mtra. Laura Gutiérrez',
     cupoMaximo: 12,
   },
   {
@@ -312,7 +305,6 @@ export const TALLERES = [
       'Materiales complementarios: conté, sanguina',
       'Cuaderno de bocetos para práctica diaria',
     ],
-    profesor: 'Mtro. Fernando Vázquez',
     cupoMaximo: 10,
   },
   {
@@ -350,7 +342,6 @@ export const TALLERES = [
       'Cuaderno de bocetos',
       'Tableta digitalizadora (opcional)',
     ],
-    profesor: 'Mtro. Ignacio Pérez',
     cupoMaximo: 15,
   },
   {
@@ -388,7 +379,6 @@ export const TALLERES = [
       'Lápices técnicos de diferentes durezas',
       'Rotuladores calibrados (opcional)',
     ],
-    profesor: 'Mtro. Arturo Mendoza',
     cupoMaximo: 12,
   },
   {
@@ -426,7 +416,6 @@ export const TALLERES = [
       'Herramientas de medición y perspectiva',
       'Kit de sombreado (difuminos, borrador de precisión)',
     ],
-    profesor: 'Mtra. Julia Morales',
     cupoMaximo: 15,
   },
   {
@@ -464,7 +453,6 @@ export const TALLERES = [
       'Papeles especiales para entintado',
       'Rotuladores calibrados variados',
     ],
-    profesor: 'Mtro. Manuel Herrera',
     cupoMaximo: 12,
   },
   {
@@ -502,7 +490,6 @@ export const TALLERES = [
       'Plantillas para viñetas (incluidas)',
       'Referencias bibliográficas',
     ],
-    profesor: 'Mtro. Diego Fuentes',
     cupoMaximo: 12,
   },
   {
@@ -540,7 +527,6 @@ export const TALLERES = [
       'Referencias anatómicas (incluidas)',
       'Tableta digitalizadora (recomendada pero opcional)',
     ],
-    profesor: 'Mtra. Sofía Reyes',
     cupoMaximo: 10,
   },
   {
@@ -578,7 +564,6 @@ export const TALLERES = [
       'Bases y estructura de alambre',
       'Material para acabados',
     ],
-    profesor: 'Mtro. Ricardo Ávila',
     cupoMaximo: 10,
   },
 
@@ -618,7 +603,6 @@ export const TALLERES = [
       'Memoria USB para respaldo',
       'Acceso a computadoras del taller',
     ],
-    profesor: 'Mtra. Verónica Campos',
     cupoMaximo: 10,
   },
   {
@@ -656,7 +640,6 @@ export const TALLERES = [
       'Disco duro externo para proyectos',
       'Acceso al laboratorio digital',
     ],
-    profesor: 'Mtro. Héctor Jiménez',
     cupoMaximo: 8,
   },
   {
@@ -694,7 +677,6 @@ export const TALLERES = [
       'Adhesivos específicos para papel',
       'Carpeta para transporte de proyectos',
     ],
-    profesor: 'Mtra. Ana Luisa Torres',
     cupoMaximo: 12,
   },
   {
@@ -732,7 +714,6 @@ export const TALLERES = [
       'Disco duro externo para proyectos (requerido)',
       'Tableta gráfica para escultura digital (disponible en sala)',
     ],
-    profesor: 'Mtro. Luis Martínez',
     cupoMaximo: 8,
   },
   {
@@ -770,7 +751,6 @@ export const TALLERES = [
       'Pinturas específicas para aerografía',
       'Materiales de enmascarado y superficies de práctica',
     ],
-    profesor: 'Mtro. Javier Robles',
     cupoMaximo: 10,
   },
 ];
