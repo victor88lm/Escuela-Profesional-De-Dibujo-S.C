@@ -65,7 +65,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   ]
 })
 export class WhatsappButtonComponent implements OnInit {
-  @Input() phoneNumber: string = '5649104506';
+  @Input() phoneNumber: string = '5516555577';
   @Input() message: string = 'Hola, me gustaría conocer el proceso de admisión para los próximos cursos';
   @Input() subtitle: string = 'Consulta nuestros cursos';
   @Input() logoUrl: string = 'assets/images/logo-escuela.png'; // Logo personalizable
