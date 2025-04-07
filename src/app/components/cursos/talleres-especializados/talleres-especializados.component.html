@@ -31,26 +31,37 @@
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
     <div
       *ngFor="let taller of talleres"
-      class="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-300 group"
+      class="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-300 group flex flex-col"
     >
+      <!-- Imagen principal -->
       <div class="relative overflow-hidden">
         <img
           [src]="taller.imagen"
           [alt]="taller.titulo"
           class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-500"
         />
+
         <div
-          class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"
+          class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-70"
         ></div>
         <div class="absolute bottom-0 left-0 right-0 p-4">
-          <h3 class="text-xl font-bold text-white drop-shadow-md">
+          <span
+            class="text-xs px-2 py-1 rounded-full font-medium uppercase tracking-wider"
+            [ngClass]="
+              'bg-' + getCategoriaColor(taller.categoria) + '-500 text-white'
+            "
+          >
+            {{ taller.categoria }}
+          </span>
+          <h3 class="text-xl font-bold text-white drop-shadow-md mt-1">
             {{ taller.titulo }}
           </h3>
         </div>
       </div>
 
-      <div class="p-6">
-        <div class="flex flex-wrap gap-3 mb-4">
+      <div class="p-6 flex-grow flex flex-col">
+        <!-- Etiquetas informativas -->
+        <div class="flex flex-wrap gap-2 mb-4">
           <span
             class="text-xs px-3 py-1.5 rounded-lg font-medium inline-flex items-center"
             [ngClass]="
@@ -96,12 +107,32 @@
             </svg>
             {{ taller.colegiatura }}
           </span>
+          <span
+            class="text-xs px-3 py-1.5 rounded-lg font-medium inline-flex items-center bg-yellow-100 text-yellow-700"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-3.5 w-3.5 mr-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            {{ taller.duracion }}
+          </span>
         </div>
 
+        <!-- Descripción -->
         <div class="bg-gray-50 rounded-lg p-4 mb-4">
           <ul class="text-gray-600 text-sm space-y-2.5">
             <li
-              *ngFor="let desc of taller.descripcion"
+              *ngFor="let desc of taller.descripcionCorta"
               class="flex items-start"
             >
               <div
@@ -130,33 +161,55 @@
           </ul>
         </div>
 
-        <button
-          [routerLink]="['/Cursos/TalleresEspecializados', taller.id]"
-          [ngClass]="
-            'bg-' +
-            getCategoriaColor(taller.categoria) +
-            '-500 hover:bg-' +
-            getCategoriaColor(taller.categoria) +
-            '-600 focus:ring-2 focus:ring-' +
-            getCategoriaColor(taller.categoria) +
-            '-300 focus:ring-offset-1'
-          "
-          class="w-full py-2.5 px-4 rounded-lg font-semibold text-white transition-all duration-300 flex items-center justify-center"
-        >
-          Ver Taller
+        <!-- Profesor -->
+        <div class="flex items-center mb-4 text-sm text-gray-600">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4 ml-2"
-            viewBox="0 0 20 20"
-            fill="currentColor"
+            class="h-4 w-4 mr-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
             <path
-              fill-rule="evenodd"
-              d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-              clip-rule="evenodd"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
             />
           </svg>
-        </button>
+          {{ taller.profesor }}
+        </div>
+
+        <!-- Botón -->
+        <div class="mt-auto">
+          <button
+            [routerLink]="['/Cursos/TalleresEspecializados', taller.id]"
+            [ngClass]="
+              'bg-' +
+              getCategoriaColor(taller.categoria) +
+              '-500 hover:bg-' +
+              getCategoriaColor(taller.categoria) +
+              '-600 focus:ring-2 focus:ring-' +
+              getCategoriaColor(taller.categoria) +
+              '-300 focus:ring-offset-1'
+            "
+            class="w-full py-2.5 px-4 rounded-lg font-semibold text-white transition-all duration-300 flex items-center justify-center"
+          >
+            Ver Taller
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 ml-2"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </div>
