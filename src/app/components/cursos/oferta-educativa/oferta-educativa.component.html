@@ -1,7 +1,14 @@
 <!-- Sección de video como fondo -->
 <div class="relative h-[32rem] w-full overflow-hidden">
   <!-- Video de fondo -->
-  <video preload="auto" class="absolute inset-0 w-full h-full object-cover" autoplay loop muted playsinline>
+  <video
+    preload="auto"
+    class="absolute inset-0 w-full h-full object-cover"
+    autoplay
+    loop
+    muted
+    playsinline
+  >
     <source src="video/FondoCursos.mp4" type="video/mp4" />
     <!-- Fallback para navegadores que no soportan video -->
     Tu navegador no soporta la etiqueta de video.
@@ -35,17 +42,20 @@
 
   <!-- Grid de tarjetas -->
   <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-    <!-- Tarjeta 1: Dibujo Publicitario (REORDENADA) -->
+    <!-- Tarjeta 1: Dibujo Publicitario (Ahora AZUL) -->
     <div
-      class="group rounded-3xl overflow-hidden backdrop-blur-lg bg-white/80 border border-gray-200 hover:border-red-200 hover:shadow-2xl transition-all duration-500 relative"
+      class="group rounded-3xl overflow-hidden backdrop-blur-lg bg-white/80 border border-gray-200 hover:border-blue-200 hover:shadow-2xl transition-all duration-500 relative"
     >
       <!-- Banner superior con gradiente -->
       <div
-        class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-red-400 to-pink-600"
+        class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 to-blue-600"
       ></div>
 
-      <!-- Imagen con overlay al hacer hover -->
-      <div class="relative overflow-hidden">
+      <!-- Imagen con overlay al hacer hover - AHORA ES UN ENLACE -->
+      <a
+        routerLink="./DibujoPublicitario"
+        class="block relative overflow-hidden"
+      >
         <img
           src="https://pictures.abebooks.com/inventory/md/md31817384449.jpg"
           alt="Dibujo Publicitario"
@@ -54,11 +64,11 @@
         <div
           class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-30 group-hover:opacity-60 transition-opacity duration-500"
         ></div>
-      </div>
+      </a>
 
       <!-- Badge/etiqueta flotante -->
       <div
-        class="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
+        class="absolute top-4 right-4 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
       >
         Profesional
       </div>
@@ -66,12 +76,14 @@
       <!-- Contenido de la tarjeta con estilo glassmorphism -->
       <div class="p-8">
         <div class="flex items-start justify-between">
-          <h2 class="text-2xl font-extrabold text-red-600">
+          <h2 class="text-2xl font-extrabold text-blue-600">
             Dibujo Publicitario
-            <div class="h-1 w-12 bg-red-500 mt-2 rounded-full"></div>
+            <div class="h-1 w-12 bg-blue-500 mt-2 rounded-full"></div>
           </h2>
-          <div
-            class="bg-red-100 text-red-600 rounded-full p-2 group-hover:bg-red-600 group-hover:text-white transition-all duration-300"
+          <!-- Flecha ahora es un enlace -->
+          <a
+            routerLink="./DibujoPublicitario"
+            class="bg-blue-100 text-blue-600 rounded-full p-2 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +99,7 @@
                 d="M14 5l7 7m0 0l-7 7m7-7H3"
               />
             </svg>
-          </div>
+          </a>
         </div>
 
         <p class="text-md text-gray-700 opacity-90 mt-4 leading-relaxed">
@@ -98,7 +110,7 @@
         <!-- Lista con iconos -->
         <div class="mt-6 space-y-3">
           <div class="flex items-center text-sm text-gray-600">
-            <div class="mr-2 text-red-500">
+            <div class="mr-2 text-blue-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -117,7 +129,7 @@
             <span>Conceptos de branding visual</span>
           </div>
           <div class="flex items-center text-sm text-gray-600">
-            <div class="mr-2 text-red-500">
+            <div class="mr-2 text-blue-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -136,7 +148,7 @@
             <span>Uso de herramientas digitales</span>
           </div>
           <div class="flex items-center text-sm text-gray-600">
-            <div class="mr-2 text-red-500">
+            <div class="mr-2 text-blue-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -160,28 +172,28 @@
         <div class="mt-8 relative">
           <button
             routerLink="./DibujoPublicitario"
-            class="w-full relative z-10 px-6 py-3 rounded-xl text-white font-bold bg-red-500 group-hover:bg-red-600 transition-all duration-300 overflow-hidden"
+            class="w-full relative z-10 px-6 py-3 rounded-xl text-white font-bold bg-blue-500 group-hover:bg-blue-600 transition-all duration-300 overflow-hidden"
           >
             <span class="relative z-10">Más información</span>
             <div
-              class="absolute inset-0 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 bg-red-700"
+              class="absolute inset-0 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 bg-blue-700"
             ></div>
           </button>
         </div>
       </div>
     </div>
 
-    <!-- Tarjeta 2: Diseño Gráfico (REORDENADA) -->
+    <!-- Tarjeta 2: Diseño Gráfico (Ahora MAGENTA) -->
     <div
       class="group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] transform"
     >
       <!-- Banner superior con gradiente -->
       <div
-        class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-green-400 to-emerald-600"
+        class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-pink-400 to-fuchsia-600"
       ></div>
 
-      <!-- Imagen con overlay al hacer hover -->
-      <div class="relative overflow-hidden">
+      <!-- Imagen con overlay al hacer hover - AHORA ES UN ENLACE -->
+      <a routerLink="./DiseñoGrafico" class="block relative overflow-hidden">
         <img
           src="https://en.camaradesevilla.com/wp-content/uploads/sites/2/2023/06/DisenoGrafico03.jpg"
           alt="Diseño Gráfico"
@@ -190,11 +202,11 @@
         <div
           class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-500"
         ></div>
-      </div>
+      </a>
 
       <!-- Badge/etiqueta flotante -->
       <div
-        class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
+        class="absolute top-4 right-4 bg-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
       >
         Avanzado
       </div>
@@ -202,12 +214,14 @@
       <!-- Contenido de la tarjeta -->
       <div class="p-8">
         <div class="flex items-start justify-between">
-          <h2 class="text-2xl font-extrabold text-green-600">
+          <h2 class="text-2xl font-extrabold text-pink-600">
             Diseño Gráfico
-            <div class="h-1 w-12 bg-green-500 mt-2 rounded-full"></div>
+            <div class="h-1 w-12 bg-pink-500 mt-2 rounded-full"></div>
           </h2>
-          <div
-            class="bg-green-100 text-green-600 rounded-full p-2 group-hover:bg-green-600 group-hover:text-white transition-all duration-300"
+          <!-- Flecha ahora es un enlace -->
+          <a
+            routerLink="./DiseñoGrafico"
+            class="bg-pink-100 text-pink-600 rounded-full p-2 group-hover:bg-pink-600 group-hover:text-white transition-all duration-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -223,7 +237,7 @@
                 d="M14 5l7 7m0 0l-7 7m7-7H3"
               />
             </svg>
-          </div>
+          </a>
         </div>
 
         <p class="text-md text-gray-700 opacity-90 mt-4 leading-relaxed">
@@ -234,7 +248,7 @@
         <!-- Lista con iconos -->
         <div class="mt-6 space-y-3">
           <div class="flex items-center text-sm text-gray-600">
-            <div class="mr-2 text-green-500">
+            <div class="mr-2 text-pink-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -253,7 +267,7 @@
             <span>Principios de diseño visual</span>
           </div>
           <div class="flex items-center text-sm text-gray-600">
-            <div class="mr-2 text-green-500">
+            <div class="mr-2 text-pink-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -272,7 +286,7 @@
             <span>Uso de software profesional</span>
           </div>
           <div class="flex items-center text-sm text-gray-600">
-            <div class="mr-2 text-green-500">
+            <div class="mr-2 text-pink-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -296,28 +310,31 @@
         <div class="mt-8 relative">
           <button
             routerLink="./DiseñoGrafico"
-            class="w-full relative z-10 px-6 py-3 rounded-xl text-white font-bold bg-green-500 group-hover:bg-green-600 transition-all duration-300 overflow-hidden"
+            class="w-full relative z-10 px-6 py-3 rounded-xl text-white font-bold bg-pink-500 group-hover:bg-pink-600 transition-all duration-300 overflow-hidden"
           >
             <span class="relative z-10">Más información</span>
             <div
-              class="absolute inset-0 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 bg-green-700"
+              class="absolute inset-0 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 bg-pink-700"
             ></div>
           </button>
         </div>
       </div>
     </div>
 
-    <!-- Tarjeta 3: Talleres Especializados (MODIFICADA, antes era Cursos de Verano) -->
+    <!-- Tarjeta 3: Talleres Especializados (Ahora VERDE) -->
     <div
-      class="group rounded-3xl overflow-hidden backdrop-blur-lg bg-white/80 border border-gray-200 hover:border-purple-200 hover:shadow-2xl transition-all duration-500 relative"
+      class="group rounded-3xl overflow-hidden backdrop-blur-lg bg-white/80 border border-gray-200 hover:border-green-200 hover:shadow-2xl transition-all duration-500 relative"
     >
       <!-- Banner superior con gradiente -->
       <div
-        class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-purple-400 to-indigo-600"
+        class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-green-400 to-emerald-600"
       ></div>
 
-      <!-- Imagen con overlay al hacer hover -->
-      <div class="relative overflow-hidden">
+      <!-- Imagen con overlay al hacer hover - AHORA ES UN ENLACE -->
+      <a
+        routerLink="./TalleresEspecializados"
+        class="block relative overflow-hidden"
+      >
         <img
           src="https://media.timeout.com/images/106010311/750/422/image.jpg"
           alt="Talleres Especializados"
@@ -326,11 +343,11 @@
         <div
           class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-30 group-hover:opacity-60 transition-opacity duration-500"
         ></div>
-      </div>
+      </a>
 
       <!-- Badge/etiqueta flotante -->
       <div
-        class="absolute top-4 right-4 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
+        class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
       >
         Especialización
       </div>
@@ -338,12 +355,14 @@
       <!-- Contenido de la tarjeta con estilo glassmorphism -->
       <div class="p-8">
         <div class="flex items-start justify-between">
-          <h2 class="text-2xl font-extrabold text-purple-600">
+          <h2 class="text-2xl font-extrabold text-green-600">
             Talleres Especializados
-            <div class="h-1 w-12 bg-purple-500 mt-2 rounded-full"></div>
+            <div class="h-1 w-12 bg-green-500 mt-2 rounded-full"></div>
           </h2>
-          <div
-            class="bg-purple-100 text-purple-600 rounded-full p-2 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300"
+          <!-- Flecha ahora es un enlace -->
+          <a
+            routerLink="./TalleresEspecializados"
+            class="bg-green-100 text-green-600 rounded-full p-2 group-hover:bg-green-600 group-hover:text-white transition-all duration-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -359,7 +378,7 @@
                 d="M14 5l7 7m0 0l-7 7m7-7H3"
               />
             </svg>
-          </div>
+          </a>
         </div>
 
         <p class="text-md text-gray-700 opacity-90 mt-4 leading-relaxed">
@@ -370,7 +389,7 @@
         <!-- Lista con iconos -->
         <div class="mt-6 space-y-3">
           <div class="flex items-center text-sm text-gray-600">
-            <div class="mr-2 text-purple-600">
+            <div class="mr-2 text-green-600">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -389,7 +408,7 @@
             <span>Masterclasses con profesionales</span>
           </div>
           <div class="flex items-center text-sm text-gray-600">
-            <div class="mr-2 text-purple-600">
+            <div class="mr-2 text-green-600">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -408,7 +427,7 @@
             <span>Grupos reducidos y personalizados</span>
           </div>
           <div class="flex items-center text-sm text-gray-600">
-            <div class="mr-2 text-purple-600">
+            <div class="mr-2 text-green-600">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -432,28 +451,28 @@
         <div class="mt-8 relative">
           <button
             routerLink="./TalleresEspecializados"
-            class="w-full relative z-10 px-6 py-3 rounded-xl text-white font-bold bg-purple-500 group-hover:bg-purple-600 transition-all duration-300 overflow-hidden"
+            class="w-full relative z-10 px-6 py-3 rounded-xl text-white font-bold bg-green-500 group-hover:bg-green-600 transition-all duration-300 overflow-hidden"
           >
             <span class="relative z-10">Más información</span>
             <div
-              class="absolute inset-0 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 bg-purple-700"
+              class="absolute inset-0 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 bg-green-700"
             ></div>
           </button>
         </div>
       </div>
     </div>
 
-    <!-- Tarjeta 4: Dibujo Infantil (REORDENADA) -->
+    <!-- Tarjeta 4: Dibujo Infantil (Ahora NARANJA ROJIZO) -->
     <div
-      class="group relative rounded-3xl overflow-hidden shadow-xl hover:shadonw-2xl transitio-all duration-500 hover:scale-[1.02] transform"
+      class="group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] transform"
     >
       <!-- Banner superior con gradiente -->
       <div
-        class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 to-blue-600"
+        class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-orange-400 to-red-500"
       ></div>
 
-      <!-- Imagen con overlay al hacer hover -->
-      <div class="relative overflow-hidden">
+      <!-- Imagen con overlay al hacer hover - AHORA ES UN ENLACE -->
+      <a routerLink="./DibujoInfantil" class="block relative overflow-hidden">
         <img
           src="https://www.hola.com/horizon/landscape/85f03f5de45d-dibujo-infantil.jpg"
           alt="Dibujo Infantil"
@@ -462,11 +481,11 @@
         <div
           class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-500"
         ></div>
-      </div>
+      </a>
 
       <!-- Badge/etiqueta flotante -->
       <div
-        class="absolute top-4 right-4 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
+        class="absolute top-4 right-4 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
       >
         Para niños
       </div>
@@ -474,12 +493,14 @@
       <!-- Contenido de la tarjeta -->
       <div class="p-8">
         <div class="flex items-start justify-between">
-          <h2 class="text-2xl font-extrabold text-blue-600">
+          <h2 class="text-2xl font-extrabold text-orange-600">
             Dibujo Infantil
-            <div class="h-1 w-12 bg-blue-500 mt-2 rounded-full"></div>
+            <div class="h-1 w-12 bg-orange-500 mt-2 rounded-full"></div>
           </h2>
-          <div
-            class="bg-blue-100 text-blue-600 rounded-full p-2 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300"
+          <!-- Flecha ahora es un enlace -->
+          <a
+            routerLink="./DibujoInfantil"
+            class="bg-orange-100 text-orange-600 rounded-full p-2 group-hover:bg-orange-600 group-hover:text-white transition-all duration-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -495,7 +516,7 @@
                 d="M14 5l7 7m0 0l-7 7m7-7H3"
               />
             </svg>
-          </div>
+          </a>
         </div>
 
         <p class="text-md text-gray-700 opacity-90 mt-4 leading-relaxed">
@@ -506,7 +527,7 @@
         <!-- Lista con iconos -->
         <div class="mt-6 space-y-3">
           <div class="flex items-center text-sm text-gray-600">
-            <div class="mr-2 text-blue-500">
+            <div class="mr-2 text-orange-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -525,7 +546,7 @@
             <span>Edad recomendada: 5-12 años</span>
           </div>
           <div class="flex items-center text-sm text-gray-600">
-            <div class="mr-2 text-blue-500">
+            <div class="mr-2 text-orange-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -544,7 +565,7 @@
             <span>Materiales incluidos</span>
           </div>
           <div class="flex items-center text-sm text-gray-600">
-            <div class="mr-2 text-blue-500">
+            <div class="mr-2 text-orange-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -568,11 +589,11 @@
         <div class="mt-8 relative">
           <button
             routerLink="./DibujoInfantil"
-            class="w-full relative z-10 px-6 py-3 rounded-xl text-white font-bold bg-blue-500 group-hover:bg-blue-600 transition-all duration-300 overflow-hidden"
+            class="w-full relative z-10 px-6 py-3 rounded-xl text-white font-bold bg-orange-500 group-hover:bg-orange-600 transition-all duration-300 overflow-hidden"
           >
             <span class="relative z-10">Más información</span>
             <div
-              class="absolute inset-0 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 bg-blue-700"
+              class="absolute inset-0 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 bg-orange-700"
             ></div>
           </button>
         </div>
