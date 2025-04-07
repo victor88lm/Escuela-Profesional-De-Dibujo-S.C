@@ -16,6 +16,7 @@ interface OpcionConocio {
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
+
 export class HomeComponent implements OnInit {
   formError = false;
   errorMessage = '';
