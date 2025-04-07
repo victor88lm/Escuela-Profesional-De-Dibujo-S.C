@@ -13,8 +13,10 @@ export class DetalleTallerComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.taller = TALLERES.find((t) => t.id === id);
+    this.route.params.subscribe((params) => {
+      const id = +params['id']; // Convierte a número
+      this.taller = TALLERES.find((t) => t.id === id);
+    });
   }
 
   getCategoriaColor(categoria: string): string {
