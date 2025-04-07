@@ -1,0 +1,204 @@
+<div class="fondo h-[6rem]"></div>
+<div
+  *ngIf="taller"
+  class="bg-white shadow-lg rounded-xl overflow-hidden max-w-4xl mx-auto my-8"
+>
+  <!-- Imagen de cabecera con overlay y título -->
+  <div class="relative h-72">
+    <img
+      [src]="taller.imagen"
+      [alt]="taller.titulo"
+      class="w-full h-full object-cover"
+    />
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-black/70 to-black/20"
+    ></div>
+    <div class="absolute bottom-0 left-0 right-0 p-6">
+      <h1 class="text-3xl font-bold text-white">{{ taller.titulo }}</h1>
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="p-6 md:p-8">
+    <!-- Información básica -->
+    <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-gray-50 rounded-lg p-4 flex items-center">
+        <div
+          class="rounded-full p-3 mr-4"
+          [ngClass]="'bg-' + getCategoriaColor(taller.categoria) + '-100'"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            [ngClass]="'text-' + getCategoriaColor(taller.categoria) + '-500'"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+            />
+          </svg>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Categoría</p>
+          <p class="text-lg font-semibold text-gray-800">
+            {{ taller.categoria }}
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-gray-50 rounded-lg p-4 flex items-center">
+        <div
+          class="rounded-full p-3 mr-4"
+          [ngClass]="'bg-' + getCategoriaColor(taller.categoria) + '-100'"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            [ngClass]="'text-' + getCategoriaColor(taller.categoria) + '-500'"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+            />
+          </svg>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Fecha de inscripción</p>
+          <p class="text-lg font-semibold text-gray-800">
+            {{ taller.fechaInscripcion }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Colegiatura -->
+    <div class="mb-8">
+      <div
+        class="inline-block px-5 py-2 rounded-lg bg-gray-100 text-gray-800 font-semibold flex items-center"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 mr-2"
+          [ngClass]="'text-' + getCategoriaColor(taller.categoria) + '-500'"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        Colegiatura: {{ taller.colegiatura }}
+      </div>
+    </div>
+
+    <!-- Sección de descripción -->
+    <div class="mb-8">
+      <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 mr-2"
+          [ngClass]="'text-' + getCategoriaColor(taller.categoria) + '-500'"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        Descripción
+      </h2>
+
+      <div class="bg-white border border-gray-200 rounded-lg p-5">
+        <ul class="space-y-3">
+          <li *ngFor="let desc of taller.descripcion" class="flex">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 mr-3 mt-0.5 flex-shrink-0"
+              [ngClass]="'text-' + getCategoriaColor(taller.categoria) + '-500'"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span class="text-gray-700">{{ desc }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="flex flex-col sm:flex-row gap-4 mt-8">
+      <a
+        routerLink="/Cursos/TalleresEspecializados"
+        class="py-3 px-6 rounded-lg border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition flex-1 text-center flex items-center justify-center"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 mr-2"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M11 17l-5-5m0 0l5-5m-5 5h12"
+          />
+        </svg>
+        Volver a talleres
+      </a>
+
+      <button
+        [ngClass]="
+          'bg-' +
+          getCategoriaColor(taller.categoria) +
+          '-500 hover:bg-' +
+          getCategoriaColor(taller.categoria) +
+          '-600'
+        "
+        class="py-3 px-6 rounded-lg text-white font-medium transition flex-1 flex items-center justify-center"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 mr-2"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        Inscribirse ahora
+      </button>
+    </div>
+  </div>
+</div>

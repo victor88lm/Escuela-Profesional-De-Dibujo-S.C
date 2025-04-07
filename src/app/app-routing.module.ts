@@ -11,6 +11,7 @@ import { DibujoInfantilComponent } from './components/cursos/dibujo-infantil/dib
 import { DisenoGraficoComponent } from './components/cursos/diseno-grafico/diseno-grafico.component';
 import { TalleresEspecializadosComponent } from './components/cursos/talleres-especializados/talleres-especializados.component';
 import { FAQComponent } from './components/Inicio/faq/faq.component';
+import { DetalleTallerComponent } from './components/cursos/talleres-especializados/detalle-taller/detalle-taller.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,9 +27,12 @@ const routes: Routes = [
     path: 'Cursos/TalleresEspecializados',
     component: TalleresEspecializadosComponent,
   },
-  { path: 'Cursos', component: OfertaEducativaComponent },
-  { path: 'Preguntas Frecuentes', component: FAQComponent},
-  { path: 'Contactanos', component: ContactoComponent },
+  {
+    path: 'Cursos/TalleresEspecializados/:id',
+    component: DetalleTallerComponent,
+  },
+  { path: 'Preguntas Frecuentes', component: FAQComponent },
+  { path: '**', redirectTo: '', pathMatch: 'full' }, // Redirigir a Home si la ruta no existe
 ];
 
 @NgModule({

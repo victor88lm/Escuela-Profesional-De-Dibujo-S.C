@@ -31,6 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TalleresEspecializadosComponent } from './components/cursos/talleres-especializados/talleres-especializados.component';
 import { WhatsappButtonComponent } from './components/shared/whatsapp-button/whatsapp-button.component';
 import { FAQComponent } from './components/Inicio/faq/faq.component';
+import { DetalleTallerComponent } from './components/cursos/talleres-especializados/detalle-taller/detalle-taller.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { FAQComponent } from './components/Inicio/faq/faq.component';
     TalleresEspecializadosComponent,
     WhatsappButtonComponent,
     FAQComponent,
+    DetalleTallerComponent,
   ],
 
   imports: [
