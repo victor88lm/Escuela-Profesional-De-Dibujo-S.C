@@ -12,14 +12,16 @@ import { DisenoGraficoComponent } from './components/cursos/diseno-grafico/disen
 import { TalleresEspecializadosComponent } from './components/cursos/talleres-especializados/talleres-especializados.component';
 import { FAQComponent } from './components/Inicio/faq/faq.component';
 import { DetalleTallerComponent } from './components/cursos/talleres-especializados/detalle-taller/detalle-taller.component';
+import { DetalleCursoComponent } from './components/cursos/detalle-curso/detalle-curso.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'Nosotros', component: NosotrosComponent },
-  { path: 'Cursos', component: OfertaEducativaComponent },
   { path: 'Galeria', component: GaleriaComponent },
   { path: 'Planteles', component: PlantelesComponent },
   { path: 'Contactanos', component: ContactoComponent },
+  { path: 'Cursos', component: OfertaEducativaComponent },
+
   { path: 'Cursos/DibujoPublicitario', component: DibujoPublicitarioComponent },
   { path: 'Cursos/DibujoInfantil', component: DibujoInfantilComponent },
   { path: 'Cursos/DiseñoGrafico', component: DisenoGraficoComponent },
@@ -31,6 +33,7 @@ const routes: Routes = [
     path: 'Cursos/TalleresEspecializados/:id',
     component: DetalleTallerComponent,
   },
+  { path: 'Cursos/:slug', component: DetalleCursoComponent },
   { path: 'Preguntas Frecuentes', component: FAQComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' }, // Redirigir a Home si la ruta no existe
 ];

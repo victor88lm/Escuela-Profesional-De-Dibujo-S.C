@@ -72,6 +72,6 @@ import { DetalleTallerComponent } from './components/cursos/talleres-especializa
     NgOptimizedImage,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

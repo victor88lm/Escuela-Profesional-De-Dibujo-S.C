@@ -1,0 +1,259 @@
+<!-- src/app/pages/cursos/detalle-curso/detalle-curso.component.html -->
+
+<div *ngIf="curso">
+  <!-- Título y Video Header -->
+  <div class="relative w-full h-[32rem] mb-16">
+    <video
+      class="absolute top-0 left-0 w-full h-full object-cover"
+      autoplay
+      loop
+      muted
+    >
+      <source
+        [src]="curso!.videoFondo ?? 'video/default.mp4'"
+        type="video/mp4"
+      />
+    </video>
+    <div class="absolute top-0 left-0 w-full h-full bg-black opacity-40"></div>
+    <div
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white"
+    >
+      <h1 class="text-4xl font-bold">{{ curso!.titulo }}</h1>
+      <p class="mt-2 text-xl">
+        {{ curso!.subtitulo }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Información del Curso -->
+  <div class="max-w-screen-lg mx-auto px-8 py-10">
+    <section class="text-center mb-10">
+      <h2 class="text-3xl font-semibold text-gray-800">
+        Información del
+        {{ curso!.categoria === "infantil" ? "Taller" : "Curso" }}
+      </h2>
+      <p class="text-lg text-gray-600 mt-3">
+        {{ curso!.descripcionCompleta }}
+      </p>
+    </section>
+
+    <!-- Diseño con dos columnas -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Galería de imágenes (Slider) -->
+      <div class="bg-gray-100 p-8 rounded-lg shadow-lg">
+        <h3 class="text-xl font-bold text-gray-700 text-center mb-4">
+          Galería del {{ curso!.categoria === "infantil" ? "Taller" : "Curso" }}
+        </h3>
+
+        <div class="relative w-full">
+          <!-- Slider de imágenes -->
+          <div class="overflow-hidden">
+            <div
+              class="flex transition-transform duration-500"
+              id="gallerySlider"
+            >
+              <img
+                *ngFor="let imagen of curso!.imagenes"
+                [src]="imagen"
+                [alt]="curso!.titulo"
+                class="w-full h-64 object-cover rounded-lg"
+              />
+            </div>
+          </div>
+          <!-- Controles para el slider -->
+          <div
+            class="absolute top-1/2 left-0 transform -translate-y-1/2 text-white text-3xl p-2 cursor-pointer bg-black bg-opacity-30 rounded-r-lg"
+            id="prevSlide"
+          >
+            &#10094;
+          </div>
+          <div
+            class="absolute top-1/2 right-0 transform -translate-y-1/2 text-white text-3xl p-2 cursor-pointer bg-black bg-opacity-30 rounded-l-lg"
+            id="nextSlide"
+          >
+            &#10095;
+          </div>
+        </div>
+      </div>
+
+      <!-- Información de Costos y Fechas -->
+      <div class="bg-gray-100 p-8 rounded-lg shadow-lg">
+        <h3 class="text-2xl font-bold text-gray-700 text-center mb-4">
+          Detalles del
+          {{ curso!.categoria === "infantil" ? "Taller" : "Curso" }}
+        </h3>
+
+        <!-- Costos -->
+        <div class="mb-8">
+          <h4 class="text-xl font-semibold text-gray-800">
+            Costos de Inscripción
+          </h4>
+          <p class="text-lg text-gray-600 mt-2">
+            Inscripción:
+            <span class="font-semibold text-blue-600">{{
+              curso!.costoInscripcion
+            }}</span
+            ><br />
+            {{
+              curso!.categoria === "infantil"
+                ? "Mensualidad"
+                : "Colegiatura mensual"
+            }}:
+            <span class="font-semibold text-blue-600">{{
+              curso!.colegiatura
+            }}</span>
+          </p>
+        </div>
+
+        <!-- Fechas -->
+        <div>
+          <h4 class="text-xl font-semibold text-gray-800">
+            Fechas Importantes
+          </h4>
+          <p class="text-lg text-gray-600 mt-2">
+            Inscripción:
+            <span class="font-semibold text-blue-600">{{
+              curso!.fechaInscripcion
+            }}</span
+            ><br />
+            {{
+              curso!.fechaInicio !== "Continuo"
+                ? "Inicio de clases:"
+                : "Días de clase:"
+            }}
+            <span class="font-semibold text-blue-600">{{
+              curso!.fechaInicio !== "Continuo"
+                ? curso!.fechaInicio
+                : curso!.horarios[0]
+            }}</span>
+            <ng-container *ngIf="curso!.categoria === 'infantil'">
+              <br />Edades:
+              <span class="font-semibold text-blue-600">5 a 12 años</span>
+            </ng-container>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full max-w-md mx-auto pt-12">
+      <!-- Botón de WhatsApp -->
+      <a
+        href="https://wa.me/521234567890?text=Me%20interesa%20el%20{{
+          curso!.categoria === 'infantil' ? 'taller' : 'curso'
+        }}%20de%20{{ curso!.titulo }}"
+        class="flex items-center gap-4 px-6 py-4 rounded-xl font-medium text-white bg-green-500 hover:bg-green-600 transition duration-200 shadow-sm hover:shadow-md w-full mb-8 transform hover:-translate-y-1"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-6 h-6"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path
+            d="M20.4 3.6C18.2 1.3 15.2 0 12 0C5.4 0 0 5.4 0 12C0 14.1 0.5 16.1 1.5 17.9L0 24L6.3 22.5C8 23.4 10 23.9 12 23.9C18.6 23.9 24 18.5 24 11.9C24 8.7 22.7 5.8 20.4 3.6ZM12 21.9C10.2 21.9 8.5 21.4 7 20.6L6.6 20.4L2.9 21.3L3.8 17.7L3.5 17.3C2.6 15.7 2.1 13.9 2.1 12C2.1 6.5 6.5 2.1 12 2.1C14.7 2.1 17.2 3.2 19.1 5.1C20.9 6.9 22.1 9.5 22.1 12.1C22 17.5 17.5 21.9 12 21.9ZM17.4 14.5C17.1 14.4 15.6 13.7 15.4 13.6C15.1 13.5 14.9 13.5 14.7 13.8C14.5 14.1 13.9 14.7 13.8 14.9C13.6 15.1 13.5 15.1 13.2 15C11.5 14.1 10.4 13.4 9.2 11.5C9 11.1 9.5 11.1 9.9 10.3C10 10.1 10 9.9 9.9 9.7C9.8 9.5 9.3 8 9 7.4C8.7 6.8 8.4 6.9 8.2 6.9C8 6.9 7.8 6.9 7.6 6.9C7.4 6.9 7.1 7 6.8 7.3C6.5 7.6 5.8 8.3 5.8 9.8C5.8 11.3 6.9 12.7 7 12.9C7.1 13.1 9.3 16.4 12.5 17.7C15 18.7 15.7 18.6 16.5 18.4C17 18.3 18.2 17.7 18.5 17C18.8 16.3 18.8 15.7 18.7 15.6C18.6 15.3 18.4 15.2 18.1 15.1C17.8 15 17.4 14.5 17.4 14.5Z"
+          />
+        </svg>
+        <span>Consultar por WhatsApp</span>
+      </a>
+
+      <div class="mt-8">
+        <h3
+          class="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-4"
+        >
+          Opciones de pago
+        </h3>
+
+        <!-- Botón PayPal -->
+        <button
+          class="flex items-center gap-4 px-6 py-4 rounded-xl font-medium text-white bg-blue-600 hover:bg-blue-700 transition duration-200 shadow-sm hover:shadow-md w-full mb-4 transform hover:-translate-y-1"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M19.8989 6.6248C19.9347 6.3936 19.9522 6.1583 19.9522 5.919C19.9522 3.8506 18.0165 2.25 15.4736 2.25H7.45166C7.09118 2.25 6.77059 2.51484 6.71485 2.87211L3.50323 20.7697C3.46153 21.0188 3.65271 21.2461 3.90608 21.2461H7.42184L8.36333 15.5074L8.34945 15.6187C8.40519 15.2614 8.7216 14.9966 9.08208 14.9966H11.106C14.3176 14.9966 16.8083 13.6877 17.6486 9.9938C17.6684 9.9158 17.6857 9.8393 17.7012 9.7643C17.9548 8.5851 17.834 7.6482 17.2202 6.9833C17.1171 6.8613 16.9991 6.7505 16.8671 6.6509C17.2535 6.6382 17.6055 6.6382 17.9201 6.6598C18.1737 6.6792 18.4224 6.7103 18.6634 6.7551C18.8053 6.7813 18.943 6.8128 19.0764 6.8488C19.3507 6.9253 19.6173 6.9879 19.8992 7.0753L19.8989 6.6248Z"
+            />
+          </svg>
+          <span>Pagar con PayPal</span>
+        </button>
+
+        <!-- Botón Tarjeta -->
+        <button
+          class="flex items-center gap-4 px-6 py-4 rounded-xl font-medium text-white bg-gray-800 hover:bg-gray-900 transition duration-200 shadow-sm hover:shadow-md w-full transform hover:-translate-y-1"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M20 4H4C2.89 4 2.01 4.89 2.01 6L2 18C2 19.11 2.89 20 4 20H20C21.11 20 22 19.11 22 18V6C22 4.89 21.11 4 20 4ZM20 18H4V12H20V18ZM20 8H4V6H20V8Z"
+            />
+          </svg>
+          <span>Pagar con tarjeta</span>
+        </button>
+      </div>
+    </div>
+    <!-- Descripción corta -->
+    <section class="mt-12 text-center">
+      <h3 class="text-2xl font-semibold text-gray-800">
+        Descripción del
+        {{ curso!.categoria === "infantil" ? "Taller" : "Curso" }}
+      </h3>
+      <p class="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">
+        {{ curso!.descripcionCompleta }}
+      </p>
+    </section>
+
+    <!-- Temario -->
+    <section class="mt-16">
+      <h3 class="text-2xl font-semibold text-gray-800 text-center">
+        {{
+          curso!.categoria === "infantil"
+            ? "Actividades del Taller"
+            : "Temario del Curso"
+        }}
+      </h3>
+      <ul class="list-disc list-inside mt-6 space-y-4 text-lg text-gray-700">
+        <li *ngFor="let tema of curso!.temario; let i = index">
+          <strong
+            >{{ curso!.categoria === "infantil" ? "Actividad" : "Módulo" }}
+            {{ i + 1 }}:</strong
+          >
+          {{ tema }}
+        </li>
+      </ul>
+    </section>
+
+    <!-- Beneficios - Solo se muestra si hay beneficios en el curso -->
+    <section
+      *ngIf="curso!.beneficios && curso!.beneficios.length > 0"
+      class="mt-16"
+    >
+      <h3 class="text-2xl font-semibold text-gray-800 text-center">
+        {{
+          curso!.categoria === "infantil"
+            ? "Beneficios para los Niños"
+            : "Beneficios del Curso"
+        }}
+      </h3>
+      <ul class="list-disc list-inside mt-6 space-y-4 text-lg text-gray-700">
+        <li *ngFor="let beneficio of curso!.beneficios">{{ beneficio }}</li>
+      </ul>
+    </section>
+  </div>
+</div>
+
+<!-- Mensaje de carga mientras se busca el curso -->
+<div *ngIf="!curso" class="flex items-center justify-center h-screen">
+  <div class="text-center">
+    <div
+      class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500 mx-auto"
+    ></div>
+    <p class="mt-4 text-gray-600">Cargando información del curso...</p>
+  </div>
+</div>
