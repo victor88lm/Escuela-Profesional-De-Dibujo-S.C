@@ -1,1 +1,62 @@
-<p>faq works!</p>
+<!-- faq.component.html -->
+<div class="container mx-auto px-4 py-12">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Preguntas Frecuentes</h2>
+      
+      <!-- Category Filters -->
+      <div class="flex flex-wrap justify-center gap-3 mb-8">
+        <button 
+          (click)="filterByCategory(null)"
+          class="px-4 py-2 rounded-full transition-colors duration-300 font-semibold text-sm"
+          [class.bg-blue-500]="!selectedCategory"
+          [class.text-white]="!selectedCategory"
+          [class.bg-gray-200]="selectedCategory"
+          [class.text-gray-700]="selectedCategory"
+        >
+          Todas las Preguntas
+        </button>
+        <button 
+          *ngFor="let category of ['Cursos', 'Horarios', 'Materiales', 'Beneficios', 'Información']"
+          (click)="filterByCategory(category)"
+          class="px-4 py-2 rounded-full transition-colors duration-300 font-semibold text-sm"
+          [class.bg-blue-500]="selectedCategory === category"
+          [class.text-white]="selectedCategory === category"
+          [class.bg-gray-200]="selectedCategory !== category"
+          [class.text-gray-700]="selectedCategory !== category"
+        >
+          {{ category }}
+        </button>
+      </div>
+  
+      <!-- FAQ Items -->
+      <div class="space-y-4">
+        <div *ngFor="let faq of getFilteredFaqs(); let i = index" class="border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+          <button 
+            (click)="toggleFaq(faqs.indexOf(faq))"
+            class="w-full text-left p-5 flex justify-between items-center hover:bg-gray-50 transition-colors duration-300"
+            [attr.aria-expanded]="faq.isOpen"
+          >
+            <span class="font-semibold text-lg text-gray-800">{{ faq.question }}</span>
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              class="h-6 w-6 transform transition-transform duration-300"
+              [class.rotate-180]="faq.isOpen"
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          
+          <div 
+            *ngIf="faq.isOpen" 
+            class="p-5 bg-gray-50 text-gray-700 whitespace-pre-line"
+            [@openClose]="faq.isOpen ? 'open' : 'closed'"
+          >
+            {{ faq.answer }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

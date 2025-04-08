@@ -5,6 +5,9 @@ header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
 
+// URL del logo de la institución (reemplaza con la URL real de tu logo)
+$LOGO_URL = "https://epd.loopmotion.tech/img/Logo.png";
+
 // Función de logging básica pero efectiva
 function log_message($message) {
     $log_file = 'form_log.txt';
@@ -70,130 +73,259 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
     
-    // Configurar el email con diseño mejorado pero manteniendo la estructura que funciona
+    // Configurar el email con diseño mejorado y elegante
     $para = "info@epd.edu.mx";
     $asunto = "Nueva solicitud de información: $curso";
     
-    // Contenido del email con formato HTML mejorado y elegante
+    // Contenido del email con diseño HTML más sofisticado
     $contenidoHTML = "
     <!DOCTYPE html>
     <html lang='es'>
     <head>
         <meta charset='UTF-8'>
         <title>Nueva solicitud de información</title>
+        <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap' rel='stylesheet'>
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
-            body { 
-                font-family: 'Inter', Arial, sans-serif; 
-                line-height: 1.6; 
-                color: #333; 
+            body {
+                font-family: 'Poppins', Arial, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                background-color: #f4f7f6;
                 margin: 0;
                 padding: 0;
-                background-color: #f4f6f9;
             }
-            .container { 
-                max-width: 650px; 
-                margin: 20px auto; 
-                background: white;
-                border-radius: 12px;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            .email-container {
+                max-width: 700px;
+                margin: 0 auto;
+                background-color: #ffffff;
+                border-radius: 15px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
                 overflow: hidden;
             }
-            .header {
-                background: linear-gradient(135deg, #4F46E5, #6366F1);
+            .email-header {
+                background: #0055A4; /* Deep blue background */
                 color: white;
-                padding: 25px;
                 text-align: center;
+                padding: 30px 20px;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
             }
-            .header h2 {
+            .email-header img {
+                max-height: 80px;
+                max-width: 250px;
+                margin-bottom: 15px;
+                filter: brightness(0) invert(1); /* Ensures white logo on blue background */
+                object-fit: contain;
+            }
+            .email-header h1 {
+                color: white;
+                margin-top: 10px;
+                font-size: 22px;
+            }
+            .email-header h1 {
                 margin: 0;
-                font-weight: 600;
                 font-size: 24px;
+                font-weight: 600;
             }
-            .content {
+            .email-body {
                 padding: 30px;
+                background-color: #ffffff;
             }
-            .section {
-                background-color: #f9fafb;
-                border-left: 4px solid #4F46E5;
+            .info-section {
+                background-color: #f9f9f9;
+                border-left: 5px solid #3498db;
                 padding: 15px;
                 margin-bottom: 20px;
-                border-radius: 0 6px 6px 0;
+                border-radius: 0 5px 5px 0;
             }
-            .field {
+            .info-row {
                 display: flex;
                 margin-bottom: 15px;
-                background-color: #f1f3f5;
+                background-color: #f1f4f6;
                 border-radius: 8px;
                 padding: 12px;
             }
-            .field-label {
+            .info-label {
                 font-weight: 600;
-                color: #374151;
-                min-width: 150px;
-                display: inline-block;
+                color: #2c3e50;
+                min-width: 180px;
+                flex-shrink: 0;
             }
-            .field-value {
-                color: #111827;
+            .info-value {
+                color: #34495e;
                 flex-grow: 1;
             }
-            .footer {
-                background-color: #f9fafb;
+            .email-footer {
+                background-color: #f1f4f6;
                 text-align: center;
                 padding: 20px;
-                border-top: 1px solid #e5e7eb;
-                font-size: 13px;
-                color: #6b7280;
+                font-size: 14px;
+                color: #7f8c8d;
+                border-top: 1px solid #e0e6e9;
             }
-            .logo {
-                max-width: 150px;
-                margin-bottom: 15px;
+            .footer-logo {
+                max-height: 40px;
+                margin-bottom: 10px;
             }
         </style>
     </head>
     <body>
-        <div class='container'>
-            <div class='header'>
-                <h2>🎨 Nueva Solicitud de Información</h2>
+        <div class='email-container'>
+            <div class='email-header'>
+                <img src='{$LOGO_URL}' alt='Logo EPD'>
+                <h1>Nueva Solicitud de Información</h1>
             </div>
             
-            <div class='content'>
-                <div class='section'>
-                    <div class='field'>
-                        <span class='field-label'>Curso de Interés:</span>
-                        <span class='field-value'><strong>$curso</strong></span>
+            <div class='email-body'>
+                <div class='info-section'>
+                    <div class='info-row'>
+                        <div class='info-label'>Curso de Interés:</div>
+                        <div class='info-value'><strong>$curso</strong></div>
                     </div>
                 </div>
                 
-                <div class='field'>
-                    <span class='field-label'>Nombre Completo:</span>
-                    <span class='field-value'>$nombre</span>
+                <div class='info-row'>
+                    <div class='info-label'>Nombre Completo:</div>
+                    <div class='info-value'>$nombre</div>
                 </div>
                 
-                <div class='field'>
-                    <span class='field-label'>Teléfono:</span>
-                    <span class='field-value'>$telefono</span>
+                <div class='info-row'>
+                    <div class='info-label'>Teléfono:</div>
+                    <div class='info-value'>$telefono</div>
                 </div>
                 
-                <div class='field'>
-                    <span class='field-label'>Correo Electrónico:</span>
-                    <span class='field-value'>$email</span>
+                <div class='info-row'>
+                    <div class='info-label'>Correo Electrónico:</div>
+                    <div class='info-value'>$email</div>
                 </div>
                 
-                <div class='field'>
-                    <span class='field-label'>Cómo nos Conoció:</span>
-                    <span class='field-value'>$conocio</span>
+                <div class='info-row'>
+                    <div class='info-label'>Cómo nos Conoció:</div>
+                    <div class='info-value'>$conocio</div>
                 </div>
                 
-                <div class='field'>
-                    <span class='field-label'>Mensaje Adicional:</span>
-                    <span class='field-value'>$mensaje</span>
+                <div class='info-row'>
+                    <div class='info-label'>Mensaje Adicional:</div>
+                    <div class='info-value'>$mensaje</div>
                 </div>
             </div>
             
-            <div class='footer'>
+            <div class='email-footer'>
+                <img src='{$LOGO_URL}' alt='Logo EPD' class='footer-logo'>
                 <p>Solicitud recibida el " . date('d/m/Y \a \l\a\s H:i') . "</p>
                 <p>© " . date('Y') . " Escuela Profesional de Dibujo | Todos los derechos reservados</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    ";
+    
+    // Configuración de confirmación con diseño similar
+    $confirm_subject = "Solicitud Recibida - Escuela Profesional de Dibujo";
+    $confirm_message = "
+    <!DOCTYPE html>
+    <html lang='es'>
+    <head>
+        <meta charset='UTF-8'>
+        <title>Solicitud Recibida</title>
+        <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap' rel='stylesheet'>
+        <style>
+            body {
+                font-family: 'Poppins', Arial, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                background-color: #f4f7f6;
+                margin: 0;
+                padding: 0;
+            }
+            .email-container {
+                max-width: 700px;
+                margin: 0 auto;
+                background-color: #ffffff;
+                border-radius: 15px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+                overflow: hidden;
+            }
+            .email-header {
+                background: #0055A4; /* Deep blue background */
+                color: white;
+                text-align: center;
+                padding: 30px 20px;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+            .email-header img {
+                max-height: 80px;
+                max-width: 250px;
+                margin-bottom: 15px;
+                filter: brightness(0) invert(1); /* Ensures white logo on blue background */
+                object-fit: contain;
+            }
+            .email-header h1 {
+                margin: 0;
+                font-size: 24px;
+                font-weight: 600;
+                color: white;
+            }
+            .email-body {
+                padding: 30px;
+                text-align: center;
+                background-color: #ffffff;
+            }
+            .cta-button {
+                display: inline-block;
+                background: linear-gradient(135deg, #3498db, #2980b9);
+                color: white;
+                text-decoration: none;
+                padding: 12px 25px;
+                border-radius: 8px;
+                font-weight: 600;
+                margin-top: 20px;
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
+            .cta-button:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+            .email-footer {
+                background-color: #f1f4f6;
+                text-align: center;
+                padding: 20px;
+                font-size: 14px;
+                color: #7f8c8d;
+                border-top: 1px solid #e0e6e9;
+            }
+            .footer-logo {
+                max-height: 40px;
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class='email-container'>
+            <div class='email-header'>
+                <img src='{$LOGO_URL}' alt='Logo EPD'>
+            </div>
+            
+            <div class='email-body'>
+                <p>Hola <strong>$nombre</strong>,</p>
+                <p>Hemos recibido tu solicitud de información sobre <strong>$curso</strong>.</p>
+                <p>Uno de nuestros asesores educativos se pondrá en contacto contigo a la brevedad para brindarte toda la información que necesitas.</p>
+                <p>Gracias por tu interés en nuestros programas educativos.</p>
+                
+                <a href='https://epd.edu.mx' class='cta-button'>Visitar Sitio Web</a>
+            </div>
+            
+            <div class='email-footer'>
+                <img src='{$LOGO_URL}' alt='Logo EPD' class='footer-logo'>
+                <p>© " . date('Y') . " Escuela Profesional de Dibujo</p>
+                <p>Este es un mensaje automático, por favor no respondas a este correo.</p>
             </div>
         </div>
     </body>
@@ -216,96 +348,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     if ($send_result) {
-        // Mensaje de confirmación para el usuario con diseño actualizado
-        $confirm_subject = "Solicitud Recibida - Escuela Profesional de Dibujo";
-        $confirm_message = "
-        <!DOCTYPE html>
-        <html lang='es'>
-        <head>
-            <meta charset='UTF-8'>
-            <title>Solicitud Recibida</title>
-            <style>
-                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
-                body { 
-                    font-family: 'Inter', Arial, sans-serif; 
-                    line-height: 1.6; 
-                    color: #333; 
-                    margin: 0;
-                    padding: 0;
-                    background-color: #f4f6f9;
-                }
-                .container { 
-                    max-width: 650px; 
-                    margin: 20px auto; 
-                    background: white;
-                    border-radius: 12px;
-                    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-                    overflow: hidden;
-                }
-                .header {
-                    background: linear-gradient(135deg, #4F46E5, #6366F1);
-                    color: white;
-                    padding: 25px;
-                    text-align: center;
-                }
-                .header h2 {
-                    margin: 0;
-                    font-weight: 600;
-                    font-size: 24px;
-                }
-                .content {
-                    padding: 30px;
-                    text-align: center;
-                }
-                .button {
-                    display: inline-block;
-                    background: linear-gradient(135deg, #4F46E5, #6366F1);
-                    color: white;
-                    text-decoration: none;
-                    padding: 12px 24px;
-                    border-radius: 8px;
-                    font-weight: 600;
-                    margin-top: 20px;
-                    transition: transform 0.2s;
-                }
-                .button:hover {
-                    transform: scale(1.05);
-                }
-                .footer {
-                    background-color: #f9fafb;
-                    text-align: center;
-                    padding: 20px;
-                    border-top: 1px solid #e5e7eb;
-                    font-size: 13px;
-                    color: #6b7280;
-                }
-            </style>
-        </head>
-        <body>
-            <div class='container'>
-                <div class='header'>
-                    <h2>✉️ Solicitud Recibida</h2>
-                </div>
-                
-                <div class='content'>
-                    <p>Hola <strong>$nombre</strong>,</p>
-                    <p>Hemos recibido tu solicitud de información sobre <strong>$curso</strong>.</p>
-                    <p>Uno de nuestros asesores educativos se pondrá en contacto contigo a la brevedad para brindarte toda la información que necesitas.</p>
-                    <p>Gracias por tu interés en nuestros programas educativos.</p>
-                    
-                    <a href='https://epd.loopmotion.tech' class='button'>Visitar Sitio Web</a>
-                </div>
-                
-                <div class='footer'>
-                    <p>© " . date('Y') . " Escuela Profesional de Dibujo</p>
-                    <p>Este es un mensaje automático, por favor no respondas a este correo.</p>
-                </div>
-            </div>
-        </body>
-        </html>
-        ";
-        
-        // Usar las mismas cabeceras simples para el mensaje de confirmación
+        // Cabeceras para el correo de confirmación
         $confirm_headers = "MIME-Version: 1.0\r\n";
         $confirm_headers .= "Content-type: text/html; charset=UTF-8\r\n";
         $confirm_headers .= "From: Escuela Profesional de Dibujo <informes@epd.edu.mx>\r\n";
