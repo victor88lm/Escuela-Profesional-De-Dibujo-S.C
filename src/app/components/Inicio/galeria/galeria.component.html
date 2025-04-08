@@ -1,7 +1,7 @@
-<!-- SnapWidget -->
+<!-- SnapWidget
 <script src="https://snapwidget.com/js/snapwidget.js"></script>
 <div class="pt-48 pb-24 bg-gray-100">
-  <!-- SnapWidget -->
+   SnapWidget 
   <script src="https://snapwidget.com/js/snapwidget.js"></script>
   <iframe
     src="https://snapwidget.com/embed/1092678"
@@ -12,4 +12,100 @@
     style="border: none; overflow: hidden; width: 100%"
     title="Prueba"
   ></iframe>
-</div>
+</div> -->
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galería de Instagram - EsproDibujo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 8rem;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+
+    .iframe-container {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 100%; /* Proporción cuadrada para el iframe */
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .iframe-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #777;
+      font-size: 0.9rem;
+    }
+
+    .footer a {
+      color: #3897f0;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .iframe-container {
+        padding-bottom: 150%; /* Más alto en móviles para mejor visualización */
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="iframe-container">
+      <iframe
+        src="https://e586af1c263040ce832997fa45a8a7a0.elf.site"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <div class="footer">
+      <p>
+        Visita nuestro perfil completo en
+        <a href="https://www.instagram.com/esprodibujo/" target="_blank"
+          >Instagram</a
+        >
+      </p>
+    </div>
+  </div>
+</body>
