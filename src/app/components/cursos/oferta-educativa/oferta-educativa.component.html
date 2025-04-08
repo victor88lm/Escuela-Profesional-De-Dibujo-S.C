@@ -45,103 +45,99 @@
   <!-- Grid de tarjetas - Generado dinámicamente desde cursos.ts -->
   <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
     <!-- Tarjeta dinámica para cada curso -->
-    <div
-      *ngFor="let curso of cursos"
-      class="group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] transform"
-    >
-      <!-- Banner superior con gradiente -->
+    <ng-container *ngFor="let curso of cursos">
       <div
-        class="absolute top-0 left-0 w-full h-2"
-        [ngClass]="
-          'bg-gradient-to-r from-' +
-          curso.color +
-          '-400 to-' +
-          curso.color +
-          '-600'
-        "
-      ></div>
-
-      <!-- Imagen con overlay al hacer hover -->
-      <a
-        [routerLink]="['./Cursos', curso.slug]"
-        class="block relative overflow-hidden"
+        class="group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] transform"
       >
-        <img
-          [src]="curso.imagen"
-          [alt]="curso.titulo"
-          class="h-96 w-full object-cover transition-transform duration-700 group-hover:scale-110"
-        />
+        <!-- Banner superior con gradiente - Colores específicos en lugar de dinámicos -->
         <div
-          class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-500"
+          *ngIf="curso.color === 'blue'"
+          class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 to-blue-600"
         ></div>
-      </a>
+        <div
+          *ngIf="curso.color === 'pink'"
+          class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-pink-400 to-pink-600"
+        ></div>
+        <div
+          *ngIf="curso.color === 'orange'"
+          class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-orange-400 to-orange-600"
+        ></div>
+        <div
+          *ngIf="curso.color === 'green'"
+          class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-green-400 to-green-600"
+        ></div>
 
-      <!-- Badge/etiqueta flotante -->
-      <div
-        class="absolute top-4 right-4 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
-        [ngClass]="'bg-' + curso.color + '-500'"
-      >
-        {{ curso.categoria | titlecase }}
-      </div>
+        <!-- Imagen con overlay al hacer hover -->
+        <a
+          [routerLink]="'/Cursos/' + curso.slug"
+          class="block relative overflow-hidden"
+        >
+          <img
+            [src]="curso.imagen"
+            [alt]="curso.titulo"
+            class="h-96 w-full object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-500"
+          ></div>
+        </a>
 
-      <!-- Contenido de la tarjeta -->
-      <div class="p-8">
-        <div class="flex items-start justify-between">
-          <h2
-            class="text-2xl font-extrabold"
-            [ngClass]="'text-' + curso.color + '-600'"
-          >
-            {{ curso.titulo }}
-            <div
-              class="h-1 w-12 mt-2 rounded-full"
-              [ngClass]="'bg-' + curso.color + '-500'"
-            ></div>
-          </h2>
-          <!-- Flecha ahora es un enlace -->
-          <a
-            [routerLink]="'/Cursos/' + curso.slug"
-            class="rounded-full p-2 transition-all duration-300"
-            [ngClass]="
-              'bg-' +
-              curso.color +
-              '-100 text-' +
-              curso.color +
-              '-600 group-hover:bg-' +
-              curso.color +
-              '-600 group-hover:text-white'
-            "
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
-          </a>
+        <!-- Badge/etiqueta flotante - Con colores específicos -->
+        <div
+          class="absolute top-4 right-4 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
+          [ngClass]="{
+            'bg-blue-500': curso.color === 'blue',
+            'bg-pink-500': curso.color === 'pink',
+            'bg-orange-500': curso.color === 'orange',
+            'bg-green-500': curso.color === 'green'
+          }"
+        >
+          {{ curso.categoria | titlecase }}
         </div>
 
-        <p class="text-md text-gray-700 opacity-90 mt-4 leading-relaxed">
-          {{ curso.descripcionCorta }}
-        </p>
+        <!-- Contenido de la tarjeta -->
+        <div class="p-8">
+          <div class="flex items-start justify-between">
+            <h2
+              class="text-2xl font-extrabold"
+              [ngClass]="{
+                'text-blue-600': curso.color === 'blue',
+                'text-pink-600': curso.color === 'pink',
+                'text-orange-600': curso.color === 'orange',
+                'text-green-600': curso.color === 'green'
+              }"
+            >
+              {{ curso.titulo }}
+              <div
+                class="h-1 w-12 mt-2 rounded-full"
+                [ngClass]="{
+                  'bg-blue-500': curso.color === 'blue',
+                  'bg-pink-500': curso.color === 'pink',
+                  'bg-orange-500': curso.color === 'orange',
+                  'bg-green-500': curso.color === 'green'
+                }"
+              ></div>
+            </h2>
 
-        <!-- Lista con iconos -->
-        <div class="mt-6 space-y-3">
-          <div
-            *ngFor="let caracteristica of curso.caracteristicas.slice(0, 3)"
-            class="flex items-center text-sm text-gray-600"
-          >
-            <div class="mr-2" [ngClass]="'text-' + curso.color + '-500'">
+            <!-- Flecha con colores específicos -->
+            <a
+              [routerLink]="'/Cursos/' + curso.slug"
+              class="rounded-full p-2 transition-all duration-300"
+              [ngClass]="{
+                'bg-blue-100 text-blue-600 group-hover:bg-blue-600':
+                  curso.color === 'blue',
+                'bg-pink-100 text-pink-600 group-hover:bg-pink-600':
+                  curso.color === 'pink',
+                'bg-orange-100 text-orange-600 group-hover:bg-orange-600':
+                  curso.color === 'orange',
+                'bg-green-100 text-green-600 group-hover:bg-green-600':
+                  curso.color === 'green',
+                'group-hover:text-white': true
+              }"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
+                class="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -150,36 +146,78 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M5 13l4 4L19 7"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
                 />
               </svg>
+            </a>
+          </div>
+
+          <p class="text-md text-gray-700 opacity-90 mt-4 leading-relaxed">
+            {{ curso.descripcionCorta }}
+          </p>
+
+          <!-- Lista con iconos - Con colores específicos -->
+          <div class="mt-6 space-y-3">
+            <div
+              *ngFor="let caracteristica of curso.caracteristicas.slice(0, 3)"
+              class="flex items-center text-sm text-gray-600"
+            >
+              <div
+                class="mr-2"
+                [ngClass]="{
+                  'text-blue-500': curso.color === 'blue',
+                  'text-pink-500': curso.color === 'pink',
+                  'text-orange-500': curso.color === 'orange',
+                  'text-green-500': curso.color === 'green'
+                }"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+              <span>{{ caracteristica }}</span>
             </div>
-            <span>{{ caracteristica }}</span>
+          </div>
+
+          <!-- Botón con efecto hover mejorado - Con colores específicos -->
+          <div class="mt-8 relative">
+            <button
+              [routerLink]="'/Cursos/' + curso.slug"
+              class="w-full relative z-10 px-6 py-3 rounded-xl text-white font-bold transition-all duration-300 overflow-hidden"
+              [ngClass]="{
+                'bg-blue-500 group-hover:bg-blue-600': curso.color === 'blue',
+                'bg-pink-500 group-hover:bg-pink-600': curso.color === 'pink',
+                'bg-orange-500 group-hover:bg-orange-600':
+                  curso.color === 'orange',
+                'bg-green-500 group-hover:bg-green-600': curso.color === 'green'
+              }"
+            >
+              <span class="relative z-10">Más información</span>
+              <div
+                class="absolute inset-0 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500"
+                [ngClass]="{
+                  'bg-blue-700': curso.color === 'blue',
+                  'bg-pink-700': curso.color === 'pink',
+                  'bg-orange-700': curso.color === 'orange',
+                  'bg-green-700': curso.color === 'green'
+                }"
+              ></div>
+            </button>
           </div>
         </div>
-
-        <!-- Botón con efecto hover mejorado -->
-        <div class="mt-8 relative">
-          <button
-            [routerLink]="'/Cursos/' + curso.slug"
-            class="w-full relative z-10 px-6 py-3 rounded-xl text-white font-bold transition-all duration-300 overflow-hidden"
-            [ngClass]="
-              'bg-' +
-              curso.color +
-              '-500 group-hover:bg-' +
-              curso.color +
-              '-600'
-            "
-          >
-            <span class="relative z-10">Más información</span>
-            <div
-              class="absolute inset-0 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500"
-              [ngClass]="'bg-' + curso.color + '-700'"
-            ></div>
-          </button>
-        </div>
       </div>
-    </div>
+    </ng-container>
 
     <!-- Tarjeta para Talleres Especializados (Específica) -->
     <div
