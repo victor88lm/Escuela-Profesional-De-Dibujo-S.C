@@ -82,6 +82,6 @@ export class AppComponent implements OnInit {
     };
 
     // Set the source to your logo
-    img.src = 'img/LoopMotion.png';
+    img.src = 'img/LoopMotion.avif';
   }
 }

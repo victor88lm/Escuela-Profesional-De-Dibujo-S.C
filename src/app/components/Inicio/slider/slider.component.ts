@@ -1,4 +1,15 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, NgZone, Renderer2 } from '@angular/core';
+
+interface OrbitalParticle {
+  size: 'small' | 'medium' | 'large';
+  orbit: number;
+  angle: number;
+  speed: number;
+  direction: 'normal' | 'reverse';
+  color: 'teal' | 'blue';
+}
+
+
 
 @Component({
   selector: 'app-slider',
@@ -16,7 +27,19 @@ export class sliderComponent implements OnInit, OnDestroy, AfterViewInit {
   touchStartX: number = 0;
   touchEndX: number = 0;
   minSwipeDistance: number = 50;
+
+  currentMiniSlide: number = 0;
+  totalMiniSlides: number = 3;
+  miniSliderInterval: any;
   
+  
+  constructor(
+    private el: ElementRef,
+    private ngZone: NgZone,
+    private renderer: Renderer2
+  ) {}
+
+
   ngOnInit(): void {
     // Set up the slider
     this.setupSlider();
@@ -26,6 +49,9 @@ export class sliderComponent implements OnInit, OnDestroy, AfterViewInit {
     
     // Add event listeners for the dots
     this.setupDotControls();
+
+    this.setupMiniSlider();
+
   }
   
   ngAfterViewInit(): void {
@@ -37,12 +63,118 @@ export class sliderComponent implements OnInit, OnDestroy, AfterViewInit {
     
     // Set up touch events for mobile swipe
     this.setupTouchEvents();
+
+    this.createOrbitalParticles();
+    this.setupMiniSliderControls();
+
+
+  }
+
+  private createOrbitalParticles(): void {
+    const container = this.el.nativeElement.querySelector('#orbital-particles');
+    if (!container) return;
+    
+    this.ngZone.runOutsideAngular(() => {
+      // Crear partículas para cada órbita
+      const particleCounts = {
+        inner: 8,   // Órbita interna (150px)
+        middle: 12, // Órbita media (200px)
+        outer: 15   // Órbita externa (250px)
+      };
+      
+      // Generar partículas para cada órbita
+      this.generateOrbitalParticles(container, particleCounts.inner, 150);
+      this.generateOrbitalParticles(container, particleCounts.middle, 200);
+      this.generateOrbitalParticles(container, particleCounts.outer, 250);
+    });
+  }
+  
+  private generateOrbitalParticles(container: HTMLElement, count: number, radius: number): void {
+    for (let i = 0; i < count; i++) {
+      // Distribuir partículas uniformemente en la órbita
+      const angle = (i / count) * 360;
+      
+      // Calcular parámetros de la partícula
+      const particle = this.generateParticleConfig(angle, radius);
+      
+      // Crear y añadir la partícula
+      this.createOrbitalParticleElement(container, particle);
+    }
+  }
+  
+  private generateParticleConfig(angle: number, orbitRadius: number): OrbitalParticle {
+    // Determinar tamaño de la partícula
+    const sizeRandom = Math.random();
+    let size: 'small' | 'medium' | 'large';
+    
+    if (sizeRandom < 0.3) {
+      size = 'small';
+    } else if (sizeRandom < 0.7) {
+      size = 'medium';
+    } else {
+      size = 'large';
+    }
+    
+    // Determinar velocidad y dirección
+    const speed = 15 + Math.random() * 20; // Entre 15 y 35 segundos por vuelta
+    const direction = Math.random() > 0.5 ? 'normal' : 'reverse';
+    
+    // Determinar color
+    const color = Math.random() > 0.5 ? 'teal' : 'blue';
+    
+    return {
+      size,
+      orbit: orbitRadius,
+      angle,
+      speed,
+      direction,
+      color
+    };
+  }
+  
+  private createOrbitalParticleElement(container: HTMLElement, particle: OrbitalParticle): void {
+    const particleElement = this.renderer.createElement('div');
+    
+    // Aplicar clases
+    this.renderer.addClass(particleElement, 'orbital-particle');
+    this.renderer.addClass(particleElement, particle.size);
+    this.renderer.addClass(particleElement, particle.color);
+    
+    // Calcular posición central
+    const centerX = '50%';
+    const centerY = '50%';
+    
+    // Establecer propiedades de posición
+    this.renderer.setStyle(particleElement, 'left', centerX);
+    this.renderer.setStyle(particleElement, 'top', centerY);
+    this.renderer.setStyle(particleElement, '--orbit-radius', `${particle.orbit}px`);
+    
+    // Aplicar animación orbital
+    const orbitAnimation = particle.direction === 'normal' 
+      ? `orbit ${particle.speed}s linear infinite`
+      : `orbit-reverse ${particle.speed}s linear infinite`;
+    
+    // Añadir animación de pulso
+    const pulseAnimation = `pulse 2s ease-in-out infinite`;
+    
+    // Aplicar animaciones
+    this.renderer.setStyle(particleElement, 'animation', `${orbitAnimation}, ${pulseAnimation}`);
+    
+    // Retraso inicial basado en ángulo
+    const initialDelay = (particle.angle / 360) * particle.speed;
+    this.renderer.setStyle(particleElement, 'animation-delay', `-${initialDelay}s, 0s`);
+    
+    // Añadir al contenedor
+    this.renderer.appendChild(container, particleElement);
   }
   
   ngOnDestroy(): void {
     // Clean up the interval when component is destroyed
     this.stopAutoSlide();
     
+    this.stopMiniSliderAutoSlide();
+
+
     // Remove touch event listeners
     this.removeTouchEvents();
     
@@ -257,5 +389,109 @@ export class sliderComponent implements OnInit, OnDestroy, AfterViewInit {
     
     this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
     this.updateSliderPosition();
+  }
+
+  setupMiniSlider(): void {
+    // Iniciar auto-rotación del mini-slider
+    this.startMiniSliderAutoSlide();
+  }
+  
+  setupMiniSliderControls(): void {
+    // Configurar los botones de navegación del mini-slider
+    const prevButton = document.querySelector('.mini-slider-control.left');
+    const nextButton = document.querySelector('.mini-slider-control.right');
+    
+    if (prevButton) {
+      prevButton.addEventListener('click', () => {
+        this.prevMiniSlide();
+      });
+    }
+    
+    if (nextButton) {
+      nextButton.addEventListener('click', () => {
+        this.nextMiniSlide();
+      });
+    }
+    
+    // Configurar los indicadores de posición
+    const indicators = document.querySelectorAll('.mini-slider-indicator');
+    
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        this.goToMiniSlide(index);
+      });
+    });
+    
+    // Pausar auto-rotación al pasar el ratón por encima
+    const miniSliderContainer = document.querySelector('.mini-slider-container');
+    
+    if (miniSliderContainer) {
+      miniSliderContainer.addEventListener('mouseenter', () => {
+        this.stopMiniSliderAutoSlide();
+      });
+      
+      miniSliderContainer.addEventListener('mouseleave', () => {
+        this.startMiniSliderAutoSlide();
+      });
+    }
+  }
+  
+  startMiniSliderAutoSlide(): void {
+    // Solo iniciar auto-rotación si no hay un intervalo ya en ejecución
+    if (!this.miniSliderInterval) {
+      this.miniSliderInterval = setInterval(() => {
+        this.nextMiniSlide();
+      }, 5000); // Rotar cada 5 segundos
+    }
+  }
+  
+  stopMiniSliderAutoSlide(): void {
+    if (this.miniSliderInterval) {
+      clearInterval(this.miniSliderInterval);
+      this.miniSliderInterval = null;
+    }
+  }
+  
+  goToMiniSlide(index: number): void {
+    // Reiniciar el intervalo cuando se hace clic manualmente
+    this.stopMiniSliderAutoSlide();
+    
+    this.currentMiniSlide = index;
+    this.updateMiniSliderPosition();
+    
+    // Reiniciar auto-rotación
+    this.startMiniSliderAutoSlide();
+  }
+  
+  prevMiniSlide(): void {
+    this.currentMiniSlide = (this.currentMiniSlide - 1 + this.totalMiniSlides) % this.totalMiniSlides;
+    this.updateMiniSliderPosition();
+  }
+  
+  nextMiniSlide(): void {
+    this.currentMiniSlide = (this.currentMiniSlide + 1) % this.totalMiniSlides;
+    this.updateMiniSliderPosition();
+  }
+  
+  updateMiniSliderPosition(): void {
+    // Actualizar la posición del track
+    const track = document.getElementById('miniSliderTrack');
+    if (track) {
+      this.renderer.setStyle(track, 'transform', `translateX(-${this.currentMiniSlide * 100}%)`);
+    }
+    
+    // Actualizar indicadores
+    const indicators = document.querySelectorAll('.mini-slider-indicator');
+    indicators.forEach((indicator, index) => {
+      if (index === this.currentMiniSlide) {
+        this.renderer.addClass(indicator, 'active');
+        this.renderer.addClass(indicator, 'bg-white');
+        this.renderer.removeClass(indicator, 'bg-white/50');
+      } else {
+        this.renderer.removeClass(indicator, 'active');
+        this.renderer.removeClass(indicator, 'bg-white');
+        this.renderer.addClass(indicator, 'bg-white/50');
+      }
+    });
   }
 }
