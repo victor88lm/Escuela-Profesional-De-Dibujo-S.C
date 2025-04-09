@@ -1,96 +1,87 @@
 <!-- Slider component with three slides and swipe functionality -->
-<section class="slider-container relative overflow-hidden" aria-label="Escuela Profesional de Dibujo">
-    <!-- Slider controls - Improved with better positioning and appearance -->
-    <div class="slider-controls absolute z-20 bottom-6 left-0 right-0 flex justify-center gap-3">
-        <button class="slider-dot active" aria-label="Slide 1" data-slide="0"></button>
-        <button class="slider-dot" aria-label="Slide 2" data-slide="1"></button>
-        <button class="slider-dot" aria-label="Slide 3" data-slide="2"></button>
+<section class="slider-container relative overflow-hidden" #sliderContainer aria-label="Escuela Profesional de Dibujo">
+    <!-- Slider controls - Enhanced for better mobile experience -->
+    <div class="slider-controls absolute z-20 bottom-3 xs:bottom-4 sm:bottom-6 left-0 right-0 flex justify-center gap-2 sm:gap-3">
+        <button #sliderDot class="slider-dot active h-4 w-4 xs:h-3 xs:w-3 sm:h-4 sm:w-4 rounded-full bg-white shadow-md touch-manipulation" aria-label="Slide 1" data-slide="0"></button>
+        <button #sliderDot class="slider-dot h-4 w-4 xs:h-3 xs:w-3 sm:h-4 sm:w-4 rounded-full bg-white/50 shadow-md touch-manipulation" aria-label="Slide 2" data-slide="1"></button>
+        <button #sliderDot class="slider-dot h-4 w-4 xs:h-3 xs:w-3 sm:h-4 sm:w-4 rounded-full bg-white/50 shadow-md touch-manipulation" aria-label="Slide 3" data-slide="2"></button>
     </div>
 
-    <!-- Added navigation arrows for desktop -->
-    <button class="nav-arrow nav-prev hidden sm:block" aria-label="Anterior slide">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <!-- Enhanced navigation arrows - increased touch area and improved visibility -->
+    <button #navPrev class="nav-arrow nav-prev absolute left-1 xs:left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 backdrop-blur-sm p-2 xs:p-2 sm:p-2 rounded-full z-10 touch-manipulation" aria-label="Anterior slide">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 xs:h-6 xs:w-6 sm:h-8 sm:w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
     </button>
-    <button class="nav-arrow nav-next hidden sm:block" aria-label="Siguiente slide">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <button #navNext class="nav-arrow nav-next absolute right-1 xs:right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 backdrop-blur-sm p-2 xs:p-2 sm:p-2 rounded-full z-10 touch-manipulation" aria-label="Siguiente slide">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 xs:h-6 xs:w-6 sm:h-8 sm:w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
     </button>
 
-    <!-- Slider wrapper - This will be handled by the swipe functionality -->
-    <div class="slider-wrapper flex transition-transform duration-500 ease-in-out h-[600px]" id="sliderWrapper">
-        <!-- Slide 1: Original Hero (unchanged) -->
+    <!-- Slider wrapper - Improved adaptive height for all screen sizes -->
+    <div #sliderWrapper class="slider-wrapper flex transition-transform duration-500 ease-in-out h-[350px] xs:h-[400px] sm:h-[500px] md:h-[600px] will-change-transform">
+        <!-- Slide 1: Original Hero (enhanced responsive improvements) -->
         <div class="slider-slide flex-shrink-0 w-full relative">
             <section class="hero-section flex items-center justify-center h-full" aria-label="Escuela Profesional de Dibujo">
-                <!-- Overlay con gradiente mejorado -->
-                <div class="hero-overlay bg-gradient-to-br from-gray-900/80 to-indigo-900/70" role="presentation"></div>
+                <!-- Overlay con gradiente mejorado para móviles -->
+                <div class="hero-overlay bg-gradient-to-br from-gray-900/90 to-indigo-900/80 absolute inset-0" role="presentation"></div>
                 
-                <!-- Contenido Hero Optimizado y Mejorado -->
-                <div class="hero-content flex items-center justify-center h-full w-full pt-4">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                            <!-- Contenido de Texto Mejorado -->
+                <!-- Contenido Hero Optimizado y Mejorado para móviles -->
+                <div class="hero-content flex items-center justify-center h-full w-full pt-1 xs:pt-2 sm:pt-4 z-10">
+                    <div class="max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 w-full">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 xs:gap-4 sm:gap-8 items-center">
+                            <!-- Contenido de Texto Mejorado para móviles -->
                             <div class="text-white">
-                                <div class="flex items-center mb-4">
-                                    <img src="https://img.icons8.com/ios-filled/50/FFFFFF/paint-palette.png" alt="Paleta de arte" class="h-10 w-10 mr-3" />
-                                    <span class="text-sm uppercase tracking-wider text-white font-semibold">Formación especializada</span>
-                                </div>
-                                
-                                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
+                                <!-- Títulos comprimidos en móviles muy pequeños -->
+                                <h1 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight">
                                     <span class="block text-white">Arte y técnica</span>
                                     <span class="block text-white">en el dibujo profesional</span>
                                 </h1>
                                 
-                                <p class="mt-6 text-lg sm:text-xl text-white max-w-lg">
+                                <p class="mt-2 xs:mt-3 sm:mt-6 text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl text-white max-w-lg">
                                     Descubre tu potencial artístico en la Escuela Profesional de Dibujo. 
-                                    Nuestros programas especializados te brindarán las herramientas 
-                                    necesarias para destacar en el mundo del arte.
+                                    Nuestros programas te brindarán las herramientas 
+                                    necesarias para destacar.
                                 </p>
                                 
-                                <!-- Características destacadas con iconos -->
-                                <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <!-- Características simplificadas en móviles muy pequeños -->
+                                <div class="mt-3 xs:mt-4 sm:mt-8 grid grid-cols-1 xs:grid-cols-2 gap-2 xs:gap-3 sm:gap-4">
                                     <div class="flex items-start">
-                                        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/diploma.png" alt="Certificación" class="h-8 w-8 mr-3" />
+                                        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/diploma.png" alt="Certificación" class="h-5 w-5 xs:h-6 xs:w-6 sm:h-8 sm:w-8 mr-2 sm:mr-3" loading="lazy" />
                                         <div>
-                                            <h3 class="font-semibold text-white">Certificación Profesional</h3>
-                                            <p class="text-sm text-white">Obtén un diploma reconocido en el sector artístico</p>
+                                            <h3 class="font-semibold text-white text-xs xs:text-sm sm:text-base lg:text-lg">Certificación Profesional</h3>
+                                            <p class="text-xxs xs:text-xs sm:text-sm lg:text-base text-white">Diploma reconocido en el sector</p>
                                         </div>
                                     </div>
                                     <div class="flex items-start">
-                                        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/teacher.png" alt="Profesores" class="h-8 w-8 mr-3" />
+                                        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/teacher.png" alt="Profesores" class="h-5 w-5 xs:h-6 xs:w-6 sm:h-8 sm:w-8 mr-2 sm:mr-3" loading="lazy" />
                                         <div>
-                                            <h3 class="font-semibold text-white">Docentes Expertos</h3>
-                                            <p class="text-sm text-white">Aprende con artistas de amplia trayectoria</p>
+                                            <h3 class="font-semibold text-white text-xs xs:text-sm sm:text-base lg:text-lg">Docentes Expertos</h3>
+                                            <p class="text-xxs xs:text-xs sm:text-sm lg:text-base text-white">Artistas de amplia trayectoria</p>
                                         </div>
                                     </div>
                                 </div>
                                 
-                                <div class="mt-10 flex flex-wrap gap-4">
-                                    <a routerLink="/Cursos" class="group inline-block px-8 py-3 btn-primary font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300" aria-label="Descubre nuestros cursos">
+                                <!-- Botón con mejor área táctil -->
+                                <div class="mt-4 xs:mt-5 sm:mt-10 flex flex-wrap gap-2 xs:gap-3 sm:gap-4">
+                                    <a routerLink="/Cursos" class="group inline-block px-4 xs:px-5 sm:px-8 py-2.5 xs:py-2 sm:py-3 btn-primary text-xs xs:text-sm sm:text-base lg:text-lg font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300 touch-manipulation" aria-label="Descubre nuestros cursos">
                                         <span class="flex items-center">
-                                            Descubre nuestros cursos
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                            Descubre cursos
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 xs:h-4 xs:w-4 sm:h-5 sm:w-5 ml-1 xs:ml-1 sm:ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                             </svg>
-                                        </span>
-                                    </a>
-                                    <a routerLink="/Contactanos" class="group inline-block px-8 py-3 border-2 border-white text-white font-medium rounded-full hover:bg-white hover:text-indigo-900 transition-colors duration-300" aria-label="Contactar con nosotros">
-                                        <span class="flex items-center">
-                                            <img src="https://img.icons8.com/ios-filled/50/FFFFFF/phone.png" alt="Contacto" class="h-5 w-5 mr-2" />
-                                            Contactar
                                         </span>
                                     </a>
                                 </div>
                             </div>
                             
-                            <!-- Imagen Optimizada sin Elementos Decorativos adicionales -->
-                            <div class="hidden md:block relative">
+                            <!-- Imagen (ahora visible en xs pero oculta en móviles muy pequeños) -->
+                            <div class="hidden xs:block relative">
                                 <div class="float-animation">
                                     <img 
                                         ngSrc="img/Icon.avif" 
-                                        alt="Estudiantes dibujando en la Escuela Profesional de Dibujo" 
+                                        alt="Estudiantes dibujando" 
                                         class="w-full h-auto object-contain rounded-lg" 
                                         width="500" 
                                         height="500"
@@ -98,7 +89,6 @@
                                     >
                                 </div>
                                 
-                                <!-- Solo mantenemos el elemento decorativo original -->
                                 <div class="absolute -top-10 right-0" aria-hidden="true">
                                     <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="50" cy="50" r="40" stroke="rgba(255, 255, 255, 0.15)" stroke-width="2" stroke-dasharray="10 10" />
@@ -111,257 +101,225 @@
             </section>
         </div>
 
-        <!-- Slide 2: Fechas de Inscripción (Enhanced) -->
-<!-- Modificación de tu plantilla HTML para incluir el mini-slider -->
-<div class="slider-slide flex-shrink-0 w-full relative">
-    <section class="hero-section flex items-center justify-center h-full" aria-label="Fechas de Inscripción">
-        <!-- Enhanced purple overlay with more vibrant gradient -->
-        <div class="hero-overlay-purple" role="presentation"></div>
-        <!-- Inscripción Content -->
-        <div class="hero-content flex items-center justify-center h-full w-full pt-0 lg:pt-4">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <!-- Enhanced Text Content with improved UI -->
-                    <div class="text-white">
-                        <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
-                            <span class="block text-purple-200 text-glow-purple">Inscripciones</span>
-                            <span class="block text-white">Abiertas</span>
-                        </h2>
-                        <p class="mt-6 text-lg sm:text-xl text-gray-100 max-w-lg">
-                            No pierdas la oportunidad de formarte con los mejores. 
-                            Las inscripciones para el próximo ciclo ya están abiertas.
-                        </p>
-                        <!-- Enhanced date card with better styling -->
-                        <div class="mt-6 glass-card p-6 rounded-xl border border-purple-300 border-opacity-30">
-                            <h3 class="text-xl font-semibold text-purple-200 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                Próximas fechas:
-                            </h3>
-                            <ul class="mt-4 space-y-3">
-                                <li class="flex items-center date-item">
-                                    <div class="date-icon-container">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="date-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        <!-- Slide 2: Fechas de Inscripción (Mobile Enhanced) -->
+        <div class="slider-slide flex-shrink-0 w-full relative">
+            <section class="hero-section flex items-center justify-center h-full" aria-label="Fechas de Inscripción">
+                <!-- Overlay con mejor contraste para móviles -->
+                <div class="hero-overlay-purple absolute inset-0" role="presentation"></div>
+                <!-- Inscripción Content - Optimizada para móviles -->
+                <div class="hero-content flex items-center justify-center h-full w-full pt-0 xs:pt-0 sm:pt-4 z-10">
+                    <div class="max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 w-full">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 xs:gap-4 sm:gap-8 items-center">
+                            <!-- Contenido de texto simplificado para móviles -->
+                            <div class="text-white">
+                                <h2 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight">
+                                    <span class="block text-purple-200 text-glow-purple">Inscripciones</span>
+                                    <span class="block text-white">Abiertas</span>
+                                </h2>
+                                <p class="mt-2 xs:mt-3 sm:mt-6 text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl text-gray-100 max-w-lg">
+                                    No pierdas la oportunidad de formarte con los mejores. 
+                                    Las inscripciones ya están abiertas.
+                                </p>
+                                <!-- Tarjeta de fechas con mejor distribución para móviles -->
+                                <div class="mt-3 xs:mt-4 sm:mt-6 glass-card p-3 xs:p-4 sm:p-6 rounded-xl border border-purple-300 border-opacity-30">
+                                    <h3 class="text-base xs:text-lg sm:text-xl lg:text-2xl font-semibold text-purple-200 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 xs:h-5 xs:w-5 sm:h-6 sm:w-6 mr-1 xs:mr-1 sm:mr-2 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
-                                    </div>
-                                    <span>Inicio de clases: <strong>15 de mayo</strong></span>
-                                </li>
-                                <li class="flex items-center date-item">
-                                    <div class="date-icon-container">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="date-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                        </svg>
-                                    </div>
-                                    <span>Cierre de inscripciones: <strong>30 de abril</strong></span>
-                                </li>
-                                <li class="flex items-center date-item">
-                                    <div class="date-icon-container">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="date-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </div>
-                                    <span>Descuento por inscripción anticipada: <strong class="text-purple-200">hasta el 20 de abril</strong></span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="mt-10">
-                            <a routerLink="/Inscripcion" class="group inline-block px-8 py-3 btn-secondary font-medium rounded-full pulse-animation" aria-label="Inscríbete ahora">
-                                <span class="flex items-center">
-                                    Inscríbete ahora
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                    </svg>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Mini-slider con 3 imágenes - adaptado para Angular -->
-                    <div class="hidden md:block relative">
-                        <div class="mini-slider-container relative">
-                            <!-- Contenedor del carrusel -->
-                            <div class="mini-slider-wrapper overflow-hidden rounded-lg shadow-purple">
-                                <!-- Track del carrusel -->
-                                <div class="mini-slider-track flex transition-transform duration-300" id="miniSliderTrack">
-                                    <!-- Slide 1 -->
-                                    <div class="mini-slider-slide flex-shrink-0 w-full">
-                                        <img 
-                                            src="img/Slider2.avif" 
-                                            alt="Calendario de inscripciones para la Escuela Profesional de Dibujo" 
-                                            class="w-full h-auto object-cover" 
-                                            loading="lazy" 
-                                            width="600" 
-                                            height="400"
-                                        >
-                                    </div>
-                                    <!-- Slide 2 -->
-                                    <div class="mini-slider-slide flex-shrink-0 w-full">
-                                        <img 
-                                            src="img/Slider2b.avif" 
-                                            alt="Estudiantes en clase de dibujo" 
-                                            class="w-full h-auto object-cover" 
-                                            loading="lazy" 
-                                            width="600" 
-                                            height="400"
-                                        >
-                                    </div>
-                                    <!-- Slide 3 -->
-                                    <div class="mini-slider-slide flex-shrink-0 w-full">
-                                        <img 
-                                            src="img/Slider2c.avif" 
-                                            alt="Obras de arte de estudiantes" 
-                                            class="w-full h-auto object-cover" 
-                                            loading="lazy" 
-                                            width="600" 
-                                            height="400"
-                                        >
-                                    </div>
+                                        Próximas fechas:
+                                    </h3>
+                                    <ul class="mt-2 xs:mt-3 sm:mt-4 space-y-1.5 xs:space-y-2 sm:space-y-3">
+                                        <li class="flex items-center date-item">
+                                            <div class="date-icon-container">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="date-icon h-3.5 w-3.5 xs:h-4 xs:w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                </svg>
+                                            </div>
+                                            <span class="text-xs xs:text-sm sm:text-base lg:text-lg">Inicio: <strong>15 de mayo</strong></span>
+                                        </li>
+                                        <li class="flex items-center date-item">
+                                            <div class="date-icon-container">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="date-icon h-3.5 w-3.5 xs:h-4 xs:w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                </svg>
+                                            </div>
+                                            <span class="text-xs xs:text-sm sm:text-base lg:text-lg">Cierre: <strong>30 de abril</strong></span>
+                                        </li>
+                                        <li class="flex items-center date-item">
+                                            <div class="date-icon-container">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="date-icon h-3.5 w-3.5 xs:h-4 xs:w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </div>
+                                            <span class="text-xs xs:text-sm sm:text-base lg:text-lg">Descuento: <strong class="text-purple-200">hasta 20/abril</strong></span>
+                                        </li>
+                                    </ul>
                                 </div>
-                                
-                                <!-- Controles del mini-slider adaptados para Angular -->
-                                <button class="mini-slider-control left absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/20 hover:bg-white/40 rounded-full p-2 backdrop-blur-sm transition-all" aria-label="Imagen anterior">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                                    </svg>
-                                </button>
-                                <button class="mini-slider-control right absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/20 hover:bg-white/40 rounded-full p-2 backdrop-blur-sm transition-all" aria-label="Imagen siguiente">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </button>
-                                
-                                <!-- Indicadores de posición -->
-                                <div class="mini-slider-indicators absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                                    <button class="w-2 h-2 rounded-full bg-white/50 hover:bg-white/80 mini-slider-indicator active" aria-label="Imagen 1"></button>
-                                    <button class="w-2 h-2 rounded-full bg-white/50 hover:bg-white/80 mini-slider-indicator" aria-label="Imagen 2"></button>
-                                    <button class="w-2 h-2 rounded-full bg-white/50 hover:bg-white/80 mini-slider-indicator" aria-label="Imagen 3"></button>
+                                <!-- Botón con mejor área táctil -->
+                                <div class="mt-4 xs:mt-5 sm:mt-10">
+                                    <a href="https://epd.edu.mx/registro.html" target="_blank" class="group inline-block px-4 xs:px-5 sm:px-8 py-2.5 xs:py-2 sm:py-3 btn-secondary text-xs xs:text-sm sm:text-base lg:text-lg font-medium rounded-full pulse-animation touch-manipulation" aria-label="Inscríbete ahora">
+                                        <span class="flex items-center">
+                                            Inscríbete ahora
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 xs:h-4 xs:w-4 sm:h-5 sm:w-5 ml-1 xs:ml-1 sm:ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                            </svg>
+                                        </span>
+                                    </a>
                                 </div>
                             </div>
                             
-                            <!-- Elementos decorativos -->
-                            <div class="float-animation absolute -bottom-10 left-0" aria-hidden="true">
-                                <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="50" cy="50" r="40" stroke="rgba(139, 92, 246, 0.3)" stroke-width="2" stroke-dasharray="10 10" />
-                                </svg>
-                            </div>
-                            <div class="absolute top-10 right-10 purple-star-animation" aria-hidden="true">
-                                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="rgba(167, 139, 250, 0.5)" stroke-width="1" />
-                                </svg>
+                            <!-- Mini-slider optimizado para xs pero oculto en móviles muy pequeños -->
+                            <div class="hidden xs:block relative">
+                                <div #miniSliderContainer class="mini-slider-container relative">
+                                    <!-- Contenedor del carrusel -->
+                                    <div class="mini-slider-wrapper overflow-hidden rounded-lg shadow-purple">
+                                        <!-- Track del carrusel con will-change para mejor rendimiento -->
+                                        <div #miniSliderTrack class="mini-slider-track flex transition-transform duration-300 will-change-transform">
+                                            <!-- Slides con imágenes optimizadas -->
+                                            <div class="mini-slider-slide flex-shrink-0 w-full">
+                                                <img 
+                                                    src="img/Slider2.avif" 
+                                                    alt="Calendario de inscripciones" 
+                                                    class="w-full h-auto object-cover" 
+                                                    loading="lazy" 
+                                                    width="400"
+                                                    height="300"
+                                                >
+                                            </div>
+                                            <div class="mini-slider-slide flex-shrink-0 w-full">
+                                                <img 
+                                                    src="img/Slider2b.avif" 
+                                                    alt="Estudiantes en clase" 
+                                                    class="w-full h-auto object-cover" 
+                                                    loading="lazy" 
+                                                    width="400"
+                                                    height="300"
+                                                >
+                                            </div>
+                                            <div class="mini-slider-slide flex-shrink-0 w-full">
+                                                <img 
+                                                    src="img/Slider2c.avif" 
+                                                    alt="Obras de estudiantes" 
+                                                    class="w-full h-auto object-cover" 
+                                                    loading="lazy" 
+                                                    width="400"
+                                                    height="300"
+                                                >
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Controles del mini-slider con mejor área táctil -->
+                                        <button #miniPrev class="mini-slider-control left absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/20 hover:bg-white/40 rounded-full p-2 backdrop-blur-sm transition-all touch-manipulation" aria-label="Imagen anterior">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 xs:h-5 xs:w-5 sm:h-6 sm:w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                            </svg>
+                                        </button>
+                                        <button #miniNext class="mini-slider-control right absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/20 hover:bg-white/40 rounded-full p-2 backdrop-blur-sm transition-all touch-manipulation" aria-label="Imagen siguiente">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 xs:h-5 xs:w-5 sm:h-6 sm:w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </button>
+                                        
+                                        <!-- Indicadores más visibles -->
+                                        <div class="mini-slider-indicators absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                                            <button #miniSliderIndicator class="w-2 h-2 rounded-full bg-white mini-slider-indicator active touch-manipulation" aria-label="Imagen 1"></button>
+                                            <button #miniSliderIndicator class="w-2 h-2 rounded-full bg-white/50 mini-slider-indicator touch-manipulation" aria-label="Imagen 2"></button>
+                                            <button #miniSliderIndicator class="w-2 h-2 rounded-full bg-white/50 mini-slider-indicator touch-manipulation" aria-label="Imagen 3"></button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
-    </section>
-</div>
         
-
-<div class="slider-slide flex-shrink-0 w-full relative">
-    <section class="hero-section flex items-center justify-center h-full" aria-label="Presentación en Video">
-        <!-- Manteniendo el overlay original pero con el estilo de gradiente -->
-        <div class="hero-overlay-green bg-gradient-to-br from-gray-900/80 to-green-900/70" role="presentation"></div>
-        
-        <!-- Contenido Hero Optimizado y Mejorado -->
-        <div class="hero-content flex items-center justify-center h-full w-full pt-4">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <!-- Contenido de Texto Mejorado -->
-                    <div class="text-white">
-                        <div class="flex items-center mb-4">
-                            <img src="https://img.icons8.com/ios-filled/50/10B981/paint-palette.png" alt="Paleta de arte" class="h-10 w-10 mr-3" />
-                            <span class="text-sm uppercase tracking-wider text-green-200 font-semibold">Escuela de arte</span>
-                        </div>
-                        
-                        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
-                            <span class="block text-green-200">Conoce nuestra</span>
-                            <span class="block text-white">escuela en acción</span>
-                        </h1>
-                        
-                        <p class="mt-6 text-lg sm:text-xl text-white max-w-lg">
-                            Mira cómo nuestros estudiantes aplican las técnicas aprendidas y 
-                            desarrollan su talento artístico en un ambiente creativo y profesional.
-                        </p>
-                        
-                        <!-- Características destacadas con iconos -->
-                        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="flex items-start">
-                                <img src="https://img.icons8.com/ios-filled/50/FFFFFF/certificate.png" alt="Certificación" class="h-8 w-8 mr-3" />
-                                <div>
-                                    <h3 class="font-semibold text-green-200">Proyectos Reales</h3>
-                                    <p class="text-sm text-white">Aprende haciendo con proyectos del mundo profesional</p>
+        <!-- Slide 3: Presentación en Video (Mobile Enhanced) -->
+        <div class="slider-slide flex-shrink-0 w-full relative">
+            <section class="hero-section flex items-center justify-center h-full" aria-label="Presentación en Video">
+                <!-- Overlay con mejor contraste para móviles -->
+                <div class="hero-overlay-green bg-gradient-to-br from-gray-900/90 to-green-900/80 absolute inset-0" role="presentation"></div>
+                
+                <!-- Contenido Hero optimizado para móviles -->
+                <div class="hero-content flex items-center justify-center h-full w-full pt-1 xs:pt-2 sm:pt-4 z-10">
+                    <div class="max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 w-full">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 xs:gap-4 sm:gap-8 items-center">
+                            <!-- Contenido de texto simplificado para móviles -->
+                            <div class="text-white">
+                                <h1 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight">
+                                    <span class="block text-green-200">Conoce nuestra</span>
+                                    <span class="block text-white">escuela en acción</span>
+                                </h1>
+                                
+                                <p class="mt-2 xs:mt-3 sm:mt-6 text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl text-white max-w-lg">
+                                    Mira cómo nuestros estudiantes aplican las técnicas y 
+                                    desarrollan su talento artístico en un ambiente creativo.
+                                </p>
+                                
+                                <!-- Características con mejor espaciado para móviles -->
+                                <div class="mt-3 xs:mt-4 sm:mt-8 grid grid-cols-1 xs:grid-cols-2 gap-2 xs:gap-3 sm:gap-4">
+                                    <div class="flex items-start">
+                                        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/certificate.png" alt="Certificación" class="h-5 w-5 xs:h-6 xs:w-6 sm:h-8 sm:w-8 mr-2 xs:mr-2 sm:mr-3" loading="lazy" />
+                                        <div>
+                                            <h3 class="font-semibold text-green-200 text-xs xs:text-sm sm:text-base lg:text-lg">Proyectos Reales</h3>
+                                            <p class="text-xxs xs:text-xs sm:text-sm lg:text-base text-white">Proyectos del mundo profesional</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/teacher.png" alt="Profesores" class="h-5 w-5 xs:h-6 xs:w-6 sm:h-8 sm:w-8 mr-2 xs:mr-2 sm:mr-3" loading="lazy" />
+                                        <div>
+                                            <h3 class="font-semibold text-green-200 text-xs xs:text-sm sm:text-base lg:text-lg">Maestros Expertos</h3>
+                                            <p class="text-xxs xs:text-xs sm:text-sm lg:text-base text-white">Artistas profesionales</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Botones con mejor adaptación para móviles -->
+                                <div class="mt-4 xs:mt-5 sm:mt-10 flex flex-wrap gap-2 xs:gap-3 sm:gap-4">
+                                    <a routerLink="/Cursos/TalleresEspecializados" class="group inline-block px-4 xs:px-5 sm:px-8 py-2.5 xs:py-2 sm:py-3 bg-green-500 text-white text-xs xs:text-sm sm:text-base lg:text-lg font-medium rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 touch-manipulation" aria-label="Conoce nuestros programas">
+                                        <span class="flex items-center">
+                                            Conoce programas
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 xs:h-4 xs:w-4 sm:h-5 sm:w-5 ml-1 xs:ml-1 sm:ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                            </svg>
+                                        </span>
+                                    </a>
                                 </div>
                             </div>
-                            <div class="flex items-start">
-                                <img src="https://img.icons8.com/ios-filled/50/FFFFFF/teacher.png" alt="Profesores" class="h-8 w-8 mr-3" />
-                                <div>
-                                    <h3 class="font-semibold text-green-200">Maestros Expertos</h3>
-                                    <p class="text-sm text-white">Aprende con artistas profesionales en activo</p>
+                            
+                            <!-- Video container mejorado para móviles -->
+                            <div class="relative h-auto mt-3 xs:mt-4 md:mt-0 md:h-full flex items-center">
+                                <div class="video-container w-full aspect-video rounded-lg overflow-hidden shadow-xl border-2 border-green-500 border-opacity-30">
+                                    <!-- Video iframe con loading lazy y mejor rendimiento -->
+                                    <iframe 
+                                        title="vimeo-player" 
+                                        src="https://player.vimeo.com/video/1062941240?h=978d473391&autoplay=1&loop=1&muted=1&background=1&quality=540p" 
+                                        width="100%" 
+                                        height="100%" 
+                                        frameborder="0" 
+                                        allowfullscreen 
+                                        loading="lazy" 
+                                        class="object-cover w-full h-full"
+                                    ></iframe>
+                                </div>
+                                
+                                <!-- Elementos decorativos visibles solo en pantallas más grandes -->
+                                <div class="hidden sm:block absolute -top-10 -right-10" aria-hidden="true">
+                                    <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="50" cy="50" r="40" stroke="rgba(16, 185, 129, 0.3)" stroke-width="2" stroke-dasharray="10 10" />
+                                    </svg>
+                                </div>
+                                
+                                <!-- Insignia adaptativa con mejor legibilidad -->
+                                <div class="absolute top-1 right-1 xs:top-2 xs:right-2 sm:top-4 sm:right-4 bg-black bg-opacity-70 backdrop-filter backdrop-blur-sm px-2 py-1 xs:px-2 xs:py-1 sm:px-3 sm:py-1 rounded-full">
+                                    <span class="text-green-300 text-xxs xs:text-xs sm:text-sm lg:text-base font-medium">Formación premium</span>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="mt-10 flex flex-wrap gap-4">
-                            <a href="#" class="group inline-block px-8 py-3 bg-green-500 text-white font-medium rounded-full shadow-lg hover:bg-green-600 transition-all duration-300" aria-label="Conoce nuestros programas">
-                                <span class="flex items-center">
-                                    Conoce nuestros programas
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                    </svg>
-                                </span>
-                            </a>
-                            <a href="#" class="group inline-block px-8 py-3 border-2 border-green-400 text-white font-medium rounded-full hover:bg-green-400 hover:text-gray-900 transition-colors duration-300" aria-label="Ver demostración">
-                                <span class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                    Ver demostración
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Contenedor de video con elementos mejorados -->
-                    <div class="relative h-full flex items-center">
-                        <div class="video-container w-full aspect-video rounded-lg overflow-hidden shadow-xl border-2 border-green-500 border-opacity-30">
-                            <!-- El iframe se mantiene exactamente igual -->
-                            <iframe 
-                                title="vimeo-player" 
-                                src="https://player.vimeo.com/video/1062941240?h=978d473391&autoplay=1&loop=1&muted=1&background=1" 
-                                width="100%" 
-                                height="100%" 
-                                frameborder="0" 
-                                allowfullscreen 
-                                loading="lazy" 
-                                class="object-cover w-full h-full"
-                            ></iframe>
-                        </div>
-                        
-                        <!-- Elementos decorativos mejorados -->
-                        <div class="absolute -top-10 -right-10" aria-hidden="true">
-                            <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="50" cy="50" r="40" stroke="rgba(16, 185, 129, 0.3)" stroke-width="2" stroke-dasharray="10 10" />
-                            </svg>
-                        </div>
-                        <div class="absolute -bottom-6 -left-6 z-10" aria-hidden="true">
-                            <svg width="100" height="40" viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2,20 C20,5 50,35 98,15" stroke="rgba(16, 185, 129, 0.6)" stroke-width="4" fill="none" stroke-linecap="round" />
-                            </svg>
-                        </div>
-                        
-                        <!-- Insignia de calidad -->
-                        <div class="absolute top-4 right-4 bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-3 py-1 rounded-full">
-                            <span class="text-green-300 text-xs font-medium">Formación premium</span>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
-    </section>
-</div>
     </div>
 </section>

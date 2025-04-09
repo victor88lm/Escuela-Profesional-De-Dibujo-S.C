@@ -1,15 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, NgZone, Renderer2 } from '@angular/core';
-
-interface OrbitalParticle {
-  size: 'small' | 'medium' | 'large';
-  orbit: number;
-  angle: number;
-  speed: number;
-  direction: 'normal' | 'reverse';
-  color: 'teal' | 'blue';
-}
-
-
+import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, NgZone, Renderer2, HostListener, ViewChild, ViewChildren, QueryList } from '@angular/core';
 
 @Component({
   selector: 'app-slider',
@@ -17,21 +6,52 @@ interface OrbitalParticle {
   styleUrls: ['./slider.component.css']
 })
 export class sliderComponent implements OnInit, OnDestroy, AfterViewInit {
+  
+  // Main slider properties
   currentSlide: number = 0;
   totalSlides: number = 3;
-  autoSlideInterval: any;
+  autoSlideInterval: any = null;
   isVisible: boolean = true;
   observer: IntersectionObserver | null = null;
   
+  // ViewChild references
+  @ViewChild('sliderWrapper') sliderWrapperRef!: ElementRef<HTMLElement>;
+  @ViewChild('sliderContainer') sliderContainerRef!: ElementRef<HTMLElement>;
+  @ViewChild('navPrev') navPrevRef!: ElementRef<HTMLElement>;
+  @ViewChild('navNext') navNextRef!: ElementRef<HTMLElement>;
+  @ViewChildren('sliderDot') sliderDots!: QueryList<ElementRef<HTMLElement>>;
+  
+  // Mini slider references
+  @ViewChild('miniSliderContainer') miniSliderContainerRef!: ElementRef<HTMLElement>;
+  @ViewChild('miniSliderTrack') miniSliderTrackRef!: ElementRef<HTMLElement>;
+  @ViewChild('miniPrev') miniPrevRef!: ElementRef<HTMLElement>;
+  @ViewChild('miniNext') miniNextRef!: ElementRef<HTMLElement>;
+  @ViewChildren('miniSliderIndicator') miniSliderIndicators!: QueryList<ElementRef<HTMLElement>>;
+  
+  // Cached DOM elements
+  private sliderWrapper: HTMLElement | null = null;
+  private sliderContainer: HTMLElement | null = null;
+  private miniSliderTrack: HTMLElement | null = null;
+  
   // Touch handling variables
+  isSwiping: boolean = false;
   touchStartX: number = 0;
   touchEndX: number = 0;
-  minSwipeDistance: number = 50;
-
+  touchStartY: number = 0;
+  touchEndY: number = 0;
+  minSwipeDistance: number = 30; 
+  swipeThreshold: number = 0.3;
+  swipeProgress: number = 0;
+  touchDelta: number = 0;
+  containerWidth: number = 0;
+  
+  // Mini slider properties
   currentMiniSlide: number = 0;
   totalMiniSlides: number = 3;
-  miniSliderInterval: any;
+  miniSliderInterval: any = null;
   
+  // Event listener cleanup functions
+  private cleanupFunctions: (() => void)[] = [];
   
   constructor(
     private el: ElementRef,
@@ -39,295 +59,357 @@ export class sliderComponent implements OnInit, OnDestroy, AfterViewInit {
     private renderer: Renderer2
   ) {}
 
-
   ngOnInit(): void {
-    // Set up the slider
-    this.setupSlider();
-    
-    // Setup visibility observer
+    // Set up the visibility observer
     this.setupVisibilityObserver();
-    
-    // Add event listeners for the dots
-    this.setupDotControls();
-
-    this.setupMiniSlider();
-
   }
   
   ngAfterViewInit(): void {
-    // Set up navigation arrows
-    this.setupNavArrows();
+    // Cache DOM elements after view is initialized
+    this.cacheElements();
     
-    // Set up play button functionality
-    this.setupPlayButton();
-    
-    // Set up touch events for mobile swipe
-    this.setupTouchEvents();
-
-    this.createOrbitalParticles();
-    this.setupMiniSliderControls();
-
-
-  }
-
-  private createOrbitalParticles(): void {
-    const container = this.el.nativeElement.querySelector('#orbital-particles');
-    if (!container) return;
-    
+    // Run outside Angular zone for better performance
     this.ngZone.runOutsideAngular(() => {
-      // Crear partículas para cada órbita
-      const particleCounts = {
-        inner: 8,   // Órbita interna (150px)
-        middle: 12, // Órbita media (200px)
-        outer: 15   // Órbita externa (250px)
-      };
+      // Set up the sliders
+      this.setupSlider();
+      this.setupMiniSlider();
       
-      // Generar partículas para cada órbita
-      this.generateOrbitalParticles(container, particleCounts.inner, 150);
-      this.generateOrbitalParticles(container, particleCounts.middle, 200);
-      this.generateOrbitalParticles(container, particleCounts.outer, 250);
+      // Add all event listeners
+      this.setupAllEventListeners();
+      
+      // Start auto-slides if visible
+      if (this.isVisible) {
+        this.startAutoSlide();
+        this.startMiniSliderAutoSlide();
+      }
     });
   }
-  
-  private generateOrbitalParticles(container: HTMLElement, count: number, radius: number): void {
-    for (let i = 0; i < count; i++) {
-      // Distribuir partículas uniformemente en la órbita
-      const angle = (i / count) * 360;
-      
-      // Calcular parámetros de la partícula
-      const particle = this.generateParticleConfig(angle, radius);
-      
-      // Crear y añadir la partícula
-      this.createOrbitalParticleElement(container, particle);
-    }
-  }
-  
-  private generateParticleConfig(angle: number, orbitRadius: number): OrbitalParticle {
-    // Determinar tamaño de la partícula
-    const sizeRandom = Math.random();
-    let size: 'small' | 'medium' | 'large';
-    
-    if (sizeRandom < 0.3) {
-      size = 'small';
-    } else if (sizeRandom < 0.7) {
-      size = 'medium';
-    } else {
-      size = 'large';
-    }
-    
-    // Determinar velocidad y dirección
-    const speed = 15 + Math.random() * 20; // Entre 15 y 35 segundos por vuelta
-    const direction = Math.random() > 0.5 ? 'normal' : 'reverse';
-    
-    // Determinar color
-    const color = Math.random() > 0.5 ? 'teal' : 'blue';
-    
-    return {
-      size,
-      orbit: orbitRadius,
-      angle,
-      speed,
-      direction,
-      color
-    };
-  }
-  
-  private createOrbitalParticleElement(container: HTMLElement, particle: OrbitalParticle): void {
-    const particleElement = this.renderer.createElement('div');
-    
-    // Aplicar clases
-    this.renderer.addClass(particleElement, 'orbital-particle');
-    this.renderer.addClass(particleElement, particle.size);
-    this.renderer.addClass(particleElement, particle.color);
-    
-    // Calcular posición central
-    const centerX = '50%';
-    const centerY = '50%';
-    
-    // Establecer propiedades de posición
-    this.renderer.setStyle(particleElement, 'left', centerX);
-    this.renderer.setStyle(particleElement, 'top', centerY);
-    this.renderer.setStyle(particleElement, '--orbit-radius', `${particle.orbit}px`);
-    
-    // Aplicar animación orbital
-    const orbitAnimation = particle.direction === 'normal' 
-      ? `orbit ${particle.speed}s linear infinite`
-      : `orbit-reverse ${particle.speed}s linear infinite`;
-    
-    // Añadir animación de pulso
-    const pulseAnimation = `pulse 2s ease-in-out infinite`;
-    
-    // Aplicar animaciones
-    this.renderer.setStyle(particleElement, 'animation', `${orbitAnimation}, ${pulseAnimation}`);
-    
-    // Retraso inicial basado en ángulo
-    const initialDelay = (particle.angle / 360) * particle.speed;
-    this.renderer.setStyle(particleElement, 'animation-delay', `-${initialDelay}s, 0s`);
-    
-    // Añadir al contenedor
-    this.renderer.appendChild(container, particleElement);
+
+  @HostListener('window:resize')
+  onResize(): void {
+    // Update container width on resize
+    this.updateContainerWidth();
+    this.updateSwipeThreshold();
   }
   
   ngOnDestroy(): void {
-    // Clean up the interval when component is destroyed
+    // Clean up all resources
     this.stopAutoSlide();
-    
     this.stopMiniSliderAutoSlide();
-
-
-    // Remove touch event listeners
-    this.removeTouchEvents();
     
-    // Disconnect the observer when component is destroyed
+    // Clean up all event listeners
+    this.cleanupAllEventListeners();
+    
+    // Disconnect observer
     if (this.observer) {
       this.observer.disconnect();
+      this.observer = null;
     }
   }
   
-  setupVisibilityObserver(): void {
-    const sliderContainer = document.querySelector('.slider-container');
+  private cacheElements(): void {
+    // Cache main slider elements
+    this.sliderWrapper = this.sliderWrapperRef?.nativeElement || null;
+    this.sliderContainer = this.sliderContainerRef?.nativeElement || null;
     
-    if (!sliderContainer) return;
+    // Cache mini slider elements
+    this.miniSliderTrack = this.miniSliderTrackRef?.nativeElement || null;
+    
+    // Get container width for calculations
+    this.updateContainerWidth();
+  }
+  
+  private updateContainerWidth(): void {
+    if (this.sliderContainer) {
+      this.containerWidth = this.sliderContainer.clientWidth || 0;
+    }
+  }
+  
+  private updateSwipeThreshold(): void {
+    // Adjust swipe threshold based on container width
+    this.swipeThreshold = this.containerWidth * 0.3; // 30% of container width
+  }
+  
+  private cleanupAllEventListeners(): void {
+    // Execute all cleanup functions
+    this.cleanupFunctions.forEach(cleanup => cleanup());
+    this.cleanupFunctions = [];
+  }
+  
+  setupVisibilityObserver(): void {
+    if (!this.sliderContainerRef?.nativeElement) return;
     
     // Create new IntersectionObserver
     this.observer = new IntersectionObserver((entries) => {
-      // We're only observing one element, so we can use entries[0]
       const entry = entries[0];
       
       // Update visibility status
       this.isVisible = entry.isIntersecting;
       
-      // Start or stop auto-slide based on visibility
-      if (this.isVisible) {
-        this.startAutoSlide();
-      } else {
-        this.stopAutoSlide();
-      }
+      // Run these operations inside Angular zone to ensure change detection
+      this.ngZone.run(() => {
+        // Start or stop auto-slide based on visibility
+        if (this.isVisible) {
+          this.startAutoSlide();
+          this.startMiniSliderAutoSlide();
+        } else {
+          this.stopAutoSlide();
+          this.stopMiniSliderAutoSlide();
+        }
+      });
     }, {
       // Consider element visible when at least 20% is in viewport
       threshold: 0.2
     });
     
     // Start observing the slider container
-    this.observer.observe(sliderContainer);
+    this.observer.observe(this.sliderContainerRef.nativeElement);
   }
   
   setupSlider(): void {
-    // Get slider wrapper
-    const sliderWrapper = document.querySelector('.slider-wrapper') as HTMLElement;
+    if (!this.sliderWrapper) return;
     
     // Set initial position
     this.updateSliderPosition();
+    
+    // Initialize swipe threshold
+    this.updateSwipeThreshold();
+  }
+  
+  setupAllEventListeners(): void {
+    this.setupDotControls();
+    this.setupNavArrows();
+    this.setupTouchEvents();
+    this.setupMiniSliderControls();
   }
   
   setupDotControls(): void {
-    const dots = document.querySelectorAll('.slider-dot');
-    
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        this.goToSlide(index);
+    if (!this.sliderDots) return;
+
+    this.sliderDots.forEach((dotRef, index) => {
+      const dot = dotRef.nativeElement;
+      const listener = (event: Event) => {
+        event.preventDefault();
+        
+        // Run inside Angular zone to ensure change detection
+        this.ngZone.run(() => {
+          this.goToSlide(index);
+        });
+      };
+      
+      dot.addEventListener('click', listener);
+      
+      // Store cleanup function
+      this.cleanupFunctions.push(() => {
+        dot.removeEventListener('click', listener);
       });
     });
   }
   
   setupNavArrows(): void {
-    const prevButton = document.querySelector('.nav-prev');
-    const nextButton = document.querySelector('.nav-next');
-    
-    if (prevButton) {
-      prevButton.addEventListener('click', () => {
-        this.prevSlide();
-      });
-    }
-    
-    if (nextButton) {
-      nextButton.addEventListener('click', () => {
-        this.nextSlide();
-      });
-    }
-  }
-  
-  setupPlayButton(): void {
-    const playButton = document.querySelector('.play-button');
-    
-    if (playButton) {
-      playButton.addEventListener('click', () => {
-        const videoThumbnail = playButton.parentElement;
-        const videoElement = videoThumbnail?.querySelector('.video-element') as HTMLVideoElement;
+    // Setup previous button
+    if (this.navPrevRef?.nativeElement) {
+      const prevButton = this.navPrevRef.nativeElement;
+      const prevListener = (event: Event) => {
+        event.preventDefault();
         
-        if (videoElement) {
-          // Hide thumbnail and play button, show video
-          playButton.classList.add('hidden');
-          videoElement.classList.remove('hidden');
-          
-          // Start playing the video
-          videoElement.play();
-        }
+        this.ngZone.run(() => {
+          this.prevSlide();
+        });
+      };
+      
+      prevButton.addEventListener('click', prevListener);
+      this.cleanupFunctions.push(() => {
+        prevButton.removeEventListener('click', prevListener);
+      });
+    }
+    
+    // Setup next button
+    if (this.navNextRef?.nativeElement) {
+      const nextButton = this.navNextRef.nativeElement;
+      const nextListener = (event: Event) => {
+        event.preventDefault();
+        
+        this.ngZone.run(() => {
+          this.nextSlide();
+        });
+      };
+      
+      nextButton.addEventListener('click', nextListener);
+      this.cleanupFunctions.push(() => {
+        nextButton.removeEventListener('click', nextListener);
       });
     }
   }
   
   setupTouchEvents(): void {
-    const sliderElement = document.querySelector('.slider-container');
+    if (!this.sliderContainer) return;
     
-    if (sliderElement) {
-      // Touch start event
-      sliderElement.addEventListener('touchstart', (e: Event) => {
-        const touchEvent = e as TouchEvent;
-        this.touchStartX = touchEvent.changedTouches[0].screenX;
-      }, { passive: true });
-      
-      // Touch end event
-      sliderElement.addEventListener('touchend', (e) => {
-        const touchEvent = e as TouchEvent;
-        this.touchEndX = touchEvent.changedTouches[0].screenX;
-        this.handleSwipe();
-      }, { passive: true });
-    }
+    // Touch start event
+    const touchStartListener = this.handleTouchStart.bind(this);
+    this.sliderContainer.addEventListener('touchstart', touchStartListener, { passive: true });
+    
+    // Touch move event
+    const touchMoveListener = this.handleTouchMove.bind(this);
+    this.sliderContainer.addEventListener('touchmove', touchMoveListener, { passive: false });
+    
+    // Touch end event
+    const touchEndListener = this.handleTouchEnd.bind(this);
+    this.sliderContainer.addEventListener('touchend', touchEndListener, { passive: true });
+    
+    // Scroll event
+    const scrollListener = () => {
+      if (this.isSwiping) {
+        this.isSwiping = false;
+        this.resetSliderPosition();
+      }
+    };
+    
+    document.addEventListener('scroll', scrollListener, { passive: true });
+    
+    // Store cleanup functions
+    this.cleanupFunctions.push(() => {
+      if (this.sliderContainer) {
+        this.sliderContainer.removeEventListener('touchstart', touchStartListener);
+        this.sliderContainer.removeEventListener('touchmove', touchMoveListener);
+        this.sliderContainer.removeEventListener('touchend', touchEndListener);
+      }
+      document.removeEventListener('scroll', scrollListener);
+    });
   }
   
-  removeTouchEvents(): void {
-    const sliderElement = document.querySelector('.slider-container');
-    
-    if (sliderElement) {
-      sliderElement.removeEventListener('touchstart', () => {});
-      sliderElement.removeEventListener('touchend', () => {});
-    }
-  }
-  
-  handleSwipe(): void {
-    // Only handle swipe if the slider is visible
+  handleTouchStart(e: TouchEvent): void {
+    // Only handle if slider is visible
     if (!this.isVisible) return;
     
-    // Calculate swipe distance
+    // Capture initial touch position
+    this.touchStartX = e.touches[0].clientX;
+    this.touchStartY = e.touches[0].clientY;
+    this.touchDelta = 0;
+    
+    // Start swipe state
+    this.isSwiping = true;
+    
+    // Stop auto-rotation during manual interaction
+    this.ngZone.run(() => {
+      this.stopAutoSlide();
+    });
+  }
+  
+  handleTouchMove(e: TouchEvent): void {
+    if (!this.isSwiping || !this.isVisible || !this.sliderWrapper) return;
+    
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    
+    // Calculate differences in X and Y
+    const diffX = currentX - this.touchStartX;
+    const diffY = currentY - this.touchStartY;
+    
+    // If vertical movement is greater than horizontal, it's probably a scroll
+    if (Math.abs(diffY) > Math.abs(diffX) * 1.5) {
+      this.isSwiping = false;
+      this.resetSliderPosition();
+      return;
+    }
+    
+    // Prevent scroll during horizontal swipe
+    e.preventDefault();
+    
+    // Update delta for tracking
+    this.touchDelta = diffX;
+    
+    // Calculate swipe progress (0 to 1)
+    this.swipeProgress = this.touchDelta / this.containerWidth;
+    
+    // Base percentage of current position
+    const slideOffset = -this.currentSlide * 100;
+    // Drag offset in percentage
+    const dragOffset = (this.touchDelta / this.containerWidth) * 100;
+    
+    // Apply resistance at edges
+    let finalOffset = slideOffset + dragOffset;
+    if ((this.currentSlide === 0 && dragOffset > 0) || 
+        (this.currentSlide === this.totalSlides - 1 && dragOffset < 0)) {
+      finalOffset = slideOffset + (dragOffset * 0.3); // 30% resistance
+    }
+    
+    // Apply transform with hardware acceleration
+    this.renderer.setStyle(
+      this.sliderWrapper, 
+      'transform', 
+      `translate3d(${finalOffset}%, 0, 0)`
+    );
+  }
+  
+  handleTouchEnd(e: TouchEvent): void {
+    if (!this.isSwiping || !this.isVisible) return;
+    
+    this.touchEndX = e.changedTouches[0].clientX;
+    this.touchEndY = e.changedTouches[0].clientY;
+    
+    // Calculate final swipe distance
     const swipeDistance = this.touchEndX - this.touchStartX;
     
-    // Reset auto-slide timer when manually swiping
-    this.stopAutoSlide();
-    
-    // Determine swipe direction if distance is greater than minimum
+    // Decide whether to change slide or return to original position
     if (Math.abs(swipeDistance) > this.minSwipeDistance) {
-      if (swipeDistance > 0) {
-        // Swiped right - go to previous slide
-        this.prevSlide();
+      // If swipe is greater than 15% of width, or is fast (minimum distance), change slide
+      if (Math.abs(swipeDistance) > this.containerWidth * 0.15) {
+        this.ngZone.run(() => {
+          if (swipeDistance > 0) {
+            this.prevSlide();
+          } else {
+            this.nextSlide();
+          }
+        });
       } else {
-        // Swiped left - go to next slide
-        this.nextSlide();
+        // Return to original position with animation
+        this.resetSliderPosition();
       }
+    } else {
+      // Insufficient swipe, return to original position
+      this.resetSliderPosition();
     }
     
-    // Restart auto-slide only if the slider is visible
+    // End swipe state
+    this.isSwiping = false;
+    this.touchDelta = 0;
+    
+    // Restart auto-rotation if slider is visible
     if (this.isVisible) {
-      this.startAutoSlide();
+      this.ngZone.run(() => {
+        this.startAutoSlide();
+      });
     }
+  }
+  
+  resetSliderPosition(): void {
+    if (!this.sliderWrapper) return;
+    
+    // Apply animation back to original position
+    this.renderer.setStyle(this.sliderWrapper, 'transition', 'transform 300ms ease-out');
+    this.renderer.setStyle(
+      this.sliderWrapper, 
+      'transform', 
+      `translate3d(-${this.currentSlide * 100}%, 0, 0)`
+    );
+    
+    // Restore original transition after animation
+    setTimeout(() => {
+      if (this.sliderWrapper) {
+        this.renderer.setStyle(this.sliderWrapper, 'transition', 'transform 500ms ease-in-out');
+      }
+    }, 300);
   }
   
   startAutoSlide(): void {
     // Only start auto-slide if slider is visible and no interval is already running
     if (this.isVisible && !this.autoSlideInterval) {
-      // Auto-slide every 10 seconds (as in your updated code)
+      // Auto-slide every 15 seconds
       this.autoSlideInterval = setInterval(() => {
-        this.nextSlide();
+        this.ngZone.run(() => {
+          this.nextSlide();
+        });
       }, 15000);
     }
   }
@@ -340,23 +422,33 @@ export class sliderComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   
   updateSliderPosition(): void {
-    const sliderWrapper = document.querySelector('.slider-wrapper') as HTMLElement;
-    if (sliderWrapper) {
-      sliderWrapper.style.transform = `translateX(-${this.currentSlide * 100}%)`;
-    }
+    if (!this.sliderWrapper) return;
+    
+    // Use translate3d for hardware acceleration
+    this.renderer.setStyle(
+      this.sliderWrapper, 
+      'transform', 
+      `translate3d(-${this.currentSlide * 100}%, 0, 0)`
+    );
     
     // Update the active dot
     this.updateActiveDot();
   }
   
   updateActiveDot(): void {
-    const dots = document.querySelectorAll('.slider-dot');
+    if (!this.sliderDots) return;
     
-    dots.forEach((dot, index) => {
+    this.sliderDots.forEach((dotRef, index) => {
+      const dot = dotRef.nativeElement;
+      
       if (index === this.currentSlide) {
-        dot.classList.add('active');
+        this.renderer.addClass(dot, 'active');
+        this.renderer.removeClass(dot, 'bg-white/50');
+        this.renderer.addClass(dot, 'bg-white');
       } else {
-        dot.classList.remove('active');
+        this.renderer.removeClass(dot, 'active');
+        this.renderer.removeClass(dot, 'bg-white');
+        this.renderer.addClass(dot, 'bg-white/50');
       }
     });
   }
@@ -391,57 +483,114 @@ export class sliderComponent implements OnInit, OnDestroy, AfterViewInit {
     this.updateSliderPosition();
   }
 
+  // Mini-slider functionality
   setupMiniSlider(): void {
-    // Iniciar auto-rotación del mini-slider
-    this.startMiniSliderAutoSlide();
+    if (!this.miniSliderTrack) return;
+    
+    // Set initial position
+    this.updateMiniSliderPosition();
   }
   
   setupMiniSliderControls(): void {
-    // Configurar los botones de navegación del mini-slider
-    const prevButton = document.querySelector('.mini-slider-control.left');
-    const nextButton = document.querySelector('.mini-slider-control.right');
-    
-    if (prevButton) {
-      prevButton.addEventListener('click', () => {
-        this.prevMiniSlide();
-      });
-    }
-    
-    if (nextButton) {
-      nextButton.addEventListener('click', () => {
-        this.nextMiniSlide();
-      });
-    }
-    
-    // Configurar los indicadores de posición
-    const indicators = document.querySelectorAll('.mini-slider-indicator');
-    
-    indicators.forEach((indicator, index) => {
-      indicator.addEventListener('click', () => {
-        this.goToMiniSlide(index);
-      });
-    });
-    
-    // Pausar auto-rotación al pasar el ratón por encima
-    const miniSliderContainer = document.querySelector('.mini-slider-container');
-    
-    if (miniSliderContainer) {
-      miniSliderContainer.addEventListener('mouseenter', () => {
-        this.stopMiniSliderAutoSlide();
-      });
+    // Setup previous button for mini-slider
+    if (this.miniPrevRef?.nativeElement) {
+      const miniPrevButton = this.miniPrevRef.nativeElement;
+      const miniPrevListener = (event: Event) => {
+        event.preventDefault();
+        
+        this.ngZone.run(() => {
+          this.prevMiniSlide();
+        });
+      };
       
-      miniSliderContainer.addEventListener('mouseleave', () => {
+      miniPrevButton.addEventListener('click', miniPrevListener);
+      this.cleanupFunctions.push(() => {
+        miniPrevButton.removeEventListener('click', miniPrevListener);
+      });
+    }
+    
+    // Setup next button for mini-slider
+    if (this.miniNextRef?.nativeElement) {
+      const miniNextButton = this.miniNextRef.nativeElement;
+      const miniNextListener = (event: Event) => {
+        event.preventDefault();
+        
+        this.ngZone.run(() => {
+          this.nextMiniSlide();
+        });
+      };
+      
+      miniNextButton.addEventListener('click', miniNextListener);
+      this.cleanupFunctions.push(() => {
+        miniNextButton.removeEventListener('click', miniNextListener);
+      });
+    }
+    
+    // Setup indicators for mini-slider
+    if (this.miniSliderIndicators) {
+      this.miniSliderIndicators.forEach((indicatorRef, index) => {
+        const indicator = indicatorRef.nativeElement;
+        const indicatorListener = (event: Event) => {
+          event.preventDefault();
+          
+          this.ngZone.run(() => {
+            this.goToMiniSlide(index);
+          });
+        };
+        
+        indicator.addEventListener('click', indicatorListener);
+        this.cleanupFunctions.push(() => {
+          indicator.removeEventListener('click', indicatorListener);
+        });
+      });
+    }
+    
+    // Setup mouse/touch events on mini-slider container
+    if (this.miniSliderContainerRef?.nativeElement) {
+      const miniContainer = this.miniSliderContainerRef.nativeElement;
+      
+      // Mouse enter - stop auto-rotation
+      const mouseEnterListener = () => {
+        this.stopMiniSliderAutoSlide();
+      };
+      miniContainer.addEventListener('mouseenter', mouseEnterListener);
+      
+      // Mouse leave - resume auto-rotation
+      const mouseLeaveListener = () => {
         this.startMiniSliderAutoSlide();
+      };
+      miniContainer.addEventListener('mouseleave', mouseLeaveListener);
+      
+      // Touch start - stop auto-rotation
+      const touchStartListener = () => {
+        this.stopMiniSliderAutoSlide();
+      };
+      miniContainer.addEventListener('touchstart', touchStartListener, { passive: true });
+      
+      // Touch end - resume auto-rotation
+      const touchEndListener = () => {
+        this.startMiniSliderAutoSlide();
+      };
+      miniContainer.addEventListener('touchend', touchEndListener, { passive: true });
+      
+      // Store cleanup functions
+      this.cleanupFunctions.push(() => {
+        miniContainer.removeEventListener('mouseenter', mouseEnterListener);
+        miniContainer.removeEventListener('mouseleave', mouseLeaveListener);
+        miniContainer.removeEventListener('touchstart', touchStartListener);
+        miniContainer.removeEventListener('touchend', touchEndListener);
       });
     }
   }
   
   startMiniSliderAutoSlide(): void {
-    // Solo iniciar auto-rotación si no hay un intervalo ya en ejecución
+    // Only start auto-rotation if no interval is already running
     if (!this.miniSliderInterval) {
       this.miniSliderInterval = setInterval(() => {
-        this.nextMiniSlide();
-      }, 5000); // Rotar cada 5 segundos
+        this.ngZone.run(() => {
+          this.nextMiniSlide();
+        });
+      }, 5000); // Rotate every 5 seconds
     }
   }
   
@@ -453,13 +602,13 @@ export class sliderComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   
   goToMiniSlide(index: number): void {
-    // Reiniciar el intervalo cuando se hace clic manualmente
+    // Reset interval when clicked manually
     this.stopMiniSliderAutoSlide();
     
     this.currentMiniSlide = index;
     this.updateMiniSliderPosition();
     
-    // Reiniciar auto-rotación
+    // Restart auto-rotation
     this.startMiniSliderAutoSlide();
   }
   
@@ -474,15 +623,25 @@ export class sliderComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   
   updateMiniSliderPosition(): void {
-    // Actualizar la posición del track
-    const track = document.getElementById('miniSliderTrack');
-    if (track) {
-      this.renderer.setStyle(track, 'transform', `translateX(-${this.currentMiniSlide * 100}%)`);
-    }
+    if (!this.miniSliderTrack) return;
     
-    // Actualizar indicadores
-    const indicators = document.querySelectorAll('.mini-slider-indicator');
-    indicators.forEach((indicator, index) => {
+    // Use translate3d for hardware acceleration
+    this.renderer.setStyle(
+      this.miniSliderTrack, 
+      'transform', 
+      `translate3d(-${this.currentMiniSlide * 100}%, 0, 0)`
+    );
+    
+    // Update indicators
+    this.updateMiniSliderIndicators();
+  }
+  
+  updateMiniSliderIndicators(): void {
+    if (!this.miniSliderIndicators) return;
+    
+    this.miniSliderIndicators.forEach((indicatorRef, index) => {
+      const indicator = indicatorRef.nativeElement;
+      
       if (index === this.currentMiniSlide) {
         this.renderer.addClass(indicator, 'active');
         this.renderer.addClass(indicator, 'bg-white');

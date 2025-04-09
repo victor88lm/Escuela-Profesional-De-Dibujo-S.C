@@ -2,7 +2,7 @@
 <nav class="fixed w-full z-50 py-2 navbar-transparent" aria-label="Menú principal">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20">
-      <!-- Logo (lado izquierdo) -->
+      <!-- Logo -->
       <div class="flex-shrink-0 logo-container">
         <a href="#" class="flex items-center" aria-label="Página de inicio">
           <img 
@@ -16,42 +16,51 @@
         </a>
       </div>
       
-      <!-- Menú centrado (escritorio) -->
+      <!-- Desktop Menu - Grouped in categories -->
       <div class="hidden md:flex md:items-center md:justify-center flex-1 -mx-8">
-        <div class="flex space-x-12">
+        <div class="flex space-x-8">
+          <!-- Main navigation -->
           <a routerLink="" class="nav-link text-white font-medium animate__animated animate__fadeIn" style="animation-delay: 0.1s;">Inicio</a>
           <a routerLink="/Nosotros" class="nav-link text-gray-300 hover:text-white font-medium animate__animated animate__fadeIn" style="animation-delay: 0.2s;">Nosotros</a>
-          <a routerLink="/Cursos" class="nav-link text-gray-300 hover:text-white font-medium animate__animated animate__fadeIn" style="animation-delay: 0.3s;">Cursos</a>
-          <a routerLink="/Galeria" class="nav-link text-gray-300 hover:text-white font-medium animate__animated animate__fadeIn" style="animation-delay: 0.5s;">Galeria</a>
-          <a routerLink="/Planteles" class="nav-link text-gray-300 hover:text-white font-medium animate__animated animate__fadeIn" style="animation-delay: 0.5s;">Planteles</a>
-          <a routerLink="/Preguntas Frecuentes" class="nav-link text-gray-300 hover:text-white font-medium animate__animated animate__fadeIn" style="animation-delay: 0.5s;">FAQ</a>
+          
+          <!-- Course related -->
+          <div class="relative group">
+            <a routerLink="/Cursos" class="nav-link text-gray-300 hover:text-white font-medium animate__animated animate__fadeIn group-hover:text-white" style="animation-delay: 0.3s;">Cursos</a>
+            <a routerLink="/Galeria" class="nav-link text-gray-300 hover:text-white font-medium animate__animated animate__fadeIn ml-8" style="animation-delay: 0.4s;">Galeria</a>
+          </div>
+          
+          <!-- Information -->
+          <div class="relative group">
+            <a routerLink="/Planteles" class="nav-link text-gray-300 hover:text-white font-medium animate__animated animate__fadeIn" style="animation-delay: 0.5s;">Planteles</a>
+            <a routerLink="/PreguntasFrecuentes" class="nav-link text-gray-300 hover:text-white font-medium animate__animated animate__fadeIn ml-8" style="animation-delay: 0.5s;">FAQ</a>
+          </div>
+          
+          <!-- Access points -->
           <a href="https://alumnos.epd.edu.mx/" target="_blank" class="nav-link text-gray-300 hover:text-white font-medium animate__animated animate__fadeIn" style="animation-delay: 0.5s;">Alumnos</a>
           <a routerLink="/Contactanos" class="nav-link text-gray-300 hover:text-white font-medium animate__animated animate__fadeIn" style="animation-delay: 0.5s;">Contacto</a>
         </div>
       </div>
       
-      <!-- Botón de inscripción (lado derecho) -->
+      <!-- Registration button -->
       <div class="hidden md:flex md:items-center">
         <a href="https://epd.edu.mx/registro.html" target="_blank" class="px-6 py-3 rounded-full btn-primary text-white text-sm font-medium transition duration-300 transform hover:scale-105 animate__animated animate__fadeIn" style="animation-delay: 0.6s;">
           Inscríbete Ahora
         </a>
       </div>
       
-      <!-- Botón móvil para abrir sidenav - MEJORADO -->
-      <div class="flex md:hidden">
-        <button 
-          type="button" 
-          (click)="toggleSidenav()"
-          id="mobile-menu-toggle"
-          class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-blue-300 focus:outline-none animate__animated animate__fadeIn" 
-          aria-label="Abrir menú" 
-          [attr.aria-expanded]="isSidenavOpen"
-        >
-          <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
+      <!-- Mobile menu button -->
+      <button 
+        type="button" 
+        (click)="toggleSidenav()"
+        id="mobile-menu-toggle"
+        class="inline-flex md:hidden items-center justify-center p-2 rounded-md text-white hover:text-blue-300 focus:outline-none animate__animated animate__fadeIn" 
+        aria-label="Abrir menú" 
+        [attr.aria-expanded]="isSidenavOpen"
+      >
+        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -152,7 +161,7 @@
     Planteles
   </a>
   
-  <a routerLink="/Preguntas Frecuentes" class="sidenav-item nav-link-item block text-white transition duration-300 mb-3" (click)="toggleSidenav()">
+  <a routerLink="/PreguntasFrecuentes" class="sidenav-item nav-link-item block text-white transition duration-300 mb-3" (click)="toggleSidenav()">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="10"></circle>
       <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>

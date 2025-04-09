@@ -5,8 +5,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: 'Be Vietnam Pro';
+    src: url('../public/fonts/BeVietnamPro-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
 body {
-    font-family: 'Be Vietnam Pro', sans-serif;
+    font-family: 'Be Vietnam Pro';
     overflow-x: hidden;
 }
 

@@ -34,7 +34,7 @@ const routes: Routes = [
     component: DetalleTallerComponent,
   },
   { path: 'Cursos/:slug', component: DetalleCursoComponent },
-  { path: 'Preguntas Frecuentes', component: FAQComponent },
+  { path: 'PreguntasFrecuentes', component: FAQComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' }, // Redirigir a Home si la ruta no existe
 ];
 

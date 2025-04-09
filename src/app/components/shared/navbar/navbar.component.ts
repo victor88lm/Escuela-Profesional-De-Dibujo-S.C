@@ -1,101 +1,65 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, HostListener, ElementRef, ViewChild } from '@angular/core';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common'; 
+import { Component, OnInit, AfterViewInit, OnDestroy, HostListener, ElementRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush // Improve performance with OnPush strategy
 })
 export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   public isSidenavOpen = false;
-  public useBlueNavbar = false; // Nueva propiedad para controlar el estado del navbar
+  public useBlueNavbar = false;
   @ViewChild('mobileSidenav') mobileSidenav: ElementRef | undefined;
+  
+  private destroy$ = new Subject<void>(); // For clean subscription management
+  private readonly blueNavbarRoutes = ['/Contactanos', '/Galeria', '/Planteles', '/PreguntasFrecuentes'];
   
   constructor(private router: Router) {}
   
   ngOnInit(): void {
-    // Usar bind para mantener el contexto correcto de this
+    // Use bound function for scroll handler
     this.handleScroll = this.handleScroll.bind(this);
-    // Manejador del evento de scroll para el efecto del navbar
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll, { passive: true }); // Passive for performance
     
-    // Suscribirse a los eventos de cambio de ruta
+    // Subscribe to route changes
     this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
+      filter(event => event instanceof NavigationEnd),
+      takeUntil(this.destroy$)
     ).subscribe((event: any) => {
-      // Lista de rutas donde el navbar debe ser azul directamente
-      const blueNavbarRoutes = ['/Contactanos', '/Galeria', '/Planteles'];
-      
-      // Comprobar si la URL actual está en la lista
-      this.useBlueNavbar = blueNavbarRoutes.includes(event.url);
-      
-      // Aplicar inmediatamente el estilo sin esperar al scroll
+      this.useBlueNavbar = this.blueNavbarRoutes.includes(event.url);
       this.applyNavbarStyle();
     });
   }
   
   ngAfterViewInit(): void {
-    // Aplicar el estilo correcto del navbar después de cargar la vista
     this.applyNavbarStyle();
   }
   
-  // Toggle del sidenav para móviles
   toggleSidenav(): void {
     this.isSidenavOpen = !this.isSidenavOpen;
+    document.body.style.overflow = this.isSidenavOpen ? 'hidden' : '';
+  }
+  
+  private applyNavbarStyle(): void {
+    const navbar = document.querySelector('.navbar-transparent');
+    if (!navbar) return;
     
-    // Evitar scroll cuando el sidenav está abierto
-    if (this.isSidenavOpen) {
-      document.body.style.overflow = 'hidden';
+    if (this.useBlueNavbar || window.scrollY > 30) {
+      navbar.classList.add('scrolled');
     } else {
-      document.body.style.overflow = '';
-      
-      // Darle tiempo a la animación antes de ocultar completamente
-      setTimeout(() => {
-        if (!this.isSidenavOpen) {
-          // Asegurar que esté oculto después de la animación
-          console.log('Sidenav completamente cerrado');
-        }
-      }, 300); // Mismo tiempo que la duración de la transición
+      navbar.classList.remove('scrolled');
     }
   }
   
-  // Nuevo método para aplicar el estilo del navbar
-  applyNavbarStyle(): void {
-    const navbar = document.querySelector('.navbar-transparent');
-    if (navbar) {
-      if (this.useBlueNavbar) {
-        navbar.classList.add('scrolled');
-      } else if (window.scrollY <= 30) {
-        navbar.classList.remove('scrolled');
-      }
-    }
+  private handleScroll(): void {
+    this.applyNavbarStyle();
   }
   
-  // Efecto de navbar al hacer scroll
-  handleScroll(): void {
-    const navbar = document.querySelector('.navbar-transparent');
-    if (navbar) {
-      // Si estamos en una ruta especial, siempre aplicar la clase scrolled
-      if (this.useBlueNavbar) {
-        navbar.classList.add('scrolled');
-      } else {
-        // Comportamiento normal para otras rutas
-        if (window.scrollY > 30) {
-          navbar.classList.add('scrolled');
-        } else {
-          navbar.classList.remove('scrolled');
-        }
-      }
-    }
-  }
-  
-  // Cerrar el sidenav al cambiar de tamaño de ventana
   @HostListener('window:resize', ['$event'])
-  onResize() {
-    // Si la pantalla es lo suficientemente grande y el sidenav está abierto, cerrarlo
+  onResize(): void {
     if (window.innerWidth >= 768 && this.isSidenavOpen) {
       this.toggleSidenav();
     }
@@ -103,5 +67,9 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   
   ngOnDestroy(): void {
     window.removeEventListener('scroll', this.handleScroll);
+    this.destroy$.next();
+    this.destroy$.complete();
   }
+
+  
 }

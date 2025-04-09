@@ -1,62 +1,174 @@
 <!-- faq.component.html -->
-<div class="container mx-auto px-4 py-12">
-    <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Preguntas Frecuentes</h2>
-      
-      <!-- Category Filters -->
-      <div class="flex flex-wrap justify-center gap-3 mb-8">
+<section class="bg-gradient-to-br from-blue-50 to-indigo-50 py-32 min-h-screen" id="faq">
+  <div class="container mx-auto px-4 max-w-6xl">
+    <!-- Encabezado del FAQ -->
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-blue-800 mb-3 relative inline-block">
+        Preguntas Frecuentes
+        <div class="absolute -bottom-2 left-0 w-full h-1 bg-amber-400 rounded-full"></div>
+      </h2>
+      <p class="text-lg text-gray-600 mt-4 max-w-3xl mx-auto">
+        Encuentra respuestas a las preguntas más comunes sobre nuestros cursos, procesos y servicios.
+      </p>
+    </div>
+
+    <!-- Buscador y filtros -->
+    <div class="mb-10">
+
+      <!-- Categorías / Filtros -->
+      <div class="flex flex-wrap justify-center gap-2 md:gap-3">
         <button 
-          (click)="filterByCategory(null)"
-          class="px-4 py-2 rounded-full transition-colors duration-300 font-semibold text-sm"
-          [class.bg-blue-500]="!selectedCategory"
-          [class.text-white]="!selectedCategory"
-          [class.bg-gray-200]="selectedCategory"
-          [class.text-gray-700]="selectedCategory"
+          (click)="filterByCategory('all')" 
+          class="px-4 py-2 rounded-full text-sm font-medium transition-all"
+          [ngClass]="activeCategory === 'all' ? 'bg-blue-600 text-white shadow-md' : 'bg-white text-gray-700 hover:bg-blue-50'"
         >
-          Todas las Preguntas
+          Todas
         </button>
         <button 
-          *ngFor="let category of ['Cursos', 'Horarios', 'Materiales', 'Beneficios', 'Información']"
-          (click)="filterByCategory(category)"
-          class="px-4 py-2 rounded-full transition-colors duration-300 font-semibold text-sm"
-          [class.bg-blue-500]="selectedCategory === category"
-          [class.text-white]="selectedCategory === category"
-          [class.bg-gray-200]="selectedCategory !== category"
-          [class.text-gray-700]="selectedCategory !== category"
+          (click)="filterByCategory('inscripciones')" 
+          class="px-4 py-2 rounded-full text-sm font-medium transition-all"
+          [ngClass]="activeCategory === 'inscripciones' ? 'bg-blue-600 text-white shadow-md' : 'bg-white text-gray-700 hover:bg-blue-50'"
         >
-          {{ category }}
+          Inscripciones
+        </button>
+        <button 
+          (click)="filterByCategory('horarios')" 
+          class="px-4 py-2 rounded-full text-sm font-medium transition-all"
+          [ngClass]="activeCategory === 'horarios' ? 'bg-blue-600 text-white shadow-md' : 'bg-white text-gray-700 hover:bg-blue-50'"
+        >
+          Horarios
+        </button>
+        <button 
+          (click)="filterByCategory('costos')" 
+          class="px-4 py-2 rounded-full text-sm font-medium transition-all"
+          [ngClass]="activeCategory === 'costos' ? 'bg-blue-600 text-white shadow-md' : 'bg-white text-gray-700 hover:bg-blue-50'"
+        >
+          Costos
+        </button>
+        <button 
+          (click)="filterByCategory('programas')" 
+          class="px-4 py-2 rounded-full text-sm font-medium transition-all"
+          [ngClass]="activeCategory === 'programas' ? 'bg-blue-600 text-white shadow-md' : 'bg-white text-gray-700 hover:bg-blue-50'"
+        >
+          Programas
+        </button>
+        <button 
+          (click)="filterByCategory('instalaciones')" 
+          class="px-4 py-2 rounded-full text-sm font-medium transition-all"
+          [ngClass]="activeCategory === 'instalaciones' ? 'bg-blue-600 text-white shadow-md' : 'bg-white text-gray-700 hover:bg-blue-50'"
+        >
+          Instalaciones
+        </button>
+        <button 
+          (click)="filterByCategory('estudiantes')" 
+          class="px-4 py-2 rounded-full text-sm font-medium transition-all"
+          [ngClass]="activeCategory === 'estudiantes' ? 'bg-blue-600 text-white shadow-md' : 'bg-white text-gray-700 hover:bg-blue-50'"
+        >
+          Vida Estudiantil
         </button>
       </div>
-  
-      <!-- FAQ Items -->
-      <div class="space-y-4">
-        <div *ngFor="let faq of getFilteredFaqs(); let i = index" class="border border-gray-200 rounded-lg overflow-hidden shadow-sm">
-          <button 
-            (click)="toggleFaq(faqs.indexOf(faq))"
-            class="w-full text-left p-5 flex justify-between items-center hover:bg-gray-50 transition-colors duration-300"
-            [attr.aria-expanded]="faq.isOpen"
-          >
-            <span class="font-semibold text-lg text-gray-800">{{ faq.question }}</span>
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              class="h-6 w-6 transform transition-transform duration-300"
-              [class.rotate-180]="faq.isOpen"
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke="currentColor"
-            >
+    </div>
+
+    <!-- Contenedor de las preguntas -->
+    <div class="space-y-4">
+      <div *ngIf="filteredItems.length === 0" class="text-center py-8">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p class="text-gray-600 text-lg">No se encontraron resultados para tu búsqueda.</p>
+        <button 
+          (click)="clearSearch()" 
+          class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          Limpiar búsqueda
+        </button>
+      </div>
+
+      <div 
+        *ngFor="let item of filteredItems; let i = index" 
+        class="bg-white rounded-xl shadow-md overflow-hidden border-l-4 transition-all duration-300 hover:shadow-lg"
+        [class.border-blue-600]="!item.isOpen"
+        [class.border-amber-400]="item.isOpen"
+        [class.shadow-lg]="item.isOpen"
+      >
+        <!-- Pregunta (header del acordeón) -->
+        <button 
+          (click)="toggleFaq(i)" 
+          class="w-full text-left p-5 flex justify-between items-center focus:outline-none"
+          [attr.aria-expanded]="item.isOpen"
+          [attr.aria-controls]="'faq-answer-' + i">
+          
+          <span class="text-lg font-medium text-gray-800 flex items-center group-hover:text-blue-600">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full mr-3 text-sm font-bold transition-all duration-300"
+                  [ngClass]="item.isOpen ? 'bg-amber-100 text-amber-600' : 'bg-blue-100 text-blue-600'">
+              {{i + 1}}
+            </span>
+            {{ item.question }}
+          </span>
+          
+          <span class="text-blue-600 transition-transform duration-300" [ngClass]="{'rotate-180': item.isOpen}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
-          </button>
+          </span>
+        </button>
+        
+        <!-- Respuesta (contenido del acordeón) -->
+        <div 
+          [id]="'faq-answer-' + i"
+          [@expandCollapse]="item.isOpen ? 'expanded' : 'collapsed'"
+          class="px-5 pb-5"
+          [ngClass]="item.isOpen ? 'bg-gradient-to-br from-blue-50/70 to-amber-50/50' : ''">
+          <div class="py-3 text-base text-gray-600 leading-relaxed">{{ item.answer }}</div>
           
-          <div 
-            *ngIf="faq.isOpen" 
-            class="p-5 bg-gray-50 text-gray-700 whitespace-pre-line"
-            [@openClose]="faq.isOpen ? 'open' : 'closed'"
-          >
-            {{ faq.answer }}
+          <!-- Badge de categoría y botones de acción -->
+          <div class="flex justify-between items-center mt-2 pt-3 border-t border-gray-100">
+            <span class="text-xs font-medium px-2 py-1 rounded-full"
+                  [ngClass]="{
+                    'bg-purple-100 text-purple-800': item.category === 'inscripciones',
+                    'bg-blue-100 text-blue-800': item.category === 'horarios',
+                    'bg-green-100 text-green-800': item.category === 'costos',
+                    'bg-indigo-100 text-indigo-800': item.category === 'programas',
+                    'bg-orange-100 text-orange-800': item.category === 'instalaciones',
+                    'bg-red-100 text-red-800': item.category === 'estudiantes'
+                  }">
+              {{item.category | titlecase}}
+            </span>
+            <div class="space-x-2">
+              <button class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 px-3 py-1 rounded-lg transition-colors">
+                ¿Fue útil?
+              </button>
+              <button class="text-xs bg-gray-50 hover:bg-gray-100 text-gray-700 px-3 py-1 rounded-lg transition-colors">
+                Compartir
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- CTA tras las preguntas -->
+    <div class="mt-12 text-center">
+      <p class="text-gray-600 mb-4">¿Tienes alguna otra pregunta? Estamos aquí para ayudarte.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a routerLink="/Contactanos" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          Contáctanos
+        </a>
+        <a href="tel:+525579872334" class="inline-block bg-white border border-blue-600 hover:bg-blue-50 text-blue-600 font-medium py-3 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          Llámanos
+        </a>
+      </div>
+    </div>
   </div>
+
+  <!-- Elementos decorativos de fondo -->
+  <div class="absolute top-20 left-10 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+  <div class="absolute top-40 right-10 w-64 h-64 bg-amber-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+  <div class="absolute bottom-20 left-1/3 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+</section>
