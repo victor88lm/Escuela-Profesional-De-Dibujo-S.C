@@ -2,18 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Curso, getCursoBySlug } from '../cursos';
 import { CommonModule, NgIf } from '@angular/common';
+import { StripeService } from '../../../services/stripe.service';
+import { HttpClientModule } from '@angular/common/http';
+
 @Component({
   selector: 'app-detalle-curso',
   templateUrl: './detalle-curso.component.html',
   styleUrls: ['./detalle-curso.component.css'],
   standalone: true,
-  imports: [CommonModule, NgIf],
+  imports: [CommonModule, NgIf, HttpClientModule],
+  providers: [StripeService], // Importante: Proveemos el servicio aquí para componentes standalone
 })
 export class DetalleCursoComponent implements OnInit {
   curso: Curso | undefined;
   currentSlideIndex = 0;
+  procesandoPago = false;
+  errorPago: string | null = null;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private stripeService: StripeService
+  ) {}
 
   ngOnInit(): void {
     // Obtener el slug del curso desde la URL
@@ -81,5 +91,68 @@ export class DetalleCursoComponent implements OnInit {
     // Aquí iría la lógica para abrir el modal de inscripción
     console.log('Abrir modal de inscripción para:', this.curso?.titulo);
     // Por ejemplo, podrías disparar un evento o cambiar una variable para mostrar un modal
+  }
+
+  // Función para extraer el valor numérico del precio
+  private extraerValorNumerico(precio: string): number {
+    return parseInt(precio.replace(/[^0-9]/g, ''));
+  }
+
+  // Calcular monto total para el pago (sin formato para procesar)
+  calcularTotalPago(): number {
+    if (!this.curso) return 0;
+
+    //Se regresa solo el valor de la colegiatura porque en linea hay descuentor de inscripcion
+    const inscripcion = this.extraerValorNumerico(this.curso.costoInscripcion);
+    const colegiatura = this.extraerValorNumerico(this.curso.colegiatura);
+
+    return colegiatura;
+  }
+
+  // Calcular monto total para mostrar al usuario (con formato)
+  calcularTotalPagoFormateado(): string {
+    const total = this.calcularTotalPago();
+    return `$${total} MXN`;
+  }
+
+  // Iniciar el pago con Stripe
+  pagarConStripe(): void {
+    if (!this.curso) return;
+
+    this.procesandoPago = true;
+    this.errorPago = null;
+
+    // Preparar los datos para la sesión de Stripe
+    const paymentData = {
+      amount: this.calcularTotalPago(),
+      currency: 'mxn',
+      name: `Inscripción: ${this.curso.titulo}`,
+      description: `Inscripción y primera mensualidad para ${
+        this.curso.categoria === 'infantil' ? 'el taller' : 'el curso'
+      } ${this.curso.titulo}`,
+      success_url: window.location.origin + '/pago-exitoso',
+      cancel_url: window.location.origin + '/pago-cancelado',
+      client_reference_id: `curso_${this.curso.id}`,
+    };
+
+    // Llamar al servicio para crear la sesión de Checkout
+    this.stripeService.createCheckoutSession(paymentData).subscribe({
+      next: (response) => {
+        this.procesandoPago = false;
+        if (response && response.id) {
+          // Redirigir a la página de pago de Stripe
+          this.stripeService.redirectToCheckout(response.id);
+        } else {
+          this.errorPago = 'No se pudo crear la sesión de pago';
+        }
+      },
+      error: (err) => {
+        this.procesandoPago = false;
+        this.errorPago =
+          'Error al procesar el pago: ' +
+          (err.error?.error || err.message || 'Error desconocido');
+        console.error('Error de pago:', err);
+      },
+    });
   }
 }

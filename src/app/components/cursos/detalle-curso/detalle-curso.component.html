@@ -180,9 +180,11 @@
           <span>Pagar con PayPal</span>
         </button>
 
-        <!-- Botón Tarjeta -->
+        <!-- Reemplaza el botón actual de "Pagar con tarjeta" con este código -->
         <button
           class="flex items-center gap-4 px-6 py-4 rounded-xl font-medium text-white bg-gray-800 hover:bg-gray-900 transition duration-200 shadow-sm hover:shadow-md w-full transform hover:-translate-y-1"
+          [disabled]="procesandoPago"
+          (click)="pagarConStripe()"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -194,8 +196,39 @@
               d="M20 4H4C2.89 4 2.01 4.89 2.01 6L2 18C2 19.11 2.89 20 4 20H20C21.11 20 22 19.11 22 18V6C22 4.89 21.11 4 20 4ZM20 18H4V12H20V18ZM20 8H4V6H20V8Z"
             />
           </svg>
-          <span>Pagar con tarjeta</span>
+          <span *ngIf="!procesandoPago">Pagar con tarjeta</span>
+          <span *ngIf="procesandoPago" class="flex items-center">
+            <svg
+              class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+            Procesando...
+          </span>
         </button>
+
+        <!-- Mensaje de error (añade esto justo después del botón) -->
+        <div
+          *ngIf="errorPago"
+          class="mt-4 p-3 bg-red-50 text-red-700 text-sm rounded-lg"
+        >
+          {{ errorPago }}
+        </div>
       </div>
     </div>
     <!-- Descripción corta -->

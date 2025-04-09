@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TALLERES } from '../../talleres';
+import { StripeService } from '../../../../services/stripe.service'; // Importa el servicio
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,9 +14,16 @@ export class DetalleTallerComponent implements OnInit {
   mostrarModal = false;
   metodoPagoSeleccionado = 'paypal'; // Por defecto
 
+  // Nuevo estado para manejar el pago con Stripe
+  procesandoPago = false;
+  errorPago: string | null = null;
+
   @ViewChild('modalContenido') modalContenido!: ElementRef;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private stripeService: StripeService // Inyecta el servicio
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -39,6 +47,7 @@ export class DetalleTallerComponent implements OnInit {
 
   calcularTotalPago(): string {
     // Extraer los valores numéricos
+    //Solo se regresa el valor de la colegiatura porque en linea hay descuento de insripcion
     const inscripcion = parseInt(
       this.taller.costoInscripcion.replace(/[^0-9]/g, '')
     );
@@ -47,10 +56,23 @@ export class DetalleTallerComponent implements OnInit {
     );
 
     // Calcular el total
-    const total = inscripcion + colegiatura;
+    const total = colegiatura;
 
     // Formatear el total como moneda
     return `${total} MXN`;
+  }
+
+  // Esta función devuelve solo el valor numérico para usar con Stripe
+  calcularTotalPagoNumerico(): number {
+    //Solo se regresa el valor de la colegiatura porque en linea hay descuentor de inscripcion
+    const inscripcion = parseInt(
+      this.taller.costoInscripcion.replace(/[^0-9]/g, '')
+    );
+    const colegiatura = parseInt(
+      this.taller.colegiatura.replace(/[^0-9]/g, '')
+    );
+
+    return colegiatura;
   }
 
   abrirModalInscripcion(): void {
@@ -74,6 +96,10 @@ export class DetalleTallerComponent implements OnInit {
 
   seleccionarMetodoPago(metodo: string): void {
     this.metodoPagoSeleccionado = metodo;
+
+    // Reset de estados de error cuando se cambia de método
+    this.errorPago = null;
+    this.procesandoPago = false;
   }
 
   copiarInfoBancaria(): void {
@@ -142,6 +168,43 @@ export class DetalleTallerComponent implements OnInit {
       if (result.isConfirmed) {
         this.cerrarModal();
       }
+    });
+  }
+
+  // Nueva función para iniciar el pago con Stripe
+  pagarConStripe(): void {
+    this.procesandoPago = true;
+    this.errorPago = null;
+
+    // Preparar los datos para la sesión de Stripe
+    const paymentData = {
+      amount: this.calcularTotalPagoNumerico(), // Monto total en números
+      currency: 'mxn', // Moneda (pesos mexicanos)
+      name: `Inscripción: ${this.taller.titulo}`, // Nombre del producto
+      description: `Inscripción y primera mensualidad para el taller ${this.taller.titulo}`,
+      success_url: window.location.origin + '/pago-exitoso', // URL de redirección tras pago exitoso
+      cancel_url: window.location.origin + '/pago-cancelado', // URL si se cancela
+      client_reference_id: `taller_${this.taller.id}`, // Referencia para identificar en Stripe
+    };
+
+    // Llamar al servicio para crear la sesión de Checkout
+    this.stripeService.createCheckoutSession(paymentData).subscribe({
+      next: (response) => {
+        this.procesandoPago = false;
+        if (response && response.id) {
+          // Redirigir a la página de pago de Stripe
+          this.stripeService.redirectToCheckout(response.id);
+        } else {
+          this.errorPago = 'No se pudo crear la sesión de pago';
+        }
+      },
+      error: (err) => {
+        this.procesandoPago = false;
+        this.errorPago =
+          'Error al procesar el pago: ' +
+          (err.error?.error || err.message || 'Error desconocido');
+        console.error('Error de pago:', err);
+      },
     });
   }
 }

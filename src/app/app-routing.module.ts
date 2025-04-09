@@ -13,6 +13,8 @@ import { TalleresEspecializadosComponent } from './components/cursos/talleres-es
 import { FAQComponent } from './components/Inicio/faq/faq.component';
 import { DetalleTallerComponent } from './components/cursos/talleres-especializados/detalle-taller/detalle-taller.component';
 import { DetalleCursoComponent } from './components/cursos/detalle-curso/detalle-curso.component';
+import { PagoExitosoComponent } from './components/cursos/pagos/pago-exitoso/pago-exitoso.component';
+import { PagoRechazadoComponent } from './components/cursos/pagos/pago-rechazado/pago-rechazado.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,6 +23,8 @@ const routes: Routes = [
   { path: 'Planteles', component: PlantelesComponent },
   { path: 'Contactanos', component: ContactoComponent },
   { path: 'Cursos', component: OfertaEducativaComponent },
+  { path: 'pago-exitoso', component: PagoExitosoComponent },
+  { path: 'pago-cancelado', component: PagoRechazadoComponent },
 
   { path: 'Cursos/DibujoPublicitario', component: DibujoPublicitarioComponent },
   { path: 'Cursos/DibujoInfantil', component: DibujoInfantilComponent },
