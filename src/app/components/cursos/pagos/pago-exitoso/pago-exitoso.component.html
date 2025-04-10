@@ -1,9 +1,14 @@
 <!-- pago-exitoso.component.html -->
-<div class="container max-w-4xl mx-auto px-4 py-8 print:py-2">
+<!-- Encabezado para evitar superposición con navbar -->
+<div
+  class="bg-gradient-to-r from-blue-600 to-purple-600 h-24 w-full fixed top-0 left-0 z-10"
+></div>
+
+<div class="container max-w-4xl mx-auto px-4 pt-32 pb-8 print:py-2">
   <!-- Estado de carga -->
   <div
     *ngIf="loading"
-    class="flex flex-col items-center justify-center min-h-[400px]"
+    class="flex flex-col items-center justify-center min-h-[400px] bg-white p-8 rounded-lg shadow-lg"
   >
     <div
       class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"
@@ -14,7 +19,7 @@
   <!-- Error -->
   <div
     *ngIf="error && !loading"
-    class="bg-red-50 p-6 rounded-lg text-center min-h-[400px] flex flex-col items-center justify-center"
+    class="bg-red-50 p-6 rounded-lg text-center min-h-[400px] flex flex-col items-center justify-center shadow-lg"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -35,8 +40,8 @@
       Lo sentimos, no pudimos recuperar los detalles de tu pago.
     </p>
     <a
-      routerLink="/"
-      class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+      [routerLink]="['/']"
+      class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 font-medium"
       >Volver al inicio</a
     >
   </div>
@@ -44,15 +49,17 @@
   <!-- Información del pago -->
   <div
     *ngIf="pagoInfo && !loading"
-    class="print:shadow-none shadow-lg rounded-lg overflow-hidden"
+    class="print:shadow-none shadow-lg rounded-lg overflow-hidden bg-white"
   >
     <!-- Encabezado -->
-    <div class="bg-green-500 text-white p-6 print:bg-white print:text-black">
+    <div
+      class="bg-gradient-to-r from-green-500 to-emerald-600 text-white p-6 print:bg-white print:text-black"
+    >
       <div
         class="flex justify-between items-center print:border-b print:border-gray-300 print:pb-4"
       >
         <div>
-          <h1 class="text-2xl font-bold mb-2">¡Pago Exitoso!</h1>
+          <h1 class="text-2xl md:text-3xl font-bold mb-2">¡Pago Exitoso!</h1>
           <p class="text-lg opacity-90">
             Tu inscripción ha sido registrada correctamente.
           </p>
@@ -70,8 +77,10 @@
     <!-- Detalles del pago -->
     <div class="bg-white p-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div>
-          <h3 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <h3
+            class="text-lg font-semibold text-gray-700 mb-4 border-b border-gray-200 pb-2"
+          >
             Información del Cliente
           </h3>
           <div class="space-y-3">
@@ -94,14 +103,16 @@
           </div>
         </div>
 
-        <div>
-          <h3 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <h3
+            class="text-lg font-semibold text-gray-700 mb-4 border-b border-gray-200 pb-2"
+          >
             Detalles del Curso
           </h3>
           <div class="space-y-3">
             <div>
               <p class="text-sm text-gray-500">Curso/Taller</p>
-              <p class="font-medium">{{ pagoInfo.producto_nombre }}</p>
+              <p class="font-medium">Pago de colegiatura</p>
             </div>
             <div>
               <p class="text-sm text-gray-500">Monto Pagado</p>
@@ -119,7 +130,7 @@
 
       <!-- Instrucciones -->
       <div
-        class="bg-blue-50 p-4 rounded-lg mb-6 print:bg-white print:border print:border-blue-200"
+        class="bg-blue-50 p-5 rounded-lg mb-6 print:bg-white print:border print:border-blue-200 border border-blue-100"
       >
         <h3 class="text-lg font-semibold text-blue-800 mb-2">Próximos Pasos</h3>
         <ol class="list-decimal pl-5 space-y-2 text-gray-700">
@@ -137,8 +148,8 @@
       <!-- Botones de acción (no mostrar en impresión) -->
       <div class="flex flex-wrap gap-4 mt-6 print:hidden">
         <button
-          (click)="imprimirComprobante()"
-          class="px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition flex items-center"
+          (click)="imprimirComprobanteOptimizado()"
+          class="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors duration-300 flex items-center shadow-md"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -152,12 +163,12 @@
               clip-rule="evenodd"
             />
           </svg>
-          Imprimir Comprobante
+          Imprimir comprobante
         </button>
 
         <button
           (click)="compartirWhatsApp()"
-          class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition flex items-center"
+          class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300 flex items-center shadow-md"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -173,8 +184,8 @@
         </button>
 
         <a
-          routerLink="/"
-          class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center"
+          [routerLink]="['/']"
+          class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 flex items-center shadow-md"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -191,6 +191,7 @@ export class DetalleTallerComponent implements OnInit {
     this.errorPago = null;
 
     // Preparar los datos para la sesión de Stripe
+    // Cuando creas el objeto paymentData
     const paymentData = {
       amount: this.calcularTotalPago(),
       currency: 'mxn',
@@ -200,11 +201,11 @@ export class DetalleTallerComponent implements OnInit {
       } ${this.taller.titulo}`,
       success_url:
         window.location.origin +
-        '/pago-exitoso?payment_intent={PAYMENT_INTENT}',
+        '/pago-exitoso?session_id={CHECKOUT_SESSION_ID}', // ESTA ES LA LÍNEA CLAVE
       cancel_url: window.location.origin + '/pago-cancelado',
-      client_reference_id: `curso_${this.taller.id}`,
+      client_reference_id: `taller_${this.taller.id}`,
       customer_email: this.emailCliente,
-      producto_tipo: 'curso',
+      producto_tipo: 'taller',
       producto_id: this.taller.id.toString(),
     };
 
