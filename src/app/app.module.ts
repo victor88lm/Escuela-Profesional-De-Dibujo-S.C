@@ -70,6 +70,7 @@ import { DetalleTallerComponent } from './components/cursos/talleres-especializa
     HttpClientModule,
     ReactiveFormsModule,
     NgOptimizedImage,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

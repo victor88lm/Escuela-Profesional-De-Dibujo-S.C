@@ -180,7 +180,63 @@
           <span>Pagar con PayPal</span>
         </button>
 
-        <!-- Reemplaza el botón actual de "Pagar con tarjeta" con este código -->
+        <!-- Modal para solicitar email (agrega esto antes del botón de pago) -->
+        <div
+          *ngIf="mostrarFormularioEmail"
+          class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+        >
+          <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-6">
+            <h3 class="text-xl font-semibold mb-4">
+              Ingresa tu correo electrónico
+            </h3>
+
+            <p class="text-gray-600 mb-4">
+              Necesitamos tu correo para enviarte la confirmación de pago y
+              detalles sobre tu inscripción.
+            </p>
+
+            <div class="mb-4">
+              <label
+                for="email"
+                class="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Correo electrónico
+              </label>
+              <input
+                type="email"
+                id="email"
+                [(ngModel)]="emailCliente"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                placeholder="ejemplo@correo.com"
+              />
+            </div>
+
+            <div
+              *ngIf="errorPago"
+              class="mb-4 p-3 bg-red-50 text-red-700 text-sm rounded-lg"
+            >
+              {{ errorPago }}
+            </div>
+
+            <div class="flex gap-3">
+              <button
+                class="flex-1 py-2 px-4 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50"
+                (click)="mostrarFormularioEmail = false"
+              >
+                Cancelar
+              </button>
+
+              <button
+                class="flex-1 py-2 px-4 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
+                (click)="confirmarEmail()"
+              >
+                Continuar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modifica el botón de pago con tarjeta para que muestre el formulario de email -->
         <button
           class="flex items-center gap-4 px-6 py-4 rounded-xl font-medium text-white bg-gray-800 hover:bg-gray-900 transition duration-200 shadow-sm hover:shadow-md w-full transform hover:-translate-y-1"
           [disabled]="procesandoPago"

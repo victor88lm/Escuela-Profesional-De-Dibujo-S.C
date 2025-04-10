@@ -599,6 +599,7 @@
             </div>
 
             <!-- Botón de pago con Stripe -->
+            <!-- Reemplaza el botón existente en la sección de tarjeta con este -->
             <button
               [ngClass]="
                 'bg-' +
@@ -611,18 +612,9 @@
               [disabled]="procesandoPago"
               (click)="pagarConStripe()"
             >
-              <span *ngIf="!procesandoPago">
-                <svg
-                  class="w-5 h-5 mr-2 inline-block"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M4 4C2.89 4 2 4.89 2 6V18C2 19.11 2.89 20 4 20H20C21.11 20 22 19.11 22 18V6C22 4.89 21.11 4 20 4H4ZM4 6H20V10H4V6ZM4 12H20V18H4V12ZM6 16H10V17H6V16Z"
-                  />
-                </svg>
-                Pagar {{ calcularTotalPago() }} ahora
-              </span>
+              <span *ngIf="!procesandoPago"
+                >Pagar {{ calcularTotalPago() }}</span
+              >
               <span *ngIf="procesandoPago" class="flex items-center">
                 <svg
                   class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
@@ -647,6 +639,14 @@
                 Procesando...
               </span>
             </button>
+
+            <!-- Añade el mensaje de error si no existía -->
+            <div
+              *ngIf="errorPago"
+              class="mt-4 p-3 bg-red-50 text-red-700 text-sm rounded-lg"
+            >
+              {{ errorPago }}
+            </div>
           </div>
 
           <!-- Transferencia -->
@@ -851,6 +851,67 @@
           />
         </svg>
         <span class="text-sm text-gray-600">Pago seguro y encriptado</span>
+      </div>
+    </div>
+    <!-- Modal para solicitar email (agrega esto dentro del div del contenido modal, justo antes del final) -->
+    <div
+      *ngIf="mostrarFormularioEmail"
+      class="fixed inset-0 bg-black bg-opacity-50 z-[60] flex items-center justify-center p-4"
+    >
+      <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-6">
+        <h3 class="text-xl font-semibold mb-4">
+          Ingresa tu correo electrónico
+        </h3>
+
+        <p class="text-gray-600 mb-4">
+          Necesitamos tu correo para enviarte la confirmación de pago y detalles
+          sobre tu inscripción.
+        </p>
+
+        <div class="mb-4">
+          <label
+            for="email"
+            class="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Correo electrónico
+          </label>
+          <input
+            type="email"
+            id="email"
+            [(ngModel)]="emailCliente"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            placeholder="ejemplo@correo.com"
+          />
+        </div>
+
+        <div
+          *ngIf="errorPago"
+          class="mb-4 p-3 bg-red-50 text-red-700 text-sm rounded-lg"
+        >
+          {{ errorPago }}
+        </div>
+
+        <div class="flex gap-3">
+          <button
+            class="flex-1 py-2 px-4 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50"
+            (click)="mostrarFormularioEmail = false"
+          >
+            Cancelar
+          </button>
+
+          <button
+            [ngClass]="
+              'flex-1 py-2 px-4 rounded-lg font-medium text-white bg-' +
+              getCategoriaColor(taller.categoria) +
+              '-500 hover:bg-' +
+              getCategoriaColor(taller.categoria) +
+              '-600'
+            "
+            (click)="confirmarEmail()"
+          >
+            Continuar
+          </button>
+        </div>
       </div>
     </div>
   </div>

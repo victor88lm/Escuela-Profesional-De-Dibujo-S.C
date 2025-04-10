@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { Curso, getCursoBySlug } from '../cursos';
 import { CommonModule, NgIf } from '@angular/common';
 import { StripeService } from '../../../services/stripe.service';
@@ -10,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
   templateUrl: './detalle-curso.component.html',
   styleUrls: ['./detalle-curso.component.css'],
   standalone: true,
-  imports: [CommonModule, NgIf, HttpClientModule],
+  imports: [CommonModule, NgIf, HttpClientModule, FormsModule],
   providers: [StripeService], // Importante: Proveemos el servicio aquí para componentes standalone
 })
 export class DetalleCursoComponent implements OnInit {
@@ -115,9 +116,18 @@ export class DetalleCursoComponent implements OnInit {
     return `$${total} MXN`;
   }
 
-  // Iniciar el pago con Stripe
+  emailCliente: string = '';
+  mostrarFormularioEmail: boolean = false;
+
+  // Reemplazar la función pagarConStripe() con esta versión
   pagarConStripe(): void {
     if (!this.curso) return;
+
+    // Si aún no tenemos el email, mostrar formulario primero
+    if (!this.emailCliente) {
+      this.mostrarFormularioEmail = true;
+      return;
+    }
 
     this.procesandoPago = true;
     this.errorPago = null;
@@ -130,9 +140,14 @@ export class DetalleCursoComponent implements OnInit {
       description: `Inscripción y primera mensualidad para ${
         this.curso.categoria === 'infantil' ? 'el taller' : 'el curso'
       } ${this.curso.titulo}`,
-      success_url: window.location.origin + '/pago-exitoso',
+      success_url:
+        window.location.origin +
+        '/pago-exitoso?payment_intent={PAYMENT_INTENT}',
       cancel_url: window.location.origin + '/pago-cancelado',
       client_reference_id: `curso_${this.curso.id}`,
+      customer_email: this.emailCliente,
+      producto_tipo: 'curso',
+      producto_id: this.curso.id.toString(),
     };
 
     // Llamar al servicio para crear la sesión de Checkout
@@ -154,5 +169,18 @@ export class DetalleCursoComponent implements OnInit {
         console.error('Error de pago:', err);
       },
     });
+  }
+
+  // Nueva función para confirmar el email y proceder con el pago
+  confirmarEmail(): void {
+    // Validación básica de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(this.emailCliente)) {
+      this.errorPago = 'Por favor ingresa un correo electrónico válido';
+      return;
+    }
+
+    this.mostrarFormularioEmail = false;
+    this.pagarConStripe();
   }
 }

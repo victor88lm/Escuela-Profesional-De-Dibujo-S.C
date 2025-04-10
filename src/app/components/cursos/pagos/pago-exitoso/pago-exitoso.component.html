@@ -1,152 +1,209 @@
-<!-- Contenedor principal -->
-<div
-  class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-indigo-50 to-blue-100 py-12 px-4 sm:px-6 lg:px-8"
->
+<!-- pago-exitoso.component.html -->
+<div class="container max-w-4xl mx-auto px-4 py-8 print:py-2">
+  <!-- Estado de carga -->
   <div
-    class="max-w-md w-full bg-white shadow-xl rounded-2xl p-8 transform transition-all duration-300 hover:scale-105"
+    *ngIf="loading"
+    class="flex flex-col items-center justify-center min-h-[400px]"
   >
-    <!-- Animación de éxito con círculos concéntricos -->
-    <div class="text-center mb-8 relative">
-      <div class="absolute inset-0 flex items-center justify-center">
-        <div
-          class="animate-ping h-16 w-16 rounded-full bg-green-400 opacity-20"
-        ></div>
-      </div>
-      <div
-        class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-gradient-to-r from-green-400 to-green-500 shadow-md"
-      >
-        <svg
-          class="h-12 w-12 text-white"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M5 13l4 4L19 7"
-          ></path>
-        </svg>
-      </div>
-      <h2 class="mt-6 text-3xl font-extrabold text-gray-900">¡Pago Exitoso!</h2>
-      <p class="mt-3 text-xl text-gray-600">
-        Tu transacción ha sido procesada correctamente
-      </p>
-      <!-- Contador para redirección -->
-      <div class="mt-6 text-sm text-gray-500">
-        Serás redirigido al inicio en
-        <span id="countdown" class="font-bold text-indigo-600">5</span> segundos
-      </div>
-    </div>
-
-    <!-- Número de orden simplificado -->
-    <div class="border-t border-gray-200 pt-6 text-center">
-      <p class="text-sm font-medium text-gray-500">Número de orden</p>
-      <p class="text-lg font-bold text-gray-900 mt-1">#ORD-12345</p>
-    </div>
-
-    <!-- Mensaje enviado al correo -->
-    <div class="text-center mt-6">
-      <p class="text-sm text-gray-600">
-        Hemos enviado un comprobante a tu correo electrónico
-      </p>
-    </div>
-
-    <!-- Confeti animado -->
     <div
-      class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none"
+      class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"
+    ></div>
+    <p class="mt-4 text-gray-600">Cargando información del pago...</p>
+  </div>
+
+  <!-- Error -->
+  <div
+    *ngIf="error && !loading"
+    class="bg-red-50 p-6 rounded-lg text-center min-h-[400px] flex flex-col items-center justify-center"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-16 w-16 text-red-500 mb-4"
+      viewBox="0 0 20 20"
+      fill="currentColor"
     >
+      <path
+        fill-rule="evenodd"
+        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+        clip-rule="evenodd"
+      />
+    </svg>
+    <h2 class="text-2xl font-bold text-red-700 mb-2">
+      No se encontró la información del pago
+    </h2>
+    <p class="text-gray-700 mb-6">
+      Lo sentimos, no pudimos recuperar los detalles de tu pago.
+    </p>
+    <a
+      routerLink="/"
+      class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+      >Volver al inicio</a
+    >
+  </div>
+
+  <!-- Información del pago -->
+  <div
+    *ngIf="pagoInfo && !loading"
+    class="print:shadow-none shadow-lg rounded-lg overflow-hidden"
+  >
+    <!-- Encabezado -->
+    <div class="bg-green-500 text-white p-6 print:bg-white print:text-black">
       <div
-        class="absolute top-0 left-1/4 w-2 h-2 bg-yellow-400 rounded-full animate-fall"
-        style="animation-delay: 0.2s; animation-duration: 3s"
-      ></div>
+        class="flex justify-between items-center print:border-b print:border-gray-300 print:pb-4"
+      >
+        <div>
+          <h1 class="text-2xl font-bold mb-2">¡Pago Exitoso!</h1>
+          <p class="text-lg opacity-90">
+            Tu inscripción ha sido registrada correctamente.
+          </p>
+        </div>
+        <div class="print:block hidden">
+          <img src="assets/logo.png" alt="Logo Escuela" class="h-16" />
+        </div>
+        <div class="hidden print:block text-right">
+          <h2 class="text-xl font-bold">Escuela de Arte EPD</h2>
+          <p>Comprobante de Pago</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detalles del pago -->
+    <div class="bg-white p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">
+            Información del Cliente
+          </h3>
+          <div class="space-y-3">
+            <div>
+              <p class="text-sm text-gray-500">Nombre</p>
+              <p class="font-medium">
+                {{ pagoInfo.nombre_cliente || "No especificado" }}
+              </p>
+            </div>
+            <div>
+              <p class="text-sm text-gray-500">Correo Electrónico</p>
+              <p class="font-medium">{{ pagoInfo.email_cliente }}</p>
+            </div>
+            <div>
+              <p class="text-sm text-gray-500">Fecha de Pago</p>
+              <p class="font-medium">
+                {{ pagoInfo.fecha_pago | date : "medium" }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">
+            Detalles del Curso
+          </h3>
+          <div class="space-y-3">
+            <div>
+              <p class="text-sm text-gray-500">Curso/Taller</p>
+              <p class="font-medium">{{ pagoInfo.producto_nombre }}</p>
+            </div>
+            <div>
+              <p class="text-sm text-gray-500">Monto Pagado</p>
+              <p class="font-medium text-xl text-green-600">
+                ${{ pagoInfo.monto }} {{ pagoInfo.moneda }}
+              </p>
+            </div>
+            <div>
+              <p class="text-sm text-gray-500">Referencia de Pago</p>
+              <p class="font-medium">{{ pagoInfo.pago_id }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Instrucciones -->
       <div
-        class="absolute top-0 left-2/3 w-3 h-3 bg-blue-400 rounded-full animate-fall"
-        style="animation-delay: 0.5s; animation-duration: 2.5s"
-      ></div>
-      <div
-        class="absolute top-0 left-1/2 w-2 h-2 bg-green-400 rounded-full animate-fall"
-        style="animation-delay: 0.8s; animation-duration: 2.8s"
-      ></div>
-      <div
-        class="absolute top-0 left-1/3 w-3 h-3 bg-pink-400 rounded-full animate-fall"
-        style="animation-delay: 1s; animation-duration: 3.2s"
-      ></div>
-      <div
-        class="absolute top-0 left-3/4 w-2 h-2 bg-purple-400 rounded-full animate-fall"
-        style="animation-delay: 1.2s; animation-duration: 2.7s"
-      ></div>
+        class="bg-blue-50 p-4 rounded-lg mb-6 print:bg-white print:border print:border-blue-200"
+      >
+        <h3 class="text-lg font-semibold text-blue-800 mb-2">Próximos Pasos</h3>
+        <ol class="list-decimal pl-5 space-y-2 text-gray-700">
+          <li>Conserva este comprobante de pago como referencia.</li>
+          <li>
+            Compartir este comprobante por WhatsApp para confirmar tu
+            inscripción.
+          </li>
+          <li>
+            Recibirás información adicional sobre el inicio del curso en breve.
+          </li>
+        </ol>
+      </div>
+
+      <!-- Botones de acción (no mostrar en impresión) -->
+      <div class="flex flex-wrap gap-4 mt-6 print:hidden">
+        <button
+          (click)="imprimirComprobante()"
+          class="px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition flex items-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 mr-2"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a2 2 0 002 2h6a2 2 0 002-2v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H7a2 2 0 00-2 2zm8 0H7v3h6V4zm0 8H7v4h6v-4z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          Imprimir Comprobante
+        </button>
+
+        <button
+          (click)="compartirWhatsApp()"
+          class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition flex items-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 mr-2"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+            />
+          </svg>
+          Compartir por WhatsApp
+        </button>
+
+        <a
+          routerLink="/"
+          class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 mr-2"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          Volver al inicio
+        </a>
+      </div>
+    </div>
+
+    <!-- Pie de página -->
+    <div
+      class="bg-gray-100 p-4 text-center text-gray-600 text-sm print:bg-white print:mt-8"
+    >
+      <p class="print:text-black">
+        © {{ pagoInfo.fecha_pago | date : "yyyy" }} Escuela de Arte EPD - Todos
+        los derechos reservados
+      </p>
+      <p class="mt-2 print:text-black">
+        PLANTEL CENTRO: 55-7987-2332 | PLANTEL ECATEPEC: 55-7321-2343
+      </p>
     </div>
   </div>
 </div>
-
-<!-- Script para redirección después de 5 segundos -->
-<script>
-  // Función autoejecutable para Angular
-  (function () {
-    let seconds = 5;
-    const countdownElement = document.getElementById("countdown");
-
-    // Actualizar contador cada segundo
-    const interval = setInterval(() => {
-      seconds--;
-      if (countdownElement) {
-        countdownElement.textContent = seconds.toString();
-      }
-
-      if (seconds <= 0) {
-        clearInterval(interval);
-        // Redirección a la página de inicio usando el Router de Angular
-        // Esto debería estar implementado en tu componente TypeScript
-      }
-    }, 1000);
-  })();
-
-  // Nota: En tu componente TypeScript de Angular deberías implementar:
-  /*
-    import { Component, OnInit } from '@angular/core';
-    import { Router } from '@angular/router';
-  
-    @Component({
-      selector: 'app-pago-exitoso',
-      templateUrl: './pago-exitoso.component.html',
-      styleUrls: ['./pago-exitoso.component.css']
-    })
-    export class PagoExitosoComponent implements OnInit {
-      
-      constructor(private router: Router) { }
-      
-      ngOnInit(): void {
-        // Redirigir después de 5 segundos
-        setTimeout(() => {
-          this.router.navigate(['/']);
-        }, 5000);
-      }
-    }
-    */
-</script>
-
-<!-- Estilos personalizados para las animaciones -->
-<style>
-  @keyframes fall {
-    0% {
-      transform: translateY(-10px);
-      opacity: 0;
-    }
-    10% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(100vh);
-      opacity: 0;
-    }
-  }
-
-  .animate-fall {
-    animation-name: fall;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-  }
-</style>

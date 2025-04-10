@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TALLERES } from '../../talleres';
+import { FormsModule } from '@angular/forms';
 import { StripeService } from '../../../../services/stripe.service'; // Importa el servicio
 import Swal from 'sweetalert2';
 
@@ -171,20 +172,40 @@ export class DetalleTallerComponent implements OnInit {
     });
   }
 
+  emailCliente: string = '';
+  mostrarFormularioEmail: boolean = false;
+
   // Nueva función para iniciar el pago con Stripe
+  // Reemplazar la función pagarConStripe() con esta versión
+  // Modificar el método pagarConStripe() en DetalleTallerComponent
   pagarConStripe(): void {
+    if (!this.taller) return;
+
+    // Si aún no tenemos el email, mostrar formulario primero
+    if (!this.emailCliente) {
+      this.mostrarFormularioEmail = true;
+      return;
+    }
+
     this.procesandoPago = true;
     this.errorPago = null;
 
     // Preparar los datos para la sesión de Stripe
     const paymentData = {
-      amount: this.calcularTotalPagoNumerico(), // Monto total en números
-      currency: 'mxn', // Moneda (pesos mexicanos)
-      name: `Inscripción: ${this.taller.titulo}`, // Nombre del producto
-      description: `Inscripción y primera mensualidad para el taller ${this.taller.titulo}`,
-      success_url: window.location.origin + '/pago-exitoso', // URL de redirección tras pago exitoso
-      cancel_url: window.location.origin + '/pago-cancelado', // URL si se cancela
-      client_reference_id: `taller_${this.taller.id}`, // Referencia para identificar en Stripe
+      amount: this.calcularTotalPago(),
+      currency: 'mxn',
+      name: `Inscripción: ${this.taller.titulo}`,
+      description: `Inscripción y primera mensualidad para ${
+        this.taller.categoria === 'infantil' ? 'el taller' : 'el curso'
+      } ${this.taller.titulo}`,
+      success_url:
+        window.location.origin +
+        '/pago-exitoso?payment_intent={PAYMENT_INTENT}',
+      cancel_url: window.location.origin + '/pago-cancelado',
+      client_reference_id: `curso_${this.taller.id}`,
+      customer_email: this.emailCliente,
+      producto_tipo: 'curso',
+      producto_id: this.taller.id.toString(),
     };
 
     // Llamar al servicio para crear la sesión de Checkout
@@ -206,5 +227,18 @@ export class DetalleTallerComponent implements OnInit {
         console.error('Error de pago:', err);
       },
     });
+  }
+
+  // Nueva función para confirmar el email y proceder con el pago
+  confirmarEmail(): void {
+    // Validación básica de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(this.emailCliente)) {
+      this.errorPago = 'Por favor ingresa un correo electrónico válido';
+      return;
+    }
+
+    this.mostrarFormularioEmail = false;
+    this.pagarConStripe();
   }
 }
