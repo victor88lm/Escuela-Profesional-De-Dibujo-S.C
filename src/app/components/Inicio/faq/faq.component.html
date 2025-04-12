@@ -1,4 +1,3 @@
-<!-- faq.component.html -->
 <section class="bg-gradient-to-br from-blue-50 to-indigo-50 py-32 min-h-screen" id="faq">
   <div class="container mx-auto px-4 max-w-6xl">
     <!-- Encabezado del FAQ -->
@@ -12,10 +11,8 @@
       </p>
     </div>
 
-    <!-- Buscador y filtros -->
+    <!-- Categorías / Filtros -->
     <div class="mb-10">
-
-      <!-- Categorías / Filtros -->
       <div class="flex flex-wrap justify-center gap-2 md:gap-3">
         <button 
           (click)="filterByCategory('all')" 
@@ -98,7 +95,7 @@
           [attr.aria-expanded]="item.isOpen"
           [attr.aria-controls]="'faq-answer-' + i">
           
-          <span class="text-lg font-medium text-gray-800 flex items-center group-hover:text-blue-600">
+          <span class="text-lg font-medium text-gray-800 flex items-center">
             <span class="inline-flex items-center justify-center w-8 h-8 rounded-full mr-3 text-sm font-bold transition-all duration-300"
                   [ngClass]="item.isOpen ? 'bg-amber-100 text-amber-600' : 'bg-blue-100 text-blue-600'">
               {{i + 1}}
@@ -121,8 +118,8 @@
           [ngClass]="item.isOpen ? 'bg-gradient-to-br from-blue-50/70 to-amber-50/50' : ''">
           <div class="py-3 text-base text-gray-600 leading-relaxed">{{ item.answer }}</div>
           
-          <!-- Badge de categoría y botones de acción -->
-          <div class="flex justify-between items-center mt-2 pt-3 border-t border-gray-100">
+          <!-- Badge de categoría -->
+          <div class="flex items-center mt-2 pt-3 border-t border-gray-100">
             <span class="text-xs font-medium px-2 py-1 rounded-full"
                   [ngClass]="{
                     'bg-purple-100 text-purple-800': item.category === 'inscripciones',
@@ -134,14 +131,6 @@
                   }">
               {{item.category | titlecase}}
             </span>
-            <div class="space-x-2">
-              <button class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 px-3 py-1 rounded-lg transition-colors">
-                ¿Fue útil?
-              </button>
-              <button class="text-xs bg-gray-50 hover:bg-gray-100 text-gray-700 px-3 py-1 rounded-lg transition-colors">
-                Compartir
-              </button>
-            </div>
           </div>
         </div>
       </div>
@@ -151,13 +140,13 @@
     <div class="mt-12 text-center">
       <p class="text-gray-600 mb-4">¿Tienes alguna otra pregunta? Estamos aquí para ayudarte.</p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a routerLink="/Contactanos" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 flex items-center justify-center">
+        <a routerLink="/Contactanos" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
           Contáctanos
         </a>
-        <a href="tel:+525579872334" class="inline-block bg-white border border-blue-600 hover:bg-blue-50 text-blue-600 font-medium py-3 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 flex items-center justify-center">
+        <a href="tel:+525579872334" class="inline-block bg-white border border-blue-600 hover:bg-blue-50 text-blue-600 font-medium py-3 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
           </svg>
@@ -166,9 +155,4 @@
       </div>
     </div>
   </div>
-
-  <!-- Elementos decorativos de fondo -->
-  <div class="absolute top-20 left-10 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-  <div class="absolute top-40 right-10 w-64 h-64 bg-amber-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-  <div class="absolute bottom-20 left-1/3 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
 </section>

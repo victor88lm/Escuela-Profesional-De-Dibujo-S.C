@@ -1,39 +1,37 @@
-<!-- Slider component with three slides and swipe functionality -->
 <section class="slider-container relative overflow-hidden" #sliderContainer aria-label="Escuela Profesional de Dibujo">
-    <!-- Slider controls - Enhanced for better mobile experience -->
+    <!-- Slider controls -->
     <div class="slider-controls absolute z-20 bottom-3 xs:bottom-4 sm:bottom-6 left-0 right-0 flex justify-center gap-2 sm:gap-3">
         <button #sliderDot class="slider-dot active h-4 w-4 xs:h-3 xs:w-3 sm:h-4 sm:w-4 rounded-full bg-white shadow-md touch-manipulation" aria-label="Slide 1" data-slide="0"></button>
         <button #sliderDot class="slider-dot h-4 w-4 xs:h-3 xs:w-3 sm:h-4 sm:w-4 rounded-full bg-white/50 shadow-md touch-manipulation" aria-label="Slide 2" data-slide="1"></button>
         <button #sliderDot class="slider-dot h-4 w-4 xs:h-3 xs:w-3 sm:h-4 sm:w-4 rounded-full bg-white/50 shadow-md touch-manipulation" aria-label="Slide 3" data-slide="2"></button>
     </div>
 
-    <!-- Enhanced navigation arrows - increased touch area and improved visibility -->
-    <button #navPrev class="nav-arrow nav-prev absolute left-1 xs:left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 backdrop-blur-sm p-2 xs:p-2 sm:p-2 rounded-full z-10 touch-manipulation" aria-label="Anterior slide">
+    <!-- Navigation arrows -->
+    <button #navPrev class="nav-arrow nav-prev absolute left-1 xs:left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 backdrop-blur-sm p-2 rounded-full z-10 touch-manipulation" aria-label="Anterior slide">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 xs:h-6 xs:w-6 sm:h-8 sm:w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
     </button>
-    <button #navNext class="nav-arrow nav-next absolute right-1 xs:right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 backdrop-blur-sm p-2 xs:p-2 sm:p-2 rounded-full z-10 touch-manipulation" aria-label="Siguiente slide">
+    <button #navNext class="nav-arrow nav-next absolute right-1 xs:right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 backdrop-blur-sm p-2 rounded-full z-10 touch-manipulation" aria-label="Siguiente slide">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 xs:h-6 xs:w-6 sm:h-8 sm:w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
     </button>
 
-    <!-- Slider wrapper - Improved adaptive height for all screen sizes -->
+    <!-- Slider wrapper -->
     <div #sliderWrapper class="slider-wrapper flex transition-transform duration-500 ease-in-out h-[350px] xs:h-[400px] sm:h-[500px] md:h-[600px] will-change-transform">
-        <!-- Slide 1: Original Hero (enhanced responsive improvements) -->
+        <!-- Slide 1: Original Hero -->
         <div class="slider-slide flex-shrink-0 w-full relative">
             <section class="hero-section flex items-center justify-center h-full" aria-label="Escuela Profesional de Dibujo">
-                <!-- Overlay con gradiente mejorado para móviles -->
+                <!-- Overlay -->
                 <div class="hero-overlay bg-gradient-to-br from-gray-900/90 to-indigo-900/80 absolute inset-0" role="presentation"></div>
                 
-                <!-- Contenido Hero Optimizado y Mejorado para móviles -->
+                <!-- Hero Content -->
                 <div class="hero-content flex items-center justify-center h-full w-full pt-1 xs:pt-2 sm:pt-4 z-10">
                     <div class="max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 w-full">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 xs:gap-4 sm:gap-8 items-center">
-                            <!-- Contenido de Texto Mejorado para móviles -->
+                            <!-- Texto -->
                             <div class="text-white">
-                                <!-- Títulos comprimidos en móviles muy pequeños -->
                                 <h1 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight">
                                     <span class="block text-white">Arte y técnica</span>
                                     <span class="block text-white">en el dibujo profesional</span>
@@ -45,7 +43,7 @@
                                     necesarias para destacar.
                                 </p>
                                 
-                                <!-- Características simplificadas en móviles muy pequeños -->
+                                <!-- Características -->
                                 <div class="mt-3 xs:mt-4 sm:mt-8 grid grid-cols-1 xs:grid-cols-2 gap-2 xs:gap-3 sm:gap-4">
                                     <div class="flex items-start">
                                         <img src="https://img.icons8.com/ios-filled/50/FFFFFF/diploma.png" alt="Certificación" class="h-5 w-5 xs:h-6 xs:w-6 sm:h-8 sm:w-8 mr-2 sm:mr-3" loading="lazy" />
@@ -63,7 +61,7 @@
                                     </div>
                                 </div>
                                 
-                                <!-- Botón con mejor área táctil -->
+                                <!-- Botón CTA -->
                                 <div class="mt-4 xs:mt-5 sm:mt-10 flex flex-wrap gap-2 xs:gap-3 sm:gap-4">
                                     <a routerLink="/Cursos" class="group inline-block px-4 xs:px-5 sm:px-8 py-2.5 xs:py-2 sm:py-3 btn-primary text-xs xs:text-sm sm:text-base lg:text-lg font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300 touch-manipulation" aria-label="Descubre nuestros cursos">
                                         <span class="flex items-center">
@@ -76,7 +74,7 @@
                                 </div>
                             </div>
                             
-                            <!-- Imagen (ahora visible en xs pero oculta en móviles muy pequeños) -->
+                            <!-- Imagen -->
                             <div class="hidden xs:block relative">
                                 <div class="float-animation">
                                     <img 
@@ -101,16 +99,16 @@
             </section>
         </div>
 
-        <!-- Slide 2: Fechas de Inscripción (Mobile Enhanced) -->
+        <!-- Slide 2: Fechas de Inscripción -->
         <div class="slider-slide flex-shrink-0 w-full relative">
             <section class="hero-section flex items-center justify-center h-full" aria-label="Fechas de Inscripción">
-                <!-- Overlay con mejor contraste para móviles -->
+                <!-- Overlay -->
                 <div class="hero-overlay-purple absolute inset-0" role="presentation"></div>
-                <!-- Inscripción Content - Optimizada para móviles -->
+                <!-- Contenido -->
                 <div class="hero-content flex items-center justify-center h-full w-full pt-0 xs:pt-0 sm:pt-4 z-10">
                     <div class="max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 w-full">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 xs:gap-4 sm:gap-8 items-center">
-                            <!-- Contenido de texto simplificado para móviles -->
+                            <!-- Texto -->
                             <div class="text-white">
                                 <h2 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight">
                                     <span class="block text-purple-200 text-glow-purple">Inscripciones</span>
@@ -120,7 +118,7 @@
                                     No pierdas la oportunidad de formarte con los mejores. 
                                     Las inscripciones ya están abiertas.
                                 </p>
-                                <!-- Tarjeta de fechas con mejor distribución para móviles -->
+                                <!-- Tarjeta de fechas -->
                                 <div class="mt-3 xs:mt-4 sm:mt-6 glass-card p-3 xs:p-4 sm:p-6 rounded-xl border border-purple-300 border-opacity-30">
                                     <h3 class="text-base xs:text-lg sm:text-xl lg:text-2xl font-semibold text-purple-200 flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 xs:h-5 xs:w-5 sm:h-6 sm:w-6 mr-1 xs:mr-1 sm:mr-2 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -155,7 +153,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <!-- Botón con mejor área táctil -->
+                                <!-- Botón -->
                                 <div class="mt-4 xs:mt-5 sm:mt-10">
                                     <a href="https://epd.edu.mx/registro.html" target="_blank" class="group inline-block px-4 xs:px-5 sm:px-8 py-2.5 xs:py-2 sm:py-3 btn-secondary text-xs xs:text-sm sm:text-base lg:text-lg font-medium rounded-full pulse-animation touch-manipulation" aria-label="Inscríbete ahora">
                                         <span class="flex items-center">
@@ -168,14 +166,14 @@
                                 </div>
                             </div>
                             
-                            <!-- Mini-slider optimizado para xs pero oculto en móviles muy pequeños -->
+                            <!-- Mini-slider -->
                             <div class="hidden xs:block relative">
                                 <div #miniSliderContainer class="mini-slider-container relative">
                                     <!-- Contenedor del carrusel -->
                                     <div class="mini-slider-wrapper overflow-hidden rounded-lg shadow-purple">
-                                        <!-- Track del carrusel con will-change para mejor rendimiento -->
+                                        <!-- Track del carrusel -->
                                         <div #miniSliderTrack class="mini-slider-track flex transition-transform duration-300 will-change-transform">
-                                            <!-- Slides con imágenes optimizadas -->
+                                            <!-- Slides -->
                                             <div class="mini-slider-slide flex-shrink-0 w-full">
                                                 <img 
                                                     src="img/Slider2.avif" 
@@ -208,7 +206,7 @@
                                             </div>
                                         </div>
                                         
-                                        <!-- Controles del mini-slider con mejor área táctil -->
+                                        <!-- Controles del mini-slider -->
                                         <button #miniPrev class="mini-slider-control left absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/20 hover:bg-white/40 rounded-full p-2 backdrop-blur-sm transition-all touch-manipulation" aria-label="Imagen anterior">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 xs:h-5 xs:w-5 sm:h-6 sm:w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -220,7 +218,7 @@
                                             </svg>
                                         </button>
                                         
-                                        <!-- Indicadores más visibles -->
+                                        <!-- Indicadores -->
                                         <div class="mini-slider-indicators absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2">
                                             <button #miniSliderIndicator class="w-2 h-2 rounded-full bg-white mini-slider-indicator active touch-manipulation" aria-label="Imagen 1"></button>
                                             <button #miniSliderIndicator class="w-2 h-2 rounded-full bg-white/50 mini-slider-indicator touch-manipulation" aria-label="Imagen 2"></button>
@@ -235,17 +233,17 @@
             </section>
         </div>
         
-        <!-- Slide 3: Presentación en Video (Mobile Enhanced) -->
+        <!-- Slide 3: Presentación en Video -->
         <div class="slider-slide flex-shrink-0 w-full relative">
             <section class="hero-section flex items-center justify-center h-full" aria-label="Presentación en Video">
-                <!-- Overlay con mejor contraste para móviles -->
+                <!-- Overlay -->
                 <div class="hero-overlay-green bg-gradient-to-br from-gray-900/90 to-green-900/80 absolute inset-0" role="presentation"></div>
                 
-                <!-- Contenido Hero optimizado para móviles -->
+                <!-- Contenido -->
                 <div class="hero-content flex items-center justify-center h-full w-full pt-1 xs:pt-2 sm:pt-4 z-10">
                     <div class="max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 w-full">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 xs:gap-4 sm:gap-8 items-center">
-                            <!-- Contenido de texto simplificado para móviles -->
+                            <!-- Texto -->
                             <div class="text-white">
                                 <h1 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight">
                                     <span class="block text-green-200">Conoce nuestra</span>
@@ -257,7 +255,7 @@
                                     desarrollan su talento artístico en un ambiente creativo.
                                 </p>
                                 
-                                <!-- Características con mejor espaciado para móviles -->
+                                <!-- Características -->
                                 <div class="mt-3 xs:mt-4 sm:mt-8 grid grid-cols-1 xs:grid-cols-2 gap-2 xs:gap-3 sm:gap-4">
                                     <div class="flex items-start">
                                         <img src="https://img.icons8.com/ios-filled/50/FFFFFF/certificate.png" alt="Certificación" class="h-5 w-5 xs:h-6 xs:w-6 sm:h-8 sm:w-8 mr-2 xs:mr-2 sm:mr-3" loading="lazy" />
@@ -275,7 +273,7 @@
                                     </div>
                                 </div>
                                 
-                                <!-- Botones con mejor adaptación para móviles -->
+                                <!-- Botón -->
                                 <div class="mt-4 xs:mt-5 sm:mt-10 flex flex-wrap gap-2 xs:gap-3 sm:gap-4">
                                     <a routerLink="/Cursos/TalleresEspecializados" class="group inline-block px-4 xs:px-5 sm:px-8 py-2.5 xs:py-2 sm:py-3 bg-green-500 text-white text-xs xs:text-sm sm:text-base lg:text-lg font-medium rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 touch-manipulation" aria-label="Conoce nuestros programas">
                                         <span class="flex items-center">
@@ -288,10 +286,10 @@
                                 </div>
                             </div>
                             
-                            <!-- Video container mejorado para móviles -->
+                            <!-- Video container -->
                             <div class="relative h-auto mt-3 xs:mt-4 md:mt-0 md:h-full flex items-center">
                                 <div class="video-container w-full aspect-video rounded-lg overflow-hidden shadow-xl border-2 border-green-500 border-opacity-30">
-                                    <!-- Video iframe con loading lazy y mejor rendimiento -->
+                                    <!-- Video iframe optimizado -->
                                     <iframe 
                                         title="vimeo-player" 
                                         src="https://player.vimeo.com/video/1062941240?h=978d473391&autoplay=1&loop=1&muted=1&background=1&quality=540p" 
@@ -304,14 +302,14 @@
                                     ></iframe>
                                 </div>
                                 
-                                <!-- Elementos decorativos visibles solo en pantallas más grandes -->
+                                <!-- Elementos decorativos -->
                                 <div class="hidden sm:block absolute -top-10 -right-10" aria-hidden="true">
                                     <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="50" cy="50" r="40" stroke="rgba(16, 185, 129, 0.3)" stroke-width="2" stroke-dasharray="10 10" />
                                     </svg>
                                 </div>
                                 
-                                <!-- Insignia adaptativa con mejor legibilidad -->
+                                <!-- Insignia -->
                                 <div class="absolute top-1 right-1 xs:top-2 xs:right-2 sm:top-4 sm:right-4 bg-black bg-opacity-70 backdrop-filter backdrop-blur-sm px-2 py-1 xs:px-2 xs:py-1 sm:px-3 sm:py-1 rounded-full">
                                     <span class="text-green-300 text-xxs xs:text-xs sm:text-sm lg:text-base font-medium">Formación premium</span>
                                 </div>

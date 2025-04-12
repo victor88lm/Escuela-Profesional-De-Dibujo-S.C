@@ -1,10 +1,9 @@
-import { Component, Input, OnInit, HostListener } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-whatsapp-button',
   templateUrl: './whatsapp-button.component.html',
-  styleUrls: ['./whatsapp-button.component.css'],
   animations: [
     trigger('expandButton', [
       state('circle', style({
@@ -17,14 +16,10 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
         width: '320px',
         height: 'auto',
         borderRadius: '20px',
-        backgroundColor: '#4881ff' // bg-blue-600 - Azul claro
+        backgroundColor: '#4881ff'
       })),
-      transition('circle => expanded', [
-        animate('0.4s cubic-bezier(0.25, 0.1, 0.25, 1.0)') // Curva de aceleración más suave
-      ]),
-      transition('expanded => circle', [
-        animate('0.3s cubic-bezier(0.25, 0.1, 0.25, 1.0)') // Curva de desaceleración más fluida
-      ])
+      transition('circle => expanded', animate('0.3s cubic-bezier(0.25, 0.1, 0.25, 1.0)')),
+      transition('expanded => circle', animate('0.25s cubic-bezier(0.25, 0.1, 0.25, 1.0)'))
     ]),
     trigger('iconTransform', [
       state('default', style({
@@ -33,53 +28,40 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
       })),
       state('hidden', style({
         opacity: 0,
-        transform: 'scale(0.5) rotate(90deg)' // Rotación menos agresiva
+        transform: 'scale(0.5) rotate(90deg)'
       })),
-      transition('default <=> hidden', [
-        animate('0.3s cubic-bezier(0.25, 0.1, 0.25, 1.0)') // Animación más suave
-      ])
+      transition('default <=> hidden', animate('0.25s ease-out'))
     ]),
     trigger('contentFade', [
       state('hidden', style({
         opacity: 0,
-        transform: 'translateY(5px)' // Menor desplazamiento
+        transform: 'translateY(5px)'
       })),
       state('visible', style({
         opacity: 1,
         transform: 'translateY(0)'
       })),
-      transition('hidden => visible', [
-        animate('0.3s cubic-bezier(0.25, 0.1, 0.25, 1.0)') // Sincronizado con la expansión
-      ]),
-      transition('visible => hidden', [
-        animate('0.2s cubic-bezier(0.25, 0.1, 0.25, 1.0)')
-      ])
-    ]),
-    trigger('rippleEffect', [
-      transition(':enter', [
-        style({ opacity: 0.7, transform: 'scale(0.1)' }),
-        animate('0.6s cubic-bezier(0, 0, 0.2, 1)', 
-          style({ opacity: 0, transform: 'scale(2.5)' }))
-      ])
+      transition('hidden => visible', animate('0.25s ease-out')),
+      transition('visible => hidden', animate('0.2s ease-in'))
     ])
   ]
 })
-export class WhatsappButtonComponent implements OnInit {
-  @Input() phoneNumber: string = '5516555577';
-  @Input() message: string = 'Hola, me gustaría conocer el proceso de admisión para los próximos cursos';
-  @Input() subtitle: string = 'Consulta nuestros cursos';
-  @Input() logoUrl: string = 'assets/images/logo-escuela.png'; // Logo personalizable
+export class WhatsappButtonComponent implements OnInit, OnDestroy {
+  @Input() phoneNumber = '5516555577';
+  @Input() message = 'Hola, me gustaría conocer el proceso de admisión para los próximos cursos';
+  @Input() subtitle = 'Consulta nuestros cursos';
+  @Input() logoUrl = 'assets/images/logo-escuela.png';
   
-  buttonState: string = 'circle';
-  iconState: string = 'default';
-  contentState: string = 'hidden';
-  isMobile: boolean = false;
-  isPulsing: boolean = false;
-  showRipple: boolean = false;
-  isAnimating: boolean = false; // Flag para prevenir animaciones simultáneas
+  buttonState = 'circle';
+  iconState = 'default';
+  contentState = 'hidden';
+  isMobile = false;
+  isPulsing = false;
+  
+  private pulseTimer: any;
+  private isAnimating = false;
 
-  // Mensajes predefinidos específicos para la escuela
-  quickReplies: Array<{text: string, message: string, icon: string}> = [
+  quickReplies = [
     {
       text: 'Información sobre inscripciones', 
       message: 'Hola, me gustaría recibir más información sobre las inscripciones',
@@ -98,117 +80,98 @@ export class WhatsappButtonComponent implements OnInit {
   ];
 
   ngOnInit() {
-    // Detectar si es un dispositivo móvil
     this.checkIfMobile();
-    
-    // Iniciar animación de pulso
     this.startPulseAnimation();
   }
 
-  // Iniciar animación de pulso para llamar la atención
-  startPulseAnimation(): void {
-    if (this.buttonState === 'circle') {
-      this.isPulsing = true;
-      setTimeout(() => {
-        this.isPulsing = false;
-      }, 1000);
-      
-      // Repetir cada 8 segundos
-      setTimeout(() => {
-        if (this.buttonState === 'circle') {
-          this.startPulseAnimation();
-        }
-      }, 8000);
+  ngOnDestroy() {
+    if (this.pulseTimer) {
+      clearTimeout(this.pulseTimer);
     }
   }
 
-  // Efecto de ripple al hacer click
-  triggerRipple(): void {
-    this.showRipple = true;
-    setTimeout(() => {
-      this.showRipple = false;
-    }, 600);
+  startPulseAnimation(): void {
+    if (this.buttonState === 'circle') {
+      this.isPulsing = true;
+      
+      this.pulseTimer = setTimeout(() => {
+        this.isPulsing = false;
+        
+        if (this.buttonState === 'circle') {
+          this.pulseTimer = setTimeout(() => {
+            this.startPulseAnimation();
+          }, 8000);
+        }
+      }, 1000);
+    }
   }
 
-  // Detectar cambios en el tamaño de la ventana
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   onResize() {
     this.checkIfMobile();
   }
 
-  // Verificar si estamos en un dispositivo móvil
   checkIfMobile(): void {
     this.isMobile = window.innerWidth <= 768;
   }
 
-  // Expandir el botón (activado por hover en desktop, click en móvil)
   expandButton(): void {
-    if (this.isAnimating) return; // Prevenir múltiples animaciones
+    if (this.isAnimating) return;
     
     this.isAnimating = true;
     this.buttonState = 'expanded';
     this.iconState = 'hidden';
     
-    // Mostrar el contenido ligeramente después para sincronizar animaciones
     setTimeout(() => {
       this.contentState = 'visible';
       this.isAnimating = false;
     }, 50);
   }
 
-  // Colapsar el botón
   collapseButton(): void {
-    if (this.isAnimating) return; // Prevenir múltiples animaciones
+    if (this.isAnimating) return;
     
     this.isAnimating = true;
     this.contentState = 'hidden';
     
-    // Esperar a que termine la animación de ocultación de contenido
     setTimeout(() => {
       this.buttonState = 'circle';
       this.iconState = 'default';
       
       setTimeout(() => {
         this.isAnimating = false;
-      }, 300);
-    }, 150);
+      }, 250);
+    }, 100);
   }
 
-  // Manejar hover (para desktop)
   onMouseEnter(): void {
     if (!this.isMobile && this.buttonState === 'circle') {
       this.expandButton();
     }
   }
 
-  // Manejar cuando el mouse sale
   onMouseLeave(): void {
     if (!this.isMobile && this.buttonState === 'expanded') {
       this.collapseButton();
     }
   }
 
-  // Manejar click (principalmente para móviles)
   onButtonClick(event: Event): void {
     event.stopPropagation();
-    this.triggerRipple();
     
     if (this.isMobile) {
       if (this.buttonState === 'circle') {
         this.expandButton();
       } else {
-        // En móvil, si ya está expandido, enviar mensaje por defecto
         this.openWhatsapp();
       }
     } else {
-      // En desktop, si está en círculo, abrir WhatsApp directamente
       if (this.buttonState === 'circle') {
         this.openWhatsapp();
       }
     }
   }
 
-  // Click en el documento para cerrar en móviles
   @HostListener('document:click')
   documentClick(): void {
     if (this.isMobile && this.buttonState === 'expanded') {
@@ -216,14 +179,12 @@ export class WhatsappButtonComponent implements OnInit {
     }
   }
 
-  // Abrir WhatsApp con mensaje específico
   openWhatsapp(customMessage?: string): void {
     const messageToSend = customMessage || this.message;
     const encodedMessage = encodeURIComponent(messageToSend);
     window.open(`https://wa.me/${this.phoneNumber}?text=${encodedMessage}`, '_blank');
   }
 
-  // Prevenir que el click se propague al documento
   preventPropagation(event: Event): void {
     event.stopPropagation();
   }

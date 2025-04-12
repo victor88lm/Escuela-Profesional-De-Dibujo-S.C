@@ -1,4 +1,6 @@
-/* Añadir a tu archivo CSS si no existe */
+/* Animaciones optimizadas para el botón de WhatsApp */
+
+/* Efecto de brillo para el botón */
 @keyframes shine {
   0% {
     left: -100%;
@@ -9,40 +11,49 @@
 }
 
 .animate-shine {
-  animation: shine 1.2s ease forwards;
+  animation: shine 1s cubic-bezier(0.25, 0.1, 0.25, 1.0) forwards;
 }
 
-/* Esta transición suaviza cualquier otro cambio visual */
-.transition-all {
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1.0);
-  transition-duration: 300ms;
-}
-
-/* Para la escala en hover */
+/* Escala hover más rápida */
 .hover\:scale-102:hover {
   transform: scale(1.02);
+  will-change: transform;
 }
 
-/* Animación de ping para el efecto pulsante */
+/* Animación ping optimizada */
 @keyframes ping {
   0% {
     transform: scale(0.8);
-    opacity: 1;
+    opacity: 0.8;
   }
-  75%, 100% {
+  70%, 100% {
     transform: scale(1.5);
     opacity: 0;
   }
 }
 
 .animate-ping {
-  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  animation: ping 1.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  will-change: transform, opacity;
 }
 
-/* Para hacer más suave la transición de hover en los botones */
+/* Mejora de rendimiento para todas las animaciones */
 button {
   backface-visibility: hidden;
   transform: translateZ(0);
   perspective: 1000;
+  will-change: transform;
+}
+
+/* Reducción de repaints */
+.fixed {
+  transform: translateZ(0);
+}
+
+/* Mejora de rendimiento para transiciones */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1.0);
+  transition-duration: 250ms;
+  will-change: transform, opacity;
 }

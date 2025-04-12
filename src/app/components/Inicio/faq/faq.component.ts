@@ -1,4 +1,3 @@
-// faq.component.ts
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
@@ -12,7 +11,6 @@ interface FaqItem {
 @Component({
   selector: 'app-faq',
   templateUrl: './faq.component.html',
-  styleUrls: ['./faq.component.css'],
   animations: [
     trigger('expandCollapse', [
       state('collapsed', style({
@@ -25,16 +23,15 @@ interface FaqItem {
         overflow: 'hidden',
         opacity: '1'
       })),
-      transition('collapsed <=> expanded', [
-        animate('300ms ease-in-out')
-      ])
+      transition('collapsed <=> expanded', animate('300ms ease-in-out'))
     ])
   ]
 })
 export class FAQComponent implements OnInit {
-  activeCategory: string = 'all';
-  searchTerm: string = '';
-
+  activeCategory = 'all';
+  searchTerm = '';
+  
+  // Datos de FAQ estructurados por categoría
   faqItems: FaqItem[] = [
     // Categoría: Inscripciones y Admisiones
     {
@@ -193,37 +190,26 @@ export class FAQComponent implements OnInit {
     }
   ];
 
-  filteredItems: FaqItem[] = this.faqItems;
+  filteredItems: FaqItem[] = [];
 
   ngOnInit() {
     this.filterByCategory('all');
   }
 
   toggleFaq(index: number): void {
-    // Cerrar todas las preguntas antes de abrir la seleccionada
     this.filteredItems.forEach((item, i) => {
-      if (i !== index) {
-        item.isOpen = false;
-      }
+      if (i !== index) item.isOpen = false;
     });
-
-    // Invertir el estado de la pregunta seleccionada
     this.filteredItems[index].isOpen = !this.filteredItems[index].isOpen;
   }
 
   filterByCategory(category: string): void {
     this.activeCategory = category;
-    
-    if (category === 'all') {
-      this.filteredItems = this.faqItems;
-    } else {
-      this.filteredItems = this.faqItems.filter(item => item.category === category);
-    }
-
-    // Si hay un término de búsqueda, aplicar también ese filtro
-    if (this.searchTerm.trim()) {
-      this.applySearch();
-    }
+    this.filteredItems = category === 'all' 
+      ? this.faqItems 
+      : this.faqItems.filter(item => item.category === category);
+      
+    if (this.searchTerm.trim()) this.applySearch();
   }
 
   applySearch(): void {
@@ -234,12 +220,10 @@ export class FAQComponent implements OnInit {
       return;
     }
 
-    // Filtrar primero por categoría (si no es 'all')
-    let baseItems = this.activeCategory === 'all' ? 
-      this.faqItems : 
-      this.faqItems.filter(item => item.category === this.activeCategory);
+    const baseItems = this.activeCategory === 'all' 
+      ? this.faqItems 
+      : this.faqItems.filter(item => item.category === this.activeCategory);
     
-    // Luego filtrar por término de búsqueda
     this.filteredItems = baseItems.filter(item => 
       item.question.toLowerCase().includes(term) || 
       item.answer.toLowerCase().includes(term)

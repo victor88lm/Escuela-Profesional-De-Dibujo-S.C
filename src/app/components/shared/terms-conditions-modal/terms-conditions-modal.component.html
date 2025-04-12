@@ -1,12 +1,11 @@
-<!-- terms-conditions-modal.component.html - Diseño Minimalista -->
 <div #termsModal 
-     class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center transition-opacity duration-300 will-change-transform" 
+     class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center transition-opacity duration-300" 
      [ngClass]="{'hidden': !isVisible, 'opacity-0': !isVisible}"
      (click)="onBackdropClick($event)">
   <div class="bg-white rounded-lg shadow-xl w-[95%] max-w-3xl max-h-[90vh] overflow-hidden flex flex-col relative animate-scale-up" 
        (click)="$event.stopPropagation()">
     
-    <!-- Header con acento de color -->
+    <!-- Header -->
     <div class="p-4 sm:p-6 border-b border-gray-100 flex justify-between items-center relative">
       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-teal-500"></div>
       <h3 class="text-xl sm:text-2xl font-medium text-gray-900 flex items-center">
@@ -23,8 +22,8 @@
       </button>
     </div>
     
-    <!-- Contenido con scroll optimizado -->
-    <div class="overflow-y-auto overscroll-contain will-change-scroll flex-grow p-4 sm:p-6 text-gray-700 smooth-scroll">
+    <!-- Contenido con scroll -->
+    <div class="overflow-y-auto overscroll-contain flex-grow p-4 sm:p-6 text-gray-700">
       <div class="space-y-6 sm:space-y-8 max-w-2xl mx-auto">
         
         <!-- Introducción -->
@@ -214,7 +213,7 @@
           </div>
         </section>
 
-        <!-- Sección 6 - Jurisdicción -->
+        <!-- Sección 6 - Aceptación -->
         <section>
           <p class="text-sm bg-green-50 p-3 rounded-md border-l-2 border-green-500">
             Al inscribirse o contratar los servicios de la Escuela Profesional De Dibujo S.C., el Estudiante manifiesta haber leído, entendido y aceptado estos Términos y Condiciones en su totalidad.
