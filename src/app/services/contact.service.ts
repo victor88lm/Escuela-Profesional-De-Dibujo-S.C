@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ContactService {
-  private apiUrl = 'https://epd.loopmotion.tech/php/procesar-formulario.php';
+  private apiUrl = 'https://epd.edu.mx/php/procesar-formulario.php';
 
   constructor(private http: HttpClient) { }
 
