@@ -345,7 +345,9 @@ export class PagoExitosoComponent implements OnInit {
             <div class="section-title">Datos del Cliente</div>
             <div class="info-group">
               <div class="label">Nombre:</div>
-              <div class="value highlight">${this.pagoInfo.nombre_cliente || 'No especificado'}</div>
+              <div class="value highlight">${
+                this.pagoInfo.nombre_cliente || 'No especificado'
+              }</div>
             </div>
             <div class="info-group">
               <div class="label">Correo:</div>
@@ -363,7 +365,9 @@ export class PagoExitosoComponent implements OnInit {
             </div>
             <div class="info-group">
               <div class="label">Fecha y Hora:</div>
-              <div class="value">${new Date(this.pagoInfo.fecha_pago).toLocaleString()}</div>
+              <div class="value">${new Date(
+                this.pagoInfo.fecha_pago
+              ).toLocaleString()}</div>
             </div>
           </div>
         </div>
@@ -379,7 +383,9 @@ export class PagoExitosoComponent implements OnInit {
       
       <div class="amount-card">
         <div class="amount-label">MONTO TOTAL</div>
-        <div class="amount-value">$${this.pagoInfo.monto} ${this.pagoInfo.moneda}</div>
+        <div class="amount-value">$${this.pagoInfo.monto} ${
+      this.pagoInfo.moneda
+    }</div>
       </div>
     </div>
     
@@ -448,7 +454,7 @@ export class PagoExitosoComponent implements OnInit {
       `Por favor, confirmar mi inscripción. ¡Gracias!`;
 
     // Número de WhatsApp de la escuela
-    const whatsappUrl = `https://wa.me/5215564709939?text=${encodeURIComponent(
+    const whatsappUrl = `https://wa.me/5215516555577?text=${encodeURIComponent(
       mensaje
     )}`;
     window.open(whatsappUrl, '_blank');

@@ -31,7 +31,7 @@ export class StripeService {
     stripeJs.onload = () => {
       // Inicializar Stripe con tu clave pública
       const stripe = (window as any).Stripe(
-        'pk_test_51RByiNPHx1YvSlrKtw9aQkjJOfudXiMh1Rl6Wh0b9OIQ2nplbYDWBRjH6u9uTOFkU8qHBrEOD2ut62P1QnN6r3OF00tCKKHFsH'
+        'pk_test_51REEqGRd6CuZcB2icBHXcENukJAppYMXVsSruDGajtbqAGVlRZ4GGCQ1DtaSS4GAiESWnQs5Yk2Kv5KYclhhX5nS00fv2hPG50'
       ); // Reemplaza con tu clave pública
 
       // Redirigir a Checkout usando el ID de sesión
