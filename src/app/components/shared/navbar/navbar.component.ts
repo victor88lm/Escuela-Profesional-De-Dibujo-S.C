@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('mobileSidenav') mobileSidenav: ElementRef | undefined;
   
   private destroy$ = new Subject<void>(); // For clean subscription management
-  private readonly blueNavbarRoutes = ['/Contactanos', '/Galeria', '/Planteles', '/PreguntasFrecuentes'];
+  private readonly blueNavbarRoutes = ['/Contactanos', '/Galeria', '/Planteles', '/PreguntasFrecuentes', '/registro'];
   
   constructor(private router: Router) {}
   
