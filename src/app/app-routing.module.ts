@@ -15,6 +15,7 @@ import { DetalleTallerComponent } from './components/cursos/talleres-especializa
 import { DetalleCursoComponent } from './components/cursos/detalle-curso/detalle-curso.component';
 import { PagoExitosoComponent } from './components/cursos/pagos/pago-exitoso/pago-exitoso.component';
 import { PagoRechazadoComponent } from './components/cursos/pagos/pago-rechazado/pago-rechazado.component';
+import { RegistroComponent } from './components/shared/registro/registro.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'Planteles', component: PlantelesComponent },
   { path: 'Contactanos', component: ContactoComponent },
   { path: 'Cursos', component: OfertaEducativaComponent },
+  { path: 'registro', component: RegistroComponent },
   { path: 'pago-exitoso', component: PagoExitosoComponent },
   { path: 'pago-cancelado', component: PagoRechazadoComponent },
 

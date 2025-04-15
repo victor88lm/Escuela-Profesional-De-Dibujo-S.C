@@ -32,6 +32,7 @@ import { TalleresEspecializadosComponent } from './components/cursos/talleres-es
 import { WhatsappButtonComponent } from './components/shared/whatsapp-button/whatsapp-button.component';
 import { FAQComponent } from './components/Inicio/faq/faq.component';
 import { DetalleTallerComponent } from './components/cursos/talleres-especializados/detalle-taller/detalle-taller.component';
+import { RegistroComponent } from './components/shared/registro/registro.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { DetalleTallerComponent } from './components/cursos/talleres-especializa
     WhatsappButtonComponent,
     FAQComponent,
     DetalleTallerComponent,
+    RegistroComponent,
   ],
 
   imports: [
