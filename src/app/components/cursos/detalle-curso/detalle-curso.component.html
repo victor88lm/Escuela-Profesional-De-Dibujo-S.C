@@ -46,32 +46,43 @@
         </h3>
 
         <div class="relative w-full">
-          <!-- Slider de imágenes -->
-          <div class="overflow-hidden">
+          <!-- Slider de imágenes con contenedor de tamaño fijo -->
+          <div class="overflow-hidden h-64 rounded-lg">
             <div
-              class="flex transition-transform duration-500"
+              class="flex transition-transform duration-500 ease-in-out h-full"
               id="gallerySlider"
             >
               <img
-                *ngFor="let imagen of curso!.imagenes"
+                *ngFor="let imagen of curso!.imagenes; let i = index"
                 [src]="imagen"
                 [alt]="curso!.titulo"
-                class="w-full h-64 object-cover rounded-lg"
+                class="w-full h-full object-cover flex-shrink-0"
+                [id]="'slide-' + i"
               />
             </div>
           </div>
-          <!-- Controles para el slider -->
+
+          <!-- Controles para el slider mejorados -->
           <div
-            class="absolute top-1/2 left-0 transform -translate-y-1/2 text-white text-3xl p-2 cursor-pointer bg-black bg-opacity-30 rounded-r-lg"
+            class="absolute top-1/2 left-2 transform -translate-y-1/2 text-white text-3xl p-2 cursor-pointer bg-black bg-opacity-50 hover:bg-opacity-70 rounded-full transition-all"
             id="prevSlide"
+            aria-label="Imagen anterior"
           >
             &#10094;
           </div>
           <div
-            class="absolute top-1/2 right-0 transform -translate-y-1/2 text-white text-3xl p-2 cursor-pointer bg-black bg-opacity-30 rounded-l-lg"
+            class="absolute top-1/2 right-2 transform -translate-y-1/2 text-white text-3xl p-2 cursor-pointer bg-black bg-opacity-50 hover:bg-opacity-70 rounded-full transition-all"
             id="nextSlide"
+            aria-label="Imagen siguiente"
           >
             &#10095;
+          </div>
+
+          <!-- Indicadores de posición (paginación) - opcional -->
+          <div
+            class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 slider-indicators"
+          >
+            <!-- Los indicadores se generarán dinámicamente con JavaScript -->
           </div>
         </div>
       </div>

@@ -47,6 +47,14 @@ export class DetalleCursoComponent implements OnInit {
   }
 
   // Método para inicializar el slider
+  ngAfterViewInit(): void {
+    // Configurar evento de redimensionamiento para mantener el slider responsive
+    window.addEventListener('resize', () => {
+      this.setupSlides();
+    });
+  }
+
+  // Método para inicializar el slider
   private initSlider(): void {
     // Configura los listeners para botones prev/next si existen en el DOM
     const prevButton = document.getElementById('prevSlide');
@@ -59,6 +67,66 @@ export class DetalleCursoComponent implements OnInit {
     if (nextButton) {
       nextButton.addEventListener('click', () => this.nextSlide());
     }
+
+    // Configurar las dimensiones de los slides
+    this.setupSlides();
+
+    // Inicializar los indicadores (opcional)
+    this.setupIndicators();
+  }
+
+  // Configurar dimensiones precisas de los slides
+  private setupSlides(): void {
+    const slider = document.getElementById('gallerySlider');
+    if (!slider || !this.curso?.imagenes?.length) return;
+
+    const containerWidth = slider.parentElement?.offsetWidth || 0;
+    const slides = slider.querySelectorAll('img');
+
+    // Asegurar que cada imagen tenga exactamente el ancho del contenedor
+    slides.forEach((slide) => {
+      (slide as HTMLElement).style.width = `${containerWidth}px`;
+    });
+
+    // Ajustar el ancho total del slider para acomodar todas las imágenes
+    slider.style.width = `${containerWidth * this.curso.imagenes.length}px`;
+
+    // Actualizar la posición actual
+    this.updateSlider();
+  }
+
+  // Configurar indicadores de posición (opcional)
+  private setupIndicators(): void {
+    const indicatorsContainer = document.querySelector('.slider-indicators');
+    if (!indicatorsContainer || !this.curso?.imagenes?.length) return;
+
+    // Limpiar indicadores existentes
+    indicatorsContainer.innerHTML = '';
+
+    // Crear indicadores para cada imagen
+    this.curso.imagenes.forEach((_, index) => {
+      const indicator = document.createElement('span');
+      indicator.classList.add(
+        'w-2',
+        'h-2',
+        'bg-white',
+        'bg-opacity-50',
+        'rounded-full',
+        'cursor-pointer',
+        'transition-all',
+        'mx-1'
+      );
+
+      if (index === this.currentSlideIndex) {
+        indicator.classList.add('bg-opacity-100');
+      }
+
+      indicator.addEventListener('click', () => {
+        this.goToSlide(index);
+      });
+
+      indicatorsContainer.appendChild(indicator);
+    });
   }
 
   // Métodos para controlar el slider de imágenes
@@ -67,6 +135,7 @@ export class DetalleCursoComponent implements OnInit {
       this.currentSlideIndex =
         (this.currentSlideIndex + 1) % this.curso.imagenes.length;
       this.updateSlider();
+      this.updateIndicators();
     }
   }
 
@@ -76,15 +145,43 @@ export class DetalleCursoComponent implements OnInit {
         (this.currentSlideIndex - 1 + this.curso.imagenes.length) %
         this.curso.imagenes.length;
       this.updateSlider();
+      this.updateIndicators();
+    }
+  }
+
+  // Ir a un slide específico (para los indicadores)
+  goToSlide(index: number): void {
+    if (
+      this.curso?.imagenes &&
+      index >= 0 &&
+      index < this.curso.imagenes.length
+    ) {
+      this.currentSlideIndex = index;
+      this.updateSlider();
+      this.updateIndicators();
     }
   }
 
   private updateSlider(): void {
     const slider = document.getElementById('gallerySlider');
     if (slider && this.curso?.imagenes) {
-      const translateValue = -this.currentSlideIndex * 100;
-      slider.style.transform = `translateX(${translateValue}%)`;
+      // Usar pixeles exactos en lugar de porcentajes
+      const containerWidth = slider.parentElement?.offsetWidth || 0;
+      const translateValue = -this.currentSlideIndex * containerWidth;
+      slider.style.transform = `translateX(${translateValue}px)`;
     }
+  }
+
+  // Actualizar el estado visual de los indicadores (opcional)
+  private updateIndicators(): void {
+    const indicators = document.querySelectorAll('.slider-indicators span');
+    indicators.forEach((indicator, index) => {
+      if (index === this.currentSlideIndex) {
+        indicator.classList.add('bg-opacity-100');
+      } else {
+        indicator.classList.remove('bg-opacity-100');
+      }
+    });
   }
 
   // Método para abrir modal de inscripción (implementación pendiente)

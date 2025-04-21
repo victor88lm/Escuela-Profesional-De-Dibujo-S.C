@@ -5,11 +5,9 @@ export const TALLERES = [
     categoria: 'Dibujo',
     titulo: 'Fundamentos de Dibujo',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/fundamentosDibujo/fundamentosDibujo1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1602738328654-51ab2ae6c4ff',
-      'https://images.unsplash.com/photo-1581354883434-54b812d3dfbc',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/fundamentosDibujo/fundamentosDibujo1.avif',
     ],
     descripcionCorta: ['✏️ Técnicas básicas', '📏 Proporción y forma'],
     descripcionCompleta:
@@ -45,11 +43,9 @@ export const TALLERES = [
     categoria: 'Dibujo',
     titulo: 'Retrato',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/retrato/retrato1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1626544827763-d516dce335e2',
-      'https://images.unsplash.com/photo-1594837101218-1cc0a15176aa',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/retrato/retrato1.avif',
     ],
     descripcionCorta: ['👤 Expresión facial', '✏️ Realismo y proporción'],
     descripcionCompleta:
@@ -85,11 +81,9 @@ export const TALLERES = [
     categoria: 'Dibujo',
     titulo: 'Anatomía',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/anatomia/anatomia1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1555721264-7a0b1730ff26',
-      'https://images.unsplash.com/photo-1576086319877-6d112591e5e6',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/anatomia/anatomia1.avif',
     ],
     descripcionCorta: ['👤 Estructura corporal', '✏️ Proporciones humanas'],
     descripcionCompleta:
@@ -125,11 +119,9 @@ export const TALLERES = [
     categoria: 'Dibujo',
     titulo: 'Diseño de Personajes',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/disenoPersonajes/disenoPersonajes1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1599498448014-67308b2271b9',
-      'https://images.unsplash.com/photo-1615412704911-55d589229865',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/disenoPersonajes/disenoPersonajes1.avif',
     ],
     descripcionCorta: ['🎭 Anatomía creativa', '🎨 Desarrollo de estilo'],
     descripcionCompleta:
@@ -165,11 +157,9 @@ export const TALLERES = [
     categoria: 'Dibujo',
     titulo: 'Perspectiva',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/perspectiva/perspectiva1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1594804233314-6b16fa858fef',
-      'https://images.unsplash.com/photo-1519974719765-e6559eac2575',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/perspectiva/perspectiva1.avif',
     ],
     descripcionCorta: ['🏙️ Escalas y profundidad', '📏 Puntos de fuga'],
     descripcionCompleta:
@@ -205,11 +195,9 @@ export const TALLERES = [
     categoria: 'Dibujo',
     titulo: 'Diseño de Escenarios',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/disenoEscenarios/disenoEscenarios1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1560421741-6551b3ff7a74',
-      'https://images.unsplash.com/photo-1510832842230-87253f48d74f',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/disenoEscenarios/disenoEscenarios1.avif',
     ],
     descripcionCorta: ['🏙️ Ambientes y espacios', '🖌️ Composición espacial'],
     descripcionCompleta:
@@ -245,11 +233,9 @@ export const TALLERES = [
     categoria: 'Dibujo',
     titulo: 'Ilustración',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/ilustracion/ilustracion1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1617791160505-6f00504e3519',
-      'https://images.unsplash.com/photo-1628359355624-855775b5c9c4',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/ilustracion/ilustracion1.avif',
     ],
     descripcionCorta: ['🎨 Técnicas mixtas', '📚 Narrativa visual'],
     descripcionCompleta:
@@ -285,11 +271,9 @@ export const TALLERES = [
     categoria: 'Dibujo',
     titulo: 'Narrativa Gráfica',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/narrativaGrafica/narracionGrafica1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1600096194534-95cf5ece04cf',
-      'https://images.unsplash.com/photo-1618519764620-7403abdbdfe9',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/narrativaGrafica/narracionGrafica1.avif',
     ],
     descripcionCorta: ['📖 Cómic y storyboard', '✏️ Composición visual'],
     descripcionCompleta:
@@ -327,11 +311,9 @@ export const TALLERES = [
     categoria: 'Pintura',
     titulo: 'Carbones',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/carbones/carbones1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1583119022894-919a68a3d0e3',
-      'https://images.unsplash.com/photo-1605095337129-ba8e0f044a4f',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/carbones/carbones1.avif',
     ],
     descripcionCorta: ['✏️ Técnica en seco', '🖤 Luces y sombras'],
     descripcionCompleta:
@@ -367,11 +349,9 @@ export const TALLERES = [
     categoria: 'Pintura',
     titulo: 'Gises Pastel',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/gisesPastel/gisesPastel1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1517697471339-4aa32003c11a',
-      'https://images.unsplash.com/photo-1596350351182-c2ce5b74a758',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/gisesPastel/gisesPastel1.avif',
     ],
     descripcionCorta: ['🖍️ Uso de pasteles', '🌈 Mezcla y difuminado'],
     descripcionCompleta:
@@ -407,11 +387,9 @@ export const TALLERES = [
     categoria: 'Pintura',
     titulo: 'Lápices de Colores',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/lapicesColores/lapizColor1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1623910241845-9f44f2e6245c',
-      'https://images.unsplash.com/photo-1513364776144-60967b0f800f',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/lapicesColores/lapizColor1.avif',
     ],
     descripcionCorta: ['🌈 Técnicas de color', '✏️ Mezclas y capas'],
     descripcionCompleta:
@@ -447,11 +425,9 @@ export const TALLERES = [
     categoria: 'Pintura',
     titulo: 'Tinta China',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/tintaChina/tintaChina1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1620012253295-c15cc3e65df4',
-      'https://images.unsplash.com/photo-1595079676339-1534801ad6cf',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/tintaChina/tintaChina1.avif',
     ],
     descripcionCorta: ['🖋️ Técnicas de línea', '✒️ Aguadas y texturas'],
     descripcionCompleta:
@@ -487,11 +463,9 @@ export const TALLERES = [
     categoria: 'Pintura',
     titulo: 'Acuarela',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/acuarela/acuarela1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1461344577544-4e5dc9487184',
-      'https://images.unsplash.com/photo-1513364776144-60967b0f800f',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/acuarela/acuarela1.avif',
     ],
     descripcionCorta: ['💧 Técnicas de agua', '🖌️ Degradados y transparencias'],
     descripcionCompleta:
@@ -527,11 +501,9 @@ export const TALLERES = [
     categoria: 'Pintura',
     titulo: 'Gouache',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/gouache/gouache1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1574017087624-7e5d28128a4d',
-      'https://images.unsplash.com/photo-1608346128025-1896b97a8a78',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/gouache/gouache1.avif',
     ],
     descripcionCorta: ['🖌️ Opacidad y brillantez', '🎨 Técnica versátil'],
     descripcionCompleta:
@@ -567,11 +539,9 @@ export const TALLERES = [
     categoria: 'Pintura',
     titulo: 'Acrílico',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/acrilico/acrilicos1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1560421741-6551b3ff7a74',
-      'https://images.unsplash.com/photo-1510832842230-87253f48d74f',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/acrilico/acrilicos1.avif',
     ],
     descripcionCorta: ['🎨 Pintura acrílica', '🖌️ Técnicas avanzadas'],
     descripcionCompleta:
@@ -607,11 +577,9 @@ export const TALLERES = [
     categoria: 'Pintura',
     titulo: 'Óleo',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/oleo/oleo1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1577085676811-4a44f31f8b6b',
-      'https://images.unsplash.com/photo-1584847319479-6dc62ebe56cb',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/oleo/oleo1.avif',
     ],
     descripcionCorta: ['🖼️ Pintura con óleo', '🎨 Mezcla de colores'],
     descripcionCompleta:
@@ -647,11 +615,9 @@ export const TALLERES = [
     categoria: 'Pintura',
     titulo: 'Aerografía',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/aerografia/aerografia1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1595079566962-23a88bc8ab5e',
-      'https://images.unsplash.com/photo-1569172367135-3bacaae17cb6',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/aerografia/aerografia1.avif',
     ],
     descripcionCorta: ['🎨 Técnicas de aerógrafo', '🖌️ Aplicación en diseño'],
     descripcionCompleta:
@@ -689,11 +655,9 @@ export const TALLERES = [
     categoria: 'Digital',
     titulo: 'Gráficos Vectoriales',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/graficosVectoriales/graficosVectoriales1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1626785774625-ddcddc3445e9',
-      'https://images.unsplash.com/photo-1626785774496-81e085700800',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/graficosVectoriales/graficosVectoriales1.avif',
     ],
     descripcionCorta: ['✒️ Ilustración vectorial', '🎨 Diseño de precisión'],
     descripcionCompleta:
@@ -729,11 +693,9 @@ export const TALLERES = [
     categoria: 'Digital',
     titulo: 'Imagen Corporativa',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/imgCoorporativa/imgCoorporativa1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1611162616475-46b635cb6868',
-      'https://images.unsplash.com/photo-1572044162444-ad60f128bdea',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/imgCoorporativa/imgCoorporativa1.avif',
     ],
     descripcionCorta: ['🏢 Branding', '🎨 Identidad visual'],
     descripcionCompleta:
@@ -769,11 +731,9 @@ export const TALLERES = [
     categoria: 'Digital',
     titulo: 'Diseño Editorial / Pre-Prensa',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/disenoEditorialPrensa/disenoEditorialPrensa1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1561291386-5be50364cfb5',
-      'https://images.unsplash.com/photo-1544083305-9b5be6c8c214',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/disenoEditorialPrensa/disenoEditorialPrensa1.avif',
     ],
     descripcionCorta: ['📚 Maquetación', '🖨️ Preparación para impresión'],
     descripcionCompleta:
@@ -809,11 +769,9 @@ export const TALLERES = [
     categoria: 'Digital',
     titulo: 'Foto Edición',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/fotoEdicion/fotoEdicion1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7',
-      'https://images.unsplash.com/photo-1572044162444-ad60f128bdea',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/fotoEdicion/fotoEdicion1.avif',
     ],
     descripcionCorta: ['📸 Retoque fotográfico', '🎨 Ajustes profesionales'],
     descripcionCompleta:
@@ -849,11 +807,9 @@ export const TALLERES = [
     categoria: 'Digital',
     titulo: 'Ilustración Digital',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/ilustracionDigital/ilustracionDigital1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1572044162444-ad60f128bdea',
-      'https://images.unsplash.com/photo-1626785774573-4b799315345d',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/ilustracionDigital/ilustracionDigital1.avif',
     ],
     descripcionCorta: ['🖥️ Pintura digital', '🎨 Técnicas avanzadas'],
     descripcionCompleta:
@@ -889,11 +845,9 @@ export const TALLERES = [
     categoria: 'Digital',
     titulo: 'Motion Graphics',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/motionGraphics/motionGraphics1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1626785774573-4b799315345d',
-      'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/motionGraphics/motionGraphics1.avif',
     ],
     descripcionCorta: ['🎬 Animación gráfica', '✨ Efectos visuales'],
     descripcionCompleta:
@@ -929,11 +883,9 @@ export const TALLERES = [
     categoria: 'Digital',
     titulo: 'Edición de Video',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/edicionVideo/edicionVideo1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1574717024453-01ba57a1f307',
-      'https://images.unsplash.com/photo-1536240478700-b869070f9279',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/edicionVideo/edicionVideo1.avif',
     ],
     descripcionCorta: ['🎬 Montaje audiovisual', '🎞️ Narrativa visual'],
     descripcionCompleta:
@@ -969,11 +921,9 @@ export const TALLERES = [
     categoria: 'Digital',
     titulo: 'Animación de Personajes 2D',
     imagen:
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/animacion2D/animacion2D1.avif',
     imagenes: [
-      'https://epd.edu.mx/prueba/wp-content/uploads/2020/08/20190528_171750-1011x1024.jpg',
-      'https://images.unsplash.com/photo-1611162616475-46b635cb6868',
-      'https://images.unsplash.com/photo-1527066236128-2ff79f7b9705',
+      'https://epd.edu.mx/Pagina_Principal/Cursos/img/talleres/animacion2D/animacion2D1.avif',
     ],
     descripcionCorta: ['🎭 Personajes animados', '🎬 Movimiento expresivo'],
     descripcionCompleta:
